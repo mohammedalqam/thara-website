@@ -250,7 +250,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // 5. روابط الواتساب الديناميكية
   // ضع رقم هاتفك هنا بدلاً من الأصفار، بالصيغة الدولية بدون (+) أو (00) مثلاً 970599000000
-  const whatsappNumber = "970000000000";
+  const whatsappNumber = "972532121036";
 
   const whatsappLinks = document.querySelectorAll(".whatsapp-link");
   whatsappLinks.forEach((link) => {
