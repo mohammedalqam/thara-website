@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 document.addEventListener("DOMContentLoaded", () => {
   // 1. القائمة الجانبية للجوال
   const menuButton = document.getElementById("menuButton");
@@ -117,7 +116,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // 5. روابط الواتساب الديناميكية
   // ضع رقم هاتفك هنا بدلاً من الأصفار، بالصيغة الدولية بدون (+) أو (00) مثلاً 970599000000
-  const whatsappNumber = "+972532121036";
+  const whatsappNumber = "972532121036";
 
   const whatsappLinks = document.querySelectorAll(".whatsapp-link");
   whatsappLinks.forEach((link) => {
@@ -132,7 +131,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
-=======
+
 document.addEventListener("DOMContentLoaded", () => {
   // 1. القائمة الجانبية للجوال
   const menuButton = document.getElementById("menuButton");
@@ -266,4 +265,3 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
->>>>>>> 3d1798e07cf1bd4df94d508ef709f4e719ad13aa
