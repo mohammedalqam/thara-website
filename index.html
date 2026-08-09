@@ -3,19 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#080808" />
-    <meta
-      name="description"
-      content="THARA Real Estates - فلل فاخرة للإيجار في أريحا"
-    />
-    <title>THARA Real Estates | فلل فاخرة في أريحا</title>
+    <meta name="theme-color" content="#FDFCF0" />
+    <meta name="description" content="THARA Real Estates - فلل فاخرة للإيجار في أريحا" />
+    <title>THARA Real Estates | ملاذك الهادئ في أريحا</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Marhey:wght@500;600&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Marhey:wght@400;500;600&display=swap" rel="stylesheet" />
 
     <link rel="stylesheet" href="style.css" />
   </head>
@@ -25,35 +19,21 @@
 
     <header class="site-header" id="top">
       <a href="#top" class="brand" aria-label="العودة إلى الرئيسية">
-        <!-- استبدل الرابط بشعارك الحقيقي -->
-        <h2
-          style="
-            color: var(--gold-light);
-            font-family: 'Marhey', sans-serif;
-            font-size: 1.5rem;
-            margin: 0;
-          "
-        >
-          THARA
-        </h2>
+        <h2 class="brand-title">THARA</h2>
       </a>
 
-      <button
-        class="menu-button"
-        id="menuButton"
-        type="button"
-        aria-label="فتح القائمة"
-        aria-expanded="false"
-      >
+      <button class="menu-button" id="menuButton" type="button" aria-label="فتح القائمة" aria-expanded="false">
         <span></span>
         <span></span>
         <span></span>
       </button>
 
+      <!-- التعديل 1: تحديث الروابط في القائمة -->
       <nav class="main-nav" id="mainNav" aria-label="القائمة الرئيسية">
-        <a href="#villa">الفيلا</a>
-        <a href="#gallery">الصور</a>
-        <a href="#features">المميزات</a>
+        <a href="villas.html" style="color: var(--accent-gold);">اختر فيلتك</a>
+        <a href="#featured">أبرز الفلل</a>
+        <a href="#gallery">معرض الصور</a>
+        <a href="#features">لماذا نحن</a>
         <a href="#contact">تواصل معنا</a>
       </nav>
     </header>
@@ -61,267 +41,186 @@
     <main>
       <section class="hero section" aria-labelledby="hero-title">
         <div class="hero-image-wrap">
-          <img
-            src="assets/IMG_4604.JPG"
-            alt="واجهة الفيلا والمسبح"
-            class="hero-image"
-          />
+          <img src="assets/IMG_4604.JPG" alt="واجهة إحدى فلل ثرى" class="hero-image" />
           <div class="hero-overlay"></div>
-          <div class="hero-badge">إقامة خاصة بمستوى مختلف</div>
+          <div class="hero-badge">إقامة هادئة بمستوى مختلف</div>
 
+          <!-- التعديل 2: تحديث نصوص وأزرار الواجهة -->
           <div class="hero-content">
-            <p class="eyebrow">THARA REAL ESTATES</p>
-            <h1 id="hero-title">فلل فاخرة للإيجار في أريحا</h1>
-            <p>خصوصية، راحة، وتصميم يخلّي الويكند تجربة كاملة، مش مجرد حجز.</p>
+            <p class="eyebrow eyebrow-light">THARA REAL ESTATES</p>
+            <h1 id="hero-title">ملاذك الهادئ في أريحا</h1>
+            <p class="hero-subtitle">خيارات متعددة وتفاصيل ناعمة تجعل من عطلتك تجربة استثنائية، مصممة خصيصاً لتناسب عائلتك.</p>
 
             <div class="hero-actions">
-              <a
-                class="button button-gold whatsapp-link"
-                href="#"
-                data-message="مرحباً، أريد الاستفسار عن الفيلا المميزة لدى THARA."
-              >
-                احجز عبر واتساب
+              <!-- الزر الرئيسي يوجه لصفحة الفلل الجديدة -->
+              <a class="button button-gold" href="villas.html">
+                تصفح الفلل المتاحة
               </a>
-              <a class="button button-ghost" href="#villa">استعرض الفيلا</a>
+              <a class="button button-ghost whatsapp-link" href="#" data-message="مرحباً، أريد الاستفسار بشكل عام عن فلل THARA.">
+                تواصل للاستفسار
+              </a>
             </div>
           </div>
         </div>
 
         <div class="quick-stats">
           <article class="reveal delay-1">
-            <strong>4</strong>
-            <span>غرف نوم</span>
+            <strong>تنوع</strong>
+            <span>مساحات تناسب الجميع</span>
           </article>
           <article class="reveal delay-2">
-            <strong>5×10</strong>
-            <span>مسبح خاص</span>
+            <strong>خصوصية</strong>
+            <span>مسابح ومرافق خاصة</span>
           </article>
           <article class="reveal delay-3">
-            <strong>10+</strong>
-            <span>ضيوف</span>
+            <strong>نظافة</strong>
+            <span>عناية فائقة بالتفاصيل</span>
           </article>
         </div>
       </section>
 
-      <section class="villa section" id="villa" aria-labelledby="villa-title">
+      <!-- التعديل 3: تحويل القسم ليعرض "أبرز الفلل" بدلاً من فيلا واحدة -->
+      <section class="featured section" id="featured" aria-labelledby="featured-title">
         <div class="section-heading reveal">
-          <p class="eyebrow">الفيلا المميزة</p>
-          <h2 id="villa-title">تجربة راقية بتفاصيل محسوبة</h2>
-          <p>مساحات مريحة، مسبح خاص، وغرف مصممة للعائلات والمجموعات.</p>
+          <p class="eyebrow">مختاراتنا لك</p>
+          <h2 id="featured-title">أبرز الفلل لدينا</h2>
+          <p>لمحة سريعة عن بعض خياراتنا المميزة التي حازت على إعجاب ضيوفنا.</p>
         </div>
 
-        <div class="villa-card reveal delay-1">
-          <div class="villa-card-image">
-            <img src="assets/IMG_4601.JPG" alt="منطقة المسبح في الفيلا" />
-            <span class="premium-tag">VIP</span>
+        <div class="featured-grid">
+          <!-- الكرت الأول (عينة) -->
+          <div class="villa-card reveal delay-1">
+            <div class="villa-card-image">
+              <img src="assets/IMG_4601.JPG" alt="فيلا الأناقة" loading="lazy" />
+              <span class="premium-tag">الأكثر طلباً</span>
+            </div>
+            <div class="villa-card-content">
+              <h3>فيلا الأناقة - 4 غرف</h3>
+              <p>تجمع بين الخصوصية التامة والدفء العائلي، بمساحات تتنفس وتناسب لحظاتكم الجميلة.</p>
+              <ul class="feature-list">
+                <li><span>✿</span> 4 غرف نوم واسعة</li>
+                <li><span>✿</span> مسبح خاص محاط بجلسات</li>
+                <li><span>✿</span> سعة تصل إلى 10 ضيوف</li>
+              </ul>
+              <a class="button button-ghost whatsapp-link" style="color: var(--text-main); border-color: var(--border);" href="#" data-message="مرحباً، أريد الاستفسار عن فيلا الأناقة.">
+                استفسار سريع
+              </a>
+            </div>
           </div>
 
-          <div class="villa-card-content">
-            <h3>فيلا VIP بأريحا</h3>
-            <p>
-              فيلا مختارة بعناية، تجمع بين الخصوصية، الراحة، والمساحات التي
-              تناسب القعدات العائلية والويكند مع الأصدقاء.
-            </p>
-
-            <ul class="feature-list">
-              <li><span>◆</span> غرف نوم واسعة ومريحة</li>
-              <li><span>◆</span> مسبح خاص مع جلسات خارجية</li>
-              <li><span>◆</span> طاولة بلياردو ومنطقة ترفيه</li>
-              <li><span>◆</span> منطقة شواء وكراج داخلي</li>
-            </ul>
-
-            <a
-              class="button button-gold whatsapp-link"
-              href="#"
-              data-message="مرحباً، أريد معرفة السعر والتواريخ المتاحة لفيلا VIP."
-            >
-              اسأل عن السعر والتوفر
-            </a>
+          <!-- الكرت الثاني (عينة) -->
+          <div class="villa-card reveal delay-2">
+            <div class="villa-card-image">
+              <img src="assets/IMG_4596.JPG" alt="فيلا الهدوء" loading="lazy" />
+              <span class="premium-tag">جديد</span>
+            </div>
+            <div class="villa-card-content">
+              <h3>فيلا الهدوء - 3 غرف</h3>
+              <p>تصميم عصري ناعم وإضاءة طبيعية تغمر المكان، مثالية للباحثين عن الاستجمام.</p>
+              <ul class="feature-list">
+                <li><span>✿</span> 3 غرف نوم مريحة</li>
+                <li><span>✿</span> منطقة شواء خارجية</li>
+                <li><span>✿</span> سعة تصل إلى 7 ضيوف</li>
+              </ul>
+              <a class="button button-ghost whatsapp-link" style="color: var(--text-main); border-color: var(--border);" href="#" data-message="مرحباً، أريد الاستفسار عن فيلا الهدوء.">
+                استفسار سريع
+              </a>
+            </div>
           </div>
+        </div>
+
+        <!-- زر الذهاب لصفحة كل الفلل -->
+        <div class="view-all-container reveal delay-3" style="text-align: center; margin-top: 50px;">
+          <a href="villas.html" class="button button-gold" style="padding: 15px 40px; font-size: 1.1rem;">
+            عرض جميع الفلل ➔
+          </a>
         </div>
       </section>
 
-      <section
-        class="gallery section"
-        id="gallery"
-        aria-labelledby="gallery-title"
-      >
+      <!-- الأقسام الباقية (الصور، المميزات، التواصل) تبقى كما هي -->
+      <section class="gallery section" id="gallery" aria-labelledby="gallery-title">
         <div class="section-heading reveal">
-          <p class="eyebrow">معرض الصور</p>
-          <h2 id="gallery-title">شوف التفاصيل قبل ما تحجز</h2>
-          <p>اضغط على أي صورة لفتحها بالحجم الكامل.</p>
+          <p class="eyebrow">أسلوب حياة THARA</p>
+          <h2 id="gallery-title">تأمل الجمال قبل وصولك</h2>
+          <p>لمسات وتفاصيل من الفلل التي نقدمها لضمان راحتك.</p>
         </div>
-
         <div class="gallery-grid">
-          <button
-            class="gallery-item gallery-item-large reveal"
-            type="button"
-            data-full="assets/villa1.jpeg"
-          >
-            <img
-              src="assets/IMG_4596.JPG"
-              alt="المسبح والواجهة الخارجية"
-              loading="lazy"
-            />
+          <button class="gallery-item gallery-item-large reveal" type="button" data-full="assets/IMG_4596.JPG">
+            <img src="assets/IMG_4596.JPG" alt="المسبح والواجهة الخارجية" loading="lazy" />
           </button>
-          <button
-            class="gallery-item reveal delay-1"
-            type="button"
-            data-full="assets/villa2.jpeg"
-          >
+          <button class="gallery-item reveal delay-1" type="button" data-full="assets/IMG_4597.JPG">
             <img src="assets/IMG_4597.JPG" alt="منطقة المسبح" loading="lazy" />
           </button>
-          <button
-            class="gallery-item reveal delay-2"
-            type="button"
-            data-full="assets/villa3.jpeg"
-          >
-            <img
-              src="assets/IMG_4600.JPG"
-              alt="طاولة البلياردو"
-              loading="lazy"
-            />
+          <button class="gallery-item reveal delay-2" type="button" data-full="assets/IMG_4600.JPG">
+            <img src="assets/IMG_4600.JPG" alt="طاولة البلياردو" loading="lazy" />
           </button>
-          <button
-            class="gallery-item reveal delay-1"
-            type="button"
-            data-full="assets/villa4.jpeg"
-          >
+          <button class="gallery-item reveal delay-1" type="button" data-full="assets/IMG_4623.JPG">
             <img src="assets/IMG_4623.JPG" alt="غرفة الجلوس" loading="lazy" />
           </button>
-          <button
-            class="gallery-item reveal delay-2"
-            type="button"
-            data-full="assets/villa5.jpeg"
-          >
-            <img
-              src="assets/IMG_4614.JPG"
-              alt="غرفة نوم ماستر"
-              loading="lazy"
-            />
+          <button class="gallery-item reveal delay-2" type="button" data-full="assets/IMG_4614.JPG">
+            <img src="assets/IMG_4614.JPG" alt="غرفة نوم ماستر" loading="lazy" />
           </button>
-          <button
-            class="gallery-item gallery-item-wide reveal delay-3"
-            type="button"
-            data-full="assets/villa8.jpeg"
-          >
-            <img
-              src="assets/IMG_4622.JPG"
-              alt="تفاصيل إضافية من الفيلا"
-              loading="lazy"
-            />
+          <button class="gallery-item gallery-item-wide reveal delay-3" type="button" data-full="assets/IMG_4622.JPG">
+            <img src="assets/IMG_4622.JPG" alt="تفاصيل إضافية من الفيلا" loading="lazy" />
           </button>
         </div>
       </section>
 
-      <section
-        class="features section"
-        id="features"
-        aria-labelledby="features-title"
-      >
+      <section class="features section" id="features" aria-labelledby="features-title">
+        <!-- نفس المحتوى السابق للمميزات -->
         <div class="section-heading reveal">
-          <p class="eyebrow">ليش THARA؟</p>
-          <h2 id="features-title">حجز أوضح، تجربة أريح</h2>
+          <p class="eyebrow">لماذا THARA؟</p>
+          <h2 id="features-title">حجز سلس، وراحة بال</h2>
         </div>
-
         <div class="features-grid">
           <article class="feature-card reveal delay-1">
-            <span class="feature-icon">✦</span>
-            <h3>فلل مختارة</h3>
-            <p>
-              نعرض الفلل التي تحقق مستوى مناسب من النظافة، الخصوصية، والتجهيز.
-            </p>
+            <span class="feature-icon">✧</span>
+            <h3>انتقاء بحُب</h3>
+            <p>نختار الفلل التي ترتقي لمعايير النظافة، الدفء، والخصوصية لتشعر وكأنك في منزلك.</p>
           </article>
           <article class="feature-card reveal delay-2">
-            <span class="feature-icon">◈</span>
-            <h3>صور حقيقية</h3>
-            <p>
-              تشوف المكان كما هو قبل الحجز، بدون صور مضللة أو مواصفات ناقصة.
-            </p>
+            <span class="feature-icon">❀</span>
+            <h3>شفافية تامة</h3>
+            <p>تشاهد المكان بتفاصيله الحقيقية دون مبالغة، لتكون تجربتك مطابقة لتوقعاتك.</p>
           </article>
           <article class="feature-card reveal delay-3">
-            <span class="feature-icon">↗</span>
-            <h3>تواصل مباشر</h3>
-            <p>
-              استفسار سريع عبر واتساب عن السعر، التوفر، وعدد الأشخاص المناسب.
-            </p>
+            <span class="feature-icon">✉</span>
+            <h3>تواصل ودود ومباشر</h3>
+            <p>نحن هنا للرد على استفساراتك بكل حب وسرعة عبر الواتساب لتسهيل حجزك.</p>
           </article>
         </div>
       </section>
 
-      <section
-        class="contact section reveal"
-        id="contact"
-        aria-labelledby="contact-title"
-      >
+      <section class="contact section reveal" id="contact" aria-labelledby="contact-title">
         <div>
-          <p class="eyebrow">جاهز للويكند؟</p>
-          <h2 id="contact-title">خلّينا نلاقي لك الفيلا المناسبة</h2>
-          <p>ابعث التاريخ وعدد الأشخاص، وبنرجعلك بالخيارات المتاحة.</p>
+          <p class="eyebrow">مستعد لعطلتك القادمة؟</p>
+          <h2 id="contact-title">دعنا نجد لك المكان الأنسب</h2>
+          <p>شاركنا تواريخك وعدد الأفراد، وسنتكفل بالباقي بكل سرور.</p>
         </div>
-
-        <a
-          class="button button-gold whatsapp-link"
-          href="#"
-          data-message="مرحباً، أريد معرفة الفلل المتاحة. عدد الأشخاص: ... والتاريخ: ..."
-        >
-          تواصل عبر واتساب
+        <a class="button button-gold whatsapp-link" href="#" data-message="مرحباً، أبحث عن فيلا للإيجار. عدد الأشخاص: ... والتاريخ: ...">
+          تواصل معنا الآن
         </a>
       </section>
     </main>
 
     <footer class="site-footer reveal">
-      <h2
-        style="
-          color: var(--gold-light);
-          font-family: 'Marhey', sans-serif;
-          font-size: 1.8rem;
-          margin-bottom: 10px;
-        "
-      >
-        THARA
-      </h2>
+      <h2 class="brand-title" style="font-size: 2rem; margin-bottom: 10px;">THARA</h2>
       <p>THARA Real Estates</p>
-      <small>فلل مختارة للإيجار في أريحا</small>
+      <small>فلل مختارة بحب للإيجار في أريحا</small>
     </footer>
 
-    <a
-      class="floating-whatsapp whatsapp-link"
-      href="#"
-      aria-label="التواصل عبر واتساب"
-      data-message="مرحباً، أريد الاستفسار عن الفلل المتاحة."
-    >
+    <!-- أيقونة الواتساب والنافذة المنبثقة للصور (نفس الكود السابق) -->
+    <a class="floating-whatsapp whatsapp-link" href="#" aria-label="التواصل عبر واتساب" data-message="مرحباً، أريد الاستفسار عن الفلل المتاحة.">
       <span>واتساب</span>
     </a>
 
     <div class="lightbox" id="lightbox" aria-hidden="true">
-      <button
-        class="lightbox-close"
-        id="lightboxClose"
-        type="button"
-        aria-label="إغلاق الصورة"
-      >
-        ×
-      </button>
-      <button
-        class="lightbox-arrow lightbox-prev"
-        id="lightboxPrev"
-        type="button"
-        aria-label="الصورة السابقة"
-      >
-        ‹
-      </button>
+      <button class="lightbox-close" id="lightboxClose" type="button" aria-label="إغلاق الصورة">×</button>
+      <button class="lightbox-arrow lightbox-prev" id="lightboxPrev" type="button" aria-label="الصورة السابقة">‹</button>
       <div class="lightbox-content">
-        <img id="lightboxImage" src="" alt="صورة مكبرة من الفيلا" />
+        <img id="lightboxImage" src="" alt="صورة مكبرة" />
       </div>
-      <button
-        class="lightbox-arrow lightbox-next"
-        id="lightboxNext"
-        type="button"
-        aria-label="الصورة التالية"
-      >
-        ›
-      </button>
+      <button class="lightbox-arrow lightbox-next" id="lightboxNext" type="button" aria-label="الصورة التالية">›</button>
     </div>
 
     <script src="script.js"></script>
