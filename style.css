@@ -824,4 +824,97 @@ button {
       padding: 35px;
     }
   }
+  /* =========================================
+   تنسيقات سلايدر الصور للفلل (إنستغرام ستايل)
+========================================= */
+.slider-container {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius) var(--radius) 0 0;
+  height: 280px;
+}
+
+@media (min-width: 768px) {
+  .slider-container {
+    height: 320px;
+  }
+}
+
+.slider-track {
+  display: flex;
+  height: 100%;
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.slider-track img {
+  min-width: 100%;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+/* أسهم التنقل يمين ويسار */
+.slider-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.85);
+  border: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  color: var(--text-main);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  transition: all 0.2s ease;
+  z-index: 5;
+  opacity: 0.9;
+}
+
+.slider-arrow:hover {
+  background: #fff;
+  opacity: 1;
+  transform: translateY(-50%) scale(1.05);
+}
+
+.prev-arrow {
+  right: 12px;
+}
+
+.next-arrow {
+  left: 12px;
+}
+
+/* نقاط المؤشر في أسفل الصورة */
+.slider-dots {
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 6px;
+  z-index: 5;
+  background: rgba(0, 0, 0, 0.25);
+  padding: 5px 10px;
+  border-radius: 99px;
+  backdrop-filter: blur(4px);
+}
+
+.slider-dots .dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  transition: all 0.3s ease;
+}
+
+.slider-dots .dot.active {
+  background: #fff;
+  width: 16px;
+  border-radius: 3px;
+}
 }
