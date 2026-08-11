@@ -1,267 +1,1044 @@
-document.addEventListener("DOMContentLoaded", () => {
-  // 1. القائمة الجانبية للجوال
-  const menuButton = document.getElementById("menuButton");
-  const mainNav = document.getElementById("mainNav");
-  const navLinks = mainNav.querySelectorAll("a");
+/* =========================================================
+   THARA REAL ESTATES
+========================================================= */
 
-  const toggleMenu = () => {
-    menuButton.classList.toggle("active");
-    mainNav.classList.toggle("open");
-    document.body.classList.toggle("menu-open");
-  };
 
-  menuButton.addEventListener("click", toggleMenu);
+/* =========================================================
+   HEADER
+========================================================= */
 
-  // إغلاق القائمة عند النقر على أي رابط داخلها
-  navLinks.forEach((link) => {
-    link.addEventListener("click", () => {
-      if (mainNav.classList.contains("open")) {
-        toggleMenu();
-      }
-    });
-  });
+const siteHeader =
+  document.getElementById("siteHeader");
 
-  // 2. الهيدر (تغيير الستايل عند التمرير)
-  const header = document.querySelector(".site-header");
-  window.addEventListener("scroll", () => {
-    if (window.scrollY > 50) {
-      header.classList.add("scrolled");
-    } else {
-      header.classList.remove("scrolled");
+const menuButton =
+  document.getElementById("menuButton");
+
+const mainNav =
+  document.getElementById("mainNav");
+
+
+if (menuButton && mainNav) {
+
+  menuButton.addEventListener(
+    "click",
+    () => {
+
+      const open =
+        mainNav.classList.toggle("active");
+
+
+      menuButton.classList.toggle(
+        "active",
+        open
+      );
+
+
+      menuButton.setAttribute(
+        "aria-expanded",
+        String(open)
+      );
+
+
+      document.body.classList.toggle(
+        "menu-open",
+        open
+      );
+
     }
-  });
+  );
 
-  // 3. تأثير الظهور الانسيابي للعناصر (Scroll Reveal)
-  const revealElements = document.querySelectorAll(".reveal");
 
-  const revealOptions = {
-    threshold: 0.15, // يظهر العنصر عندما يظهر 15% منه على الشاشة
-    rootMargin: "0px 0px -50px 0px",
-  };
+  mainNav
+    .querySelectorAll("a")
+    .forEach((link) => {
 
-  const revealObserver = new IntersectionObserver((entries, observer) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("visible");
-        observer.unobserve(entry.target); // إيقاف المراقبة بعد ظهوره لأول مرة لتقليل العبء
-      }
+      link.addEventListener(
+        "click",
+        () => {
+
+          mainNav.classList.remove(
+            "active"
+          );
+
+          menuButton.classList.remove(
+            "active"
+          );
+
+          document.body.classList.remove(
+            "menu-open"
+          );
+
+          menuButton.setAttribute(
+            "aria-expanded",
+            "false"
+          );
+
+        }
+      );
+
     });
-  }, revealOptions);
 
-  revealElements.forEach((el) => {
-    revealObserver.observe(el);
-  });
+}
 
-  // 4. معرض الصور (Lightbox)
-  const lightbox = document.getElementById("lightbox");
-  const lightboxImage = document.getElementById("lightboxImage");
-  const closeBtn = document.getElementById("lightboxClose");
-  const prevBtn = document.getElementById("lightboxPrev");
-  const nextBtn = document.getElementById("lightboxNext");
-  const galleryItems = document.querySelectorAll(".gallery-item");
 
-  let currentIndex = 0;
-  // استخراج الروابط من خصائص الصور
-  const images = Array.from(galleryItems).map((item) => item.dataset.full);
 
-  const openLightbox = (index) => {
-    if (!images[index]) return;
-    currentIndex = index;
-    lightboxImage.src = images[currentIndex];
-    lightbox.classList.add("open");
-    document.body.classList.add("lightbox-open");
-  };
+window.addEventListener(
+  "scroll",
+  () => {
 
-  const closeLightbox = () => {
-    lightbox.classList.remove("open");
-    document.body.classList.remove("lightbox-open");
-    // تفريغ الصورة قليلاً لتخفيف الذاكرة
-    setTimeout(() => {
-      lightboxImage.src = "";
-    }, 300);
-  };
+    siteHeader?.classList.toggle(
+      "scrolled",
+      window.scrollY > 25
+    );
 
-  const showNext = () => {
-    currentIndex = (currentIndex + 1) % images.length;
-    lightboxImage.src = images[currentIndex];
-  };
+  },
+  {
+    passive: true
+  }
+);
 
-  const showPrev = () => {
-    currentIndex = (currentIndex - 1 + images.length) % images.length;
-    lightboxImage.src = images[currentIndex];
-  };
 
-  galleryItems.forEach((item, index) => {
-    item.addEventListener("click", () => openLightbox(index));
-  });
 
-  closeBtn.addEventListener("click", closeLightbox);
-  nextBtn.addEventListener("click", showNext);
-  prevBtn.addEventListener("click", showPrev);
+/* =========================================================
+   HOME PAGE
+========================================================= */
 
-  // إغلاق المعرض عند النقر في المساحة الفارغة
-  lightbox.addEventListener("click", (e) => {
-    if (e.target === lightbox) {
-      closeLightbox();
+if (
+  document.body.classList.contains(
+    "home-page"
+  )
+) {
+
+
+  /* =======================================================
+     HERO CINEMATIC SLIDER
+  ======================================================= */
+
+  const heroSlides =
+    document.querySelectorAll(
+      ".hero-slide"
+    );
+
+  const heroDots =
+    document.querySelectorAll(
+      ".hero-dot"
+    );
+
+  const heroCurrent =
+    document.getElementById(
+      "heroCurrent"
+    );
+
+  const heroProgress =
+    document.getElementById(
+      "heroProgress"
+    );
+
+
+  const HERO_DURATION = 5200;
+
+  let heroIndex = 0;
+
+  let heroTimer = null;
+
+
+
+  function restartProgress() {
+
+    if (!heroProgress) {
+      return;
     }
-  });
 
-  // التنقل بالكيبورد
-  document.addEventListener("keydown", (e) => {
-    if (!lightbox.classList.contains("open")) return;
-    if (e.key === "Escape") closeLightbox();
-    if (e.key === "ArrowRight") showPrev(); // معكوسة لأن الاتجاه RTL
-    if (e.key === "ArrowLeft") showNext();
-  });
 
-  // 5. روابط الواتساب الديناميكية
-  // ضع رقم هاتفك هنا بدلاً من الأصفار، بالصيغة الدولية بدون (+) أو (00) مثلاً 970599000000
-  const whatsappNumber = "972532121036";
+    heroProgress.classList.remove(
+      "running"
+    );
 
-  const whatsappLinks = document.querySelectorAll(".whatsapp-link");
-  whatsappLinks.forEach((link) => {
-    link.addEventListener("click", (e) => {
-      e.preventDefault();
-      const message =
-        link.dataset.message || "مرحباً، أريد الاستفسار عن الفلل المتاحة.";
-      // تشفير النص ليدعمه رابط الواتساب بشكل صحيح
-      const encodedMessage = encodeURIComponent(message);
-      const url = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
-      window.open(url, "_blank");
-    });
-  });
-});
 
-document.addEventListener("DOMContentLoaded", () => {
-  // 1. القائمة الجانبية للجوال
-  const menuButton = document.getElementById("menuButton");
-  const mainNav = document.getElementById("mainNav");
-  const navLinks = mainNav.querySelectorAll("a");
+    void heroProgress.offsetWidth;
 
-  const toggleMenu = () => {
-    menuButton.classList.toggle("active");
-    mainNav.classList.toggle("open");
-    document.body.classList.toggle("menu-open");
-  };
 
-  menuButton.addEventListener("click", toggleMenu);
+    heroProgress.classList.add(
+      "running"
+    );
 
-  // إغلاق القائمة عند النقر على أي رابط داخلها
-  navLinks.forEach((link) => {
-    link.addEventListener("click", () => {
-      if (mainNav.classList.contains("open")) {
-        toggleMenu();
+  }
+
+
+
+  function showHeroSlide(index) {
+
+    heroSlides.forEach(
+      (slide, slideIndex) => {
+
+        slide.classList.toggle(
+          "active",
+          slideIndex === index
+        );
+
       }
-    });
-  });
+    );
 
-  // 2. الهيدر (تغيير الستايل عند التمرير)
-  const header = document.querySelector(".site-header");
-  window.addEventListener("scroll", () => {
-    if (window.scrollY > 50) {
-      header.classList.add("scrolled");
-    } else {
-      header.classList.remove("scrolled");
-    }
-  });
 
-  // 3. تأثير الظهور الانسيابي للعناصر (Scroll Reveal)
-  const revealElements = document.querySelectorAll(".reveal");
+    heroDots.forEach(
+      (dot, dotIndex) => {
 
-  const revealOptions = {
-    threshold: 0.15, // يظهر العنصر عندما يظهر 15% منه على الشاشة
-    rootMargin: "0px 0px -50px 0px",
-  };
+        dot.classList.toggle(
+          "active",
+          dotIndex === index
+        );
 
-  const revealObserver = new IntersectionObserver((entries, observer) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("visible");
-        observer.unobserve(entry.target); // إيقاف المراقبة بعد ظهوره لأول مرة لتقليل العبء
       }
-    });
-  }, revealOptions);
+    );
 
-  revealElements.forEach((el) => {
-    revealObserver.observe(el);
-  });
 
-  // 4. معرض الصور (Lightbox)
-  const lightbox = document.getElementById("lightbox");
-  const lightboxImage = document.getElementById("lightboxImage");
-  const closeBtn = document.getElementById("lightboxClose");
-  const prevBtn = document.getElementById("lightboxPrev");
-  const nextBtn = document.getElementById("lightboxNext");
-  const galleryItems = document.querySelectorAll(".gallery-item");
+    if (heroCurrent) {
 
-  let currentIndex = 0;
-  // استخراج الروابط من خصائص الصور
-  const images = Array.from(galleryItems).map((item) => item.dataset.full);
+      heroCurrent.textContent =
+        String(index + 1)
+          .padStart(2, "0");
 
-  const openLightbox = (index) => {
-    if (!images[index]) return;
-    currentIndex = index;
-    lightboxImage.src = images[currentIndex];
-    lightbox.classList.add("open");
-    document.body.classList.add("lightbox-open");
-  };
-
-  const closeLightbox = () => {
-    lightbox.classList.remove("open");
-    document.body.classList.remove("lightbox-open");
-    // تفريغ الصورة قليلاً لتخفيف الذاكرة
-    setTimeout(() => {
-      lightboxImage.src = "";
-    }, 300);
-  };
-
-  const showNext = () => {
-    currentIndex = (currentIndex + 1) % images.length;
-    lightboxImage.src = images[currentIndex];
-  };
-
-  const showPrev = () => {
-    currentIndex = (currentIndex - 1 + images.length) % images.length;
-    lightboxImage.src = images[currentIndex];
-  };
-
-  galleryItems.forEach((item, index) => {
-    item.addEventListener("click", () => openLightbox(index));
-  });
-
-  closeBtn.addEventListener("click", closeLightbox);
-  nextBtn.addEventListener("click", showNext);
-  prevBtn.addEventListener("click", showPrev);
-
-  // إغلاق المعرض عند النقر في المساحة الفارغة
-  lightbox.addEventListener("click", (e) => {
-    if (e.target === lightbox) {
-      closeLightbox();
     }
-  });
 
-  // التنقل بالكيبورد
-  document.addEventListener("keydown", (e) => {
-    if (!lightbox.classList.contains("open")) return;
-    if (e.key === "Escape") closeLightbox();
-    if (e.key === "ArrowRight") showPrev(); // معكوسة لأن الاتجاه RTL
-    if (e.key === "ArrowLeft") showNext();
-  });
 
-  // 5. روابط الواتساب الديناميكية
-  // ضع رقم هاتفك هنا بدلاً من الأصفار، بالصيغة الدولية بدون (+) أو (00) مثلاً 970599000000
-  const whatsappNumber = "";
+    heroIndex = index;
 
-  const whatsappLinks = document.querySelectorAll(".whatsapp-link");
-  whatsappLinks.forEach((link) => {
-    link.addEventListener("click", (e) => {
-      e.preventDefault();
-      const message =
-        link.dataset.message || "مرحباً، أريد الاستفسار عن الفلل المتاحة.";
-      // تشفير النص ليدعمه رابط الواتساب بشكل صحيح
-      const encodedMessage = encodeURIComponent(message);
-      const url = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
-      window.open(url, "_blank");
+
+    restartProgress();
+
+  }
+
+
+
+  function nextHeroSlide() {
+
+    const next =
+      (heroIndex + 1)
+      % heroSlides.length;
+
+
+    showHeroSlide(next);
+
+  }
+
+
+
+  function startHeroSlider() {
+
+    clearInterval(heroTimer);
+
+
+    if (heroSlides.length < 2) {
+      return;
+    }
+
+
+    heroTimer =
+      setInterval(
+        nextHeroSlide,
+        HERO_DURATION
+      );
+
+  }
+
+
+
+  heroDots.forEach(
+    (dot, index) => {
+
+      dot.addEventListener(
+        "click",
+        () => {
+
+          showHeroSlide(index);
+
+          startHeroSlider();
+
+        }
+      );
+
+    }
+  );
+
+
+  if (heroSlides.length) {
+
+    restartProgress();
+
+    startHeroSlider();
+
+  }
+
+
+
+  document.addEventListener(
+    "visibilitychange",
+    () => {
+
+      if (document.hidden) {
+
+        clearInterval(heroTimer);
+
+      } else {
+
+        restartProgress();
+
+        startHeroSlider();
+
+      }
+
+    }
+  );
+
+
+
+  /* =======================================================
+     REVEAL ANIMATION
+  ======================================================= */
+
+  const revealElements =
+    document.querySelectorAll(
+      ".reveal"
+    );
+
+
+  if (
+    "IntersectionObserver" in window
+  ) {
+
+    const observer =
+      new IntersectionObserver(
+        (entries) => {
+
+          entries.forEach(
+            (entry) => {
+
+              if (
+                entry.isIntersecting
+              ) {
+
+                entry.target.classList.add(
+                  "visible"
+                );
+
+
+                observer.unobserve(
+                  entry.target
+                );
+
+              }
+
+            }
+          );
+
+        },
+        {
+          threshold: 0.12
+        }
+      );
+
+
+    revealElements.forEach(
+      (element) => {
+
+        observer.observe(
+          element
+        );
+
+      }
+    );
+
+  } else {
+
+    revealElements.forEach(
+      (element) => {
+
+        element.classList.add(
+          "visible"
+        );
+
+      }
+    );
+
+  }
+
+
+
+  /* =======================================================
+     NUMBER COUNTER
+  ======================================================= */
+
+  const counters =
+    document.querySelectorAll(
+      ".count-up"
+    );
+
+
+  const counterObserver =
+    new IntersectionObserver(
+      (entries) => {
+
+        entries.forEach(
+          (entry) => {
+
+            if (!entry.isIntersecting) {
+              return;
+            }
+
+
+            const element =
+              entry.target;
+
+
+            const target =
+              Number(
+                element.dataset.count
+              );
+
+
+            const duration = 1100;
+
+            const startTime =
+              performance.now();
+
+
+            function animate(now) {
+
+              const progress =
+                Math.min(
+                  (
+                    now - startTime
+                  ) / duration,
+                  1
+                );
+
+
+              const eased =
+                1 -
+                Math.pow(
+                  1 - progress,
+                  3
+                );
+
+
+              element.textContent =
+                Math.round(
+                  target * eased
+                );
+
+
+              if (progress < 1) {
+
+                requestAnimationFrame(
+                  animate
+                );
+
+              }
+
+            }
+
+
+            requestAnimationFrame(
+              animate
+            );
+
+
+            counterObserver.unobserve(
+              element
+            );
+
+          }
+        );
+
+      },
+      {
+        threshold: .6
+      }
+    );
+
+
+  counters.forEach(
+    (counter) => {
+
+      counterObserver.observe(
+        counter
+      );
+
+    }
+  );
+
+
+
+  /* =======================================================
+     FEATURED PARALLAX
+  ======================================================= */
+
+  const parallaxImages =
+    document.querySelectorAll(
+      ".parallax-image"
+    );
+
+
+  let parallaxTicking = false;
+
+
+  function updateParallax() {
+
+    parallaxImages.forEach(
+      (image) => {
+
+        const parent =
+          image.parentElement;
+
+
+        const rect =
+          parent.getBoundingClientRect();
+
+
+        const viewport =
+          window.innerHeight;
+
+
+        if (
+          rect.bottom < 0 ||
+          rect.top > viewport
+        ) {
+          return;
+        }
+
+
+        const center =
+          rect.top +
+          rect.height / 2;
+
+
+        const offset =
+          (
+            center -
+            viewport / 2
+          ) / viewport;
+
+
+        const movement =
+          Math.max(
+            -22,
+            Math.min(
+              22,
+              offset * -35
+            )
+          );
+
+
+        image.style.setProperty(
+          "--parallax-y",
+          `${movement}px`
+        );
+
+      }
+    );
+
+
+    parallaxTicking = false;
+
+  }
+
+
+
+  window.addEventListener(
+    "scroll",
+    () => {
+
+      if (
+        parallaxTicking
+      ) {
+        return;
+      }
+
+
+      parallaxTicking = true;
+
+
+      requestAnimationFrame(
+        updateParallax
+      );
+
+    },
+    {
+      passive: true
+    }
+  );
+
+
+  updateParallax();
+
+
+
+  /* =======================================================
+     WHATSAPP
+  ======================================================= */
+
+  const whatsappNumber =
+    "972532121036";
+
+
+  function openWhatsApp(message) {
+
+    const url =
+      `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+
+
+    window.open(
+      url,
+      "_blank",
+      "noopener"
+    );
+
+  }
+
+
+  document
+    .querySelectorAll(
+      ".whatsapp-link"
+    )
+    .forEach((link) => {
+
+      link.addEventListener(
+        "click",
+        (event) => {
+
+          event.preventDefault();
+
+
+          openWhatsApp(
+            link.dataset.message ||
+            "مرحباً، أريد الاستفسار عن فلل THARA."
+          );
+
+        }
+      );
+
     });
-  });
-});
+
+
+
+  /* =======================================================
+     ADVANCED GALLERY LIGHTBOX
+  ======================================================= */
+
+  const galleryItems =
+    Array.from(
+      document.querySelectorAll(
+        ".gallery-viewer"
+      )
+    );
+
+
+  const lightbox =
+    document.getElementById(
+      "homeLightbox"
+    );
+
+  const lightboxImage =
+    document.getElementById(
+      "homeLightboxImage"
+    );
+
+  const lightboxClose =
+    document.getElementById(
+      "homeLightboxClose"
+    );
+
+  const lightboxOverlay =
+    document.getElementById(
+      "homeLightboxOverlay"
+    );
+
+  const lightboxPrev =
+    document.getElementById(
+      "lightboxPrev"
+    );
+
+  const lightboxNext =
+    document.getElementById(
+      "lightboxNext"
+    );
+
+  const lightboxCurrent =
+    document.getElementById(
+      "lightboxCurrent"
+    );
+
+  const lightboxTotal =
+    document.getElementById(
+      "lightboxTotal"
+    );
+
+
+  const galleryImages =
+    galleryItems.map(
+      (item) => item.dataset.full
+    );
+
+
+  let lightboxIndex = 0;
+
+  let lightboxTouchStart = 0;
+
+
+
+  function updateLightboxImage() {
+
+    if (!lightboxImage) {
+      return;
+    }
+
+
+    lightboxImage.classList.add(
+      "changing"
+    );
+
+
+    setTimeout(
+      () => {
+
+        lightboxImage.src =
+          galleryImages[
+            lightboxIndex
+          ];
+
+
+        lightboxCurrent.textContent =
+          lightboxIndex + 1;
+
+
+        lightboxTotal.textContent =
+          galleryImages.length;
+
+
+        lightboxImage.classList.remove(
+          "changing"
+        );
+
+      },
+      150
+    );
+
+  }
+
+
+
+  function openLightbox(index) {
+
+    if (!lightbox) {
+      return;
+    }
+
+
+    lightboxIndex = index;
+
+
+    lightboxImage.src =
+      galleryImages[index];
+
+
+    lightboxCurrent.textContent =
+      index + 1;
+
+
+    lightboxTotal.textContent =
+      galleryImages.length;
+
+
+    lightbox.classList.add(
+      "active"
+    );
+
+
+    lightbox.setAttribute(
+      "aria-hidden",
+      "false"
+    );
+
+
+    document.body.classList.add(
+      "lightbox-open"
+    );
+
+  }
+
+
+
+  function closeLightbox() {
+
+    lightbox?.classList.remove(
+      "active"
+    );
+
+
+    lightbox?.setAttribute(
+      "aria-hidden",
+      "true"
+    );
+
+
+    document.body.classList.remove(
+      "lightbox-open"
+    );
+
+  }
+
+
+
+  function nextLightboxImage() {
+
+    lightboxIndex =
+      (
+        lightboxIndex + 1
+      ) % galleryImages.length;
+
+
+    updateLightboxImage();
+
+  }
+
+
+
+  function previousLightboxImage() {
+
+    lightboxIndex =
+      (
+        lightboxIndex -
+        1 +
+        galleryImages.length
+      ) % galleryImages.length;
+
+
+    updateLightboxImage();
+
+  }
+
+
+
+  galleryItems.forEach(
+    (item, index) => {
+
+      item.addEventListener(
+        "click",
+        () => {
+
+          openLightbox(
+            index
+          );
+
+        }
+      );
+
+    }
+  );
+
+
+  lightboxClose?.addEventListener(
+    "click",
+    closeLightbox
+  );
+
+
+  lightboxOverlay?.addEventListener(
+    "click",
+    closeLightbox
+  );
+
+
+  lightboxNext?.addEventListener(
+    "click",
+    nextLightboxImage
+  );
+
+
+  lightboxPrev?.addEventListener(
+    "click",
+    previousLightboxImage
+  );
+
+
+
+  /* SWIPE */
+
+  lightboxImage?.addEventListener(
+    "touchstart",
+    (event) => {
+
+      lightboxTouchStart =
+        event.changedTouches[0]
+          .screenX;
+
+    },
+    {
+      passive: true
+    }
+  );
+
+
+  lightboxImage?.addEventListener(
+    "touchend",
+    (event) => {
+
+      const end =
+        event.changedTouches[0]
+          .screenX;
+
+
+      const difference =
+        lightboxTouchStart -
+        end;
+
+
+      if (
+        Math.abs(
+          difference
+        ) < 45
+      ) {
+        return;
+      }
+
+
+      if (difference > 0) {
+
+        nextLightboxImage();
+
+      } else {
+
+        previousLightboxImage();
+
+      }
+
+    },
+    {
+      passive: true
+    }
+  );
+
+
+
+  /* KEYBOARD */
+
+  document.addEventListener(
+    "keydown",
+    (event) => {
+
+      if (
+        !lightbox?.classList.contains(
+          "active"
+        )
+      ) {
+        return;
+      }
+
+
+      if (
+        event.key === "Escape"
+      ) {
+
+        closeLightbox();
+
+      }
+
+
+      if (
+        event.key === "ArrowLeft"
+      ) {
+
+        nextLightboxImage();
+
+      }
+
+
+      if (
+        event.key === "ArrowRight"
+      ) {
+
+        previousLightboxImage();
+
+      }
+
+    }
+  );
+
+
+
+  /* =======================================================
+     FUTURE LINKS
+  ======================================================= */
+
+  const toast =
+    document.getElementById(
+      "siteToast"
+    );
+
+
+  let toastTimer;
+
+
+  document
+    .querySelectorAll(
+      ".footer-future-link"
+    )
+    .forEach((link) => {
+
+      link.addEventListener(
+        "click",
+        (event) => {
+
+          event.preventDefault();
+
+
+          if (!toast) {
+            return;
+          }
+
+
+          toast.classList.add(
+            "active"
+          );
+
+
+          clearTimeout(
+            toastTimer
+          );
+
+
+          toastTimer =
+            setTimeout(
+              () => {
+
+                toast.classList.remove(
+                  "active"
+                );
+
+              },
+              2000
+            );
+
+        }
+      );
+
+    });
+
+
+
+  /* YEAR */
+
+  const currentYear =
+    document.getElementById(
+      "currentYear"
+    );
+
+
+  if (currentYear) {
+
+    currentYear.textContent =
+      new Date().getFullYear();
+
+  }
+
+}
