@@ -2251,6 +2251,56 @@ a {
 
 
 /* =========================================================
+   MOBILE RHYTHM
+========================================================= */
+
+@media (max-width: 699px) {
+
+  .featured-home {
+    padding-bottom: 42px;
+  }
+
+  .brand-moment {
+    padding: 56px 18px;
+  }
+
+  .brand-moment p {
+    max-width: 360px;
+    margin: 17px auto;
+    font-size: clamp(1.38rem, 5.5vw, 1.85rem);
+    line-height: 1.62;
+  }
+
+  .home-gallery {
+    padding-top: 48px;
+  }
+
+  .site-header.scrolled {
+    min-height: 58px;
+    padding: 7px 12px;
+    border-radius: 17px;
+  }
+
+  .site-header.scrolled .brand-main,
+  .site-header.scrolled .brand-title {
+    font-size: 1.15rem;
+    letter-spacing: 4px;
+  }
+
+  .site-header.scrolled .brand-small {
+    margin-top: 4px;
+    font-size: .38rem;
+    letter-spacing: 3px;
+  }
+
+  .site-header.scrolled .menu-button {
+    width: 39px;
+    height: 39px;
+  }
+}
+
+
+/* =========================================================
    TABLET
 ========================================================= */
 
