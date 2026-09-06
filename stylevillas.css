@@ -84,7 +84,7 @@
         rgba(30, 27, 21, 0.05) 10%,
         rgba(25, 22, 17, 0.66) 100%
       ),
-      url("assets/IMG_4604.JPG") center / cover no-repeat;
+      url("assets/IMG_4604.webp") center / cover no-repeat;
   
     box-shadow:
       0 25px 70px rgba(39, 31, 18, 0.14);

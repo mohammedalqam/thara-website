@@ -19,12 +19,12 @@ const villasData = {
         "فيلا واسعة ومميزة بخصوصية عالية، مناسبة للعائلات والمجموعات، مع مساحات داخلية وخارجية مصممة لقضاء عطلة مريحة ومميزة.",
   
       images: [
-        "assets/IMG_4601.JPG",
-        "assets/IMG_4597.JPG",
-        "assets/IMG_4600.JPG",
-        "assets/IMG_4623.JPG",
-        "assets/IMG_4614.JPG",
-        "assets/IMG_4622.JPG"
+        "assets/IMG_4601.webp",
+        "assets/IMG_4597.webp",
+        "assets/IMG_4600.webp",
+        "assets/IMG_4623.webp",
+        "assets/IMG_4614.webp",
+        "assets/IMG_4622.webp"
       ],
   
       facts: [
@@ -72,10 +72,10 @@ const villasData = {
         "فيلا هادئة بأجواء عائلية مريحة، توفر الخصوصية والمساحات المناسبة لقضاء يوم جميل بعيداً عن الازدحام.",
   
       images: [
-        "assets/IMG_4596.JPG",
-        "assets/IMG_4622.JPG",
-        "assets/IMG_4614.JPG",
-        "assets/IMG_4597.JPG"
+        "assets/IMG_4596.webp",
+        "assets/IMG_4622.webp",
+        "assets/IMG_4614.webp",
+        "assets/IMG_4597.webp"
       ],
   
       facts: [
@@ -123,9 +123,9 @@ const villasData = {
         "خيار مريح للأزواج والعائلات الصغيرة، بأجواء هادئة ومساحة عملية مع مسبح خاص وخصوصية عالية.",
   
       images: [
-        "assets/IMG_4623.JPG",
-        "assets/IMG_4614.JPG",
-        "assets/IMG_4622.JPG"
+        "assets/IMG_4623.webp",
+        "assets/IMG_4614.webp",
+        "assets/IMG_4622.webp"
       ],
   
       facts: [

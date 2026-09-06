@@ -116,7 +116,7 @@
         rgba(20, 18, 14, 0.08),
         rgba(20, 18, 14, 0.68)
       ),
-      url("assets/IMG_4604.JPG")
+      url("assets/IMG_4604.webp")
       center / cover no-repeat;
   
     box-shadow: var(--page-shadow);
