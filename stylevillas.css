@@ -2053,3 +2053,96 @@
     }
   
   }
+
+/* =========================================================
+   MOBILE MODAL WIDTH / IOS ZOOM FIX
+========================================================= */
+
+@media (max-width: 699px) {
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  .villa-modal {
+    width: 100%;
+    max-width: 100vw;
+    overflow-x: hidden;
+  }
+
+  .villa-modal-box {
+    width: 100%;
+    max-width: 100vw;
+    min-width: 0;
+    overflow-x: hidden;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  #villaModalContent,
+  .premium-modal-layout,
+  .premium-modal-gallery,
+  .premium-modal-info {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  .premium-modal-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .premium-thumbnails {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .premium-main-image {
+    height: clamp(230px, 68vw, 285px);
+  }
+
+  .premium-modal-info > h2 {
+    max-width: 100%;
+    font-size: clamp(1.5rem, 8vw, 2rem);
+    line-height: 1.45;
+    overflow-wrap: break-word;
+  }
+
+  .premium-description {
+    max-width: 100%;
+    overflow-wrap: break-word;
+  }
+
+  .premium-facts,
+  .premium-feature-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .premium-fact,
+  .premium-fact > div,
+  .premium-feature-list li {
+    min-width: 0;
+  }
+
+  .premium-fact {
+    gap: 8px;
+    padding: 10px;
+  }
+
+  .premium-fact strong,
+  .premium-fact small,
+  .premium-feature-list li {
+    overflow-wrap: break-word;
+  }
+
+  .premium-inquiry-fields input,
+  .premium-inquiry-fields select {
+    font-size: 16px;
+  }
+}
+
