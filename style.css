@@ -1680,7 +1680,11 @@ a {
 
   color: white;
 
+  text-decoration: none;
+
   opacity: 0;
+
+  pointer-events: none;
 
   transform: translateY(8px);
 
@@ -1689,8 +1693,11 @@ a {
     transform .3s ease;
 }
 
-.team-card:hover .team-hover {
+.team-card:hover .team-hover,
+.team-card:focus-within .team-hover {
   opacity: 1;
+
+  pointer-events: auto;
 
   transform: translateY(0);
 }
