@@ -623,7 +623,8 @@
           <a
             href="#"
             class="team-card whatsapp-link reveal"
-            data-message="مرحباً، أريد الاستفسار عن فلل THARA."
+            data-whatsapp-number="972584003302"
+            data-message="مرحباً نعيم، أريد الاستفسار عن فلل THARA."
           >
             <div class="team-image">
               <img src="assets/naeem.webp" alt="عضو فريق THARA" />
@@ -641,13 +642,15 @@
               <h3>نعيم</h3>
 
               <span>نائب ادارة الشركة</span>
+              <span class="team-phone" dir="ltr">+972 58-400-3302</span>
             </div>
           </a>
 
           <a
             href="#"
             class="team-card whatsapp-link reveal delay-1"
-            data-message="مرحباً، أريد الاستفسار عن فلل THARA."
+            data-whatsapp-number="972532121036"
+            data-message="مرحباً محمد، أريد الاستفسار عن فلل THARA."
           >
             <div class="team-image">
               <img src="assets/mohammad.webp" alt="عضو فريق THARA" />
@@ -665,13 +668,15 @@
               <h3>محمد</h3>
 
               <span>ادارة التسويق والاعلان</span>
+              <span class="team-phone" dir="ltr">+972 53-212-1036</span>
             </div>
           </a>
 
           <a
             href="#"
             class="team-card whatsapp-link reveal delay-2"
-            data-message="مرحباً، أريد الاستفسار عن فلل THARA."
+            data-whatsapp-number="972584429998"
+            data-message="مرحباً مجد، أريد الاستفسار عن فلل THARA."
           >
             <div class="team-image">
               <img src="assets/majd.webp" alt="عضو فريق THARA" />
@@ -689,6 +694,7 @@
               <h3>مجد</h3>
 
               <span>ادارة الحجوزات</span>
+              <span class="team-phone" dir="ltr">+972 58-442-9998</span>
             </div>
           </a>
         </div>
@@ -768,18 +774,36 @@
           <h3>تواصل</h3>
 
           <div class="footer-socials" aria-label="حسابات THARA على منصات التواصل">
-            <a
-              href="#"
-              class="footer-social-icon whatsapp-link"
-              data-message="مرحباً، أريد الاستفسار عن فلل THARA."
-              aria-label="واتساب"
-              title="واتساب"
-            >
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M20 11.5a8 8 0 0 1-11.7 7.1L4 20l1.4-4.2A8 8 0 1 1 20 11.5Z"></path>
-                <path d="M9 8.5c.4 2.7 1.8 4.1 4.5 4.5l1-1c.3-.3.7-.4 1-.2l2 1v2c0 .6-.4 1.1-1 1.2-4.8.5-8.9-3.6-8.4-8.4.1-.6.6-1 1.2-1h2l1 2c.2.3.1.7-.2 1l-1 1"></path>
-              </svg>
-            </a>
+            <div class="whatsapp-picker">
+              <button
+                class="footer-social-icon whatsapp-picker-toggle"
+                type="button"
+                aria-label="اختر شخصاً للتواصل عبر واتساب"
+                aria-expanded="false"
+                aria-controls="footerWhatsappMenu"
+                title="واتساب"
+              >
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M20 11.5a8 8 0 0 1-11.7 7.1L4 20l1.4-4.2A8 8 0 1 1 20 11.5Z"></path>
+                  <path d="M9 8.5c.4 2.7 1.8 4.1 4.5 4.5l1-1c.3-.3.7-.4 1-.2l2 1v2c0 .6-.4 1.1-1 1.2-4.8.5-8.9-3.6-8.4-8.4.1-.6.6-1 1.2-1h2l1 2c.2.3.1.7-.2 1l-1 1"></path>
+                </svg>
+              </button>
+
+              <div class="whatsapp-picker-menu" id="footerWhatsappMenu">
+                <a href="#" class="whatsapp-link" data-whatsapp-number="972532121036" data-message="مرحباً محمد، أريد الاستفسار عن فلل THARA.">
+                  <strong>محمد</strong>
+                  <span dir="ltr">+972 53-212-1036</span>
+                </a>
+                <a href="#" class="whatsapp-link" data-whatsapp-number="972584003302" data-message="مرحباً نعيم، أريد الاستفسار عن فلل THARA.">
+                  <strong>نعيم</strong>
+                  <span dir="ltr">+972 58-400-3302</span>
+                </a>
+                <a href="#" class="whatsapp-link" data-whatsapp-number="972584429998" data-message="مرحباً مجد، أريد الاستفسار عن فلل THARA.">
+                  <strong>مجد</strong>
+                  <span dir="ltr">+972 58-442-9998</span>
+                </a>
+              </div>
+            </div>
 
             <a href="#" class="footer-social-icon footer-future-link" aria-label="إنستغرام" title="إنستغرام">
               <svg viewBox="0 0 24 24" aria-hidden="true">
