@@ -628,44 +628,63 @@ if (
 
 
   /* =======================================================
-     FOOTER WHATSAPP PICKER
+     WHATSAPP CONTACT PICKERS
   ======================================================= */
 
-  const whatsappPicker =
-    document.querySelector(
-      ".whatsapp-picker"
+  const whatsappPickers =
+    Array.from(
+      document.querySelectorAll(
+        ".whatsapp-picker"
+      )
     );
 
 
-  const whatsappPickerToggle =
-    document.querySelector(
-      ".whatsapp-picker-toggle"
-    );
+  function closeWhatsappPickers(exceptPicker = null) {
+
+    whatsappPickers.forEach((picker) => {
+
+      if (picker === exceptPicker) {
+        return;
+      }
 
 
-  function closeWhatsappPicker() {
-
-    if (!whatsappPicker || !whatsappPickerToggle) {
-      return;
-    }
+      picker.classList.remove(
+        "active"
+      );
 
 
-    whatsappPicker.classList.remove(
-      "active"
-    );
+      const toggle =
+        picker.querySelector(
+          ".whatsapp-picker-toggle"
+        );
 
 
-    whatsappPickerToggle.setAttribute(
-      "aria-expanded",
-      "false"
-    );
+      if (toggle) {
+        toggle.setAttribute(
+          "aria-expanded",
+          "false"
+        );
+      }
+
+    });
 
   }
 
 
-  if (whatsappPicker && whatsappPickerToggle) {
+  whatsappPickers.forEach((picker) => {
 
-    whatsappPickerToggle.addEventListener(
+    const toggle =
+      picker.querySelector(
+        ".whatsapp-picker-toggle"
+      );
+
+
+    if (!toggle) {
+      return;
+    }
+
+
+    toggle.addEventListener(
       "click",
       (event) => {
 
@@ -673,21 +692,21 @@ if (
 
 
         const willOpen =
-          !whatsappPicker.classList.contains(
+          !picker.classList.contains(
             "active"
           );
 
 
-        closeWhatsappPicker();
+        closeWhatsappPickers();
 
 
         if (willOpen) {
-          whatsappPicker.classList.add(
+          picker.classList.add(
             "active"
           );
 
 
-          whatsappPickerToggle.setAttribute(
+          toggle.setAttribute(
             "aria-expanded",
             "true"
           );
@@ -697,7 +716,7 @@ if (
     );
 
 
-    whatsappPicker.addEventListener(
+    picker.addEventListener(
       "click",
       (event) => {
 
@@ -706,25 +725,25 @@ if (
       }
     );
 
-
-    document.addEventListener(
-      "click",
-      closeWhatsappPicker
-    );
+  });
 
 
-    document.addEventListener(
-      "keydown",
-      (event) => {
+  document.addEventListener(
+    "click",
+    () => closeWhatsappPickers()
+  );
 
-        if (event.key === "Escape") {
-          closeWhatsappPicker();
-        }
 
+  document.addEventListener(
+    "keydown",
+    (event) => {
+
+      if (event.key === "Escape") {
+        closeWhatsappPickers();
       }
-    );
 
-  }
+    }
+  );
 
 
 

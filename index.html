@@ -854,15 +854,33 @@
        WHATSAPP
   ====================================================== -->
 
-    <a
-      href="#"
-      class="floating-whatsapp whatsapp-link"
-      data-message="مرحباً، أريد الاستفسار عن فلل THARA."
-    >
-      <span class="whatsapp-circle"> ☎ </span>
+    <div class="whatsapp-picker floating-whatsapp-picker">
+      <button
+        class="floating-whatsapp whatsapp-picker-toggle"
+        type="button"
+        aria-label="اختر شخصاً للتواصل عبر واتساب"
+        aria-expanded="false"
+        aria-controls="floatingWhatsappMenu"
+      >
+        <span class="whatsapp-circle"> ☎ </span>
+        <span class="whatsapp-text"> واتساب </span>
+      </button>
 
-      <span class="whatsapp-text"> واتساب </span>
-    </a>
+      <div class="whatsapp-picker-menu" id="floatingWhatsappMenu">
+        <a href="#" class="whatsapp-link" data-whatsapp-number="972532121036" data-message="مرحباً محمد، أريد الاستفسار عن فلل THARA.">
+          <strong>محمد</strong>
+          <span dir="ltr">+972 53-212-1036</span>
+        </a>
+        <a href="#" class="whatsapp-link" data-whatsapp-number="972584003302" data-message="مرحباً نعيم، أريد الاستفسار عن فلل THARA.">
+          <strong>نعيم</strong>
+          <span dir="ltr">+972 58-400-3302</span>
+        </a>
+        <a href="#" class="whatsapp-link" data-whatsapp-number="972584429998" data-message="مرحباً مجد، أريد الاستفسار عن فلل THARA.">
+          <strong>مجد</strong>
+          <span dir="ltr">+972 58-442-9998</span>
+        </a>
+      </div>
+    </div>
 
     <!-- =====================================================
        ADVANCED LIGHTBOX
