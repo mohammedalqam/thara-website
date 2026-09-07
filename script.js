@@ -581,10 +581,14 @@ if (
     "972532121036";
 
 
-  function openWhatsApp(message) {
+  function openWhatsApp(message, number = whatsappNumber) {
+
+    const safeNumber =
+      String(number).replace(/\D/g, "");
+
 
     const url =
-      `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+      `https://wa.me/${safeNumber}?text=${encodeURIComponent(message)}`;
 
 
     window.open(
@@ -611,13 +615,116 @@ if (
 
           openWhatsApp(
             link.dataset.message ||
-            "مرحباً، أريد الاستفسار عن فلل THARA."
+            "مرحباً، أريد الاستفسار عن فلل THARA.",
+            link.dataset.whatsappNumber ||
+            whatsappNumber
           );
 
         }
       );
 
     });
+
+
+
+  /* =======================================================
+     FOOTER WHATSAPP PICKER
+  ======================================================= */
+
+  const whatsappPicker =
+    document.querySelector(
+      ".whatsapp-picker"
+    );
+
+
+  const whatsappPickerToggle =
+    document.querySelector(
+      ".whatsapp-picker-toggle"
+    );
+
+
+  function closeWhatsappPicker() {
+
+    if (!whatsappPicker || !whatsappPickerToggle) {
+      return;
+    }
+
+
+    whatsappPicker.classList.remove(
+      "active"
+    );
+
+
+    whatsappPickerToggle.setAttribute(
+      "aria-expanded",
+      "false"
+    );
+
+  }
+
+
+  if (whatsappPicker && whatsappPickerToggle) {
+
+    whatsappPickerToggle.addEventListener(
+      "click",
+      (event) => {
+
+        event.stopPropagation();
+
+
+        const willOpen =
+          !whatsappPicker.classList.contains(
+            "active"
+          );
+
+
+        closeWhatsappPicker();
+
+
+        if (willOpen) {
+          whatsappPicker.classList.add(
+            "active"
+          );
+
+
+          whatsappPickerToggle.setAttribute(
+            "aria-expanded",
+            "true"
+          );
+        }
+
+      }
+    );
+
+
+    whatsappPicker.addEventListener(
+      "click",
+      (event) => {
+
+        event.stopPropagation();
+
+      }
+    );
+
+
+    document.addEventListener(
+      "click",
+      closeWhatsappPicker
+    );
+
+
+    document.addEventListener(
+      "keydown",
+      (event) => {
+
+        if (event.key === "Escape") {
+          closeWhatsappPicker();
+        }
+
+      }
+    );
+
+  }
 
 
 
