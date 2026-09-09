@@ -146,6 +146,8 @@
               <span> 05 </span>
             </div>
 
+            <button id="heroPause" class="hero-pause" type="button" aria-pressed="false" hidden>إيقاف العرض</button>
+
             <div class="hero-dots">
               <button
                 class="hero-dot active"
@@ -226,10 +228,10 @@
           </p>
         </div>
 
-        <div class="featured-showcase reveal">
+        <div class="featured-showcase">
           <!-- FEATURED GALLERY -->
 
-          <div class="featured-gallery">
+          <div class="featured-gallery reveal">
             <button
               class="featured-gallery-main gallery-viewer"
               type="button"
@@ -239,6 +241,8 @@
                 src="assets/IMG_4601.webp"
                 alt="فيلا الأناقة"
                 class="parallax-image"
+                loading="lazy"
+                decoding="async"
               />
 
               <span class="featured-badge"> THARA SELECT </span>
@@ -289,7 +293,7 @@
 
           <!-- FEATURED INFO -->
 
-          <div class="featured-info">
+          <div class="featured-info reveal delay-1">
             <p class="featured-number">01</p>
 
             <h3>فيلا العاطفه</h3>
@@ -301,13 +305,13 @@
 
             <div class="featured-specs">
               <div>
-                <strong class="count-up" data-count="3"> 0 </strong>
+                <strong class="count-up" data-count="3"> 3 </strong>
 
                 <span> غرف نوم </span>
               </div>
 
               <div>
-                <strong class="count-up" data-count="10"> 0 </strong>
+                <strong class="count-up" data-count="10"> 10 </strong>
 
                 <span> أشخاص </span>
               </div>
@@ -358,7 +362,9 @@
           <span class="brand-mark"> THARA </span>
 
           <p>
-            المكان الجميل لا يملأ الصور فقط، بل يصنع الذكريات التي تبقى بعدها.
+            <span class="story-phrase">المكان الجميل لا يملأ الصور فقط،</span>
+            <span class="story-phrase">بل يصنع الذكريات</span>
+            <span class="story-phrase story-phrase-gold">التي تبقى بعدها.</span>
           </p>
 
           <span class="brand-moment-line"></span>

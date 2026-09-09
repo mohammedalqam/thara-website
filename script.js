@@ -111,466 +111,290 @@ if (
 
 
   /* =======================================================
-     HERO CINEMATIC SLIDER
+     LIGHTWEIGHT CINEMATIC MOTION
+     No dependencies, scroll hijacking or persistent RAF loop.
+     Content is visible even when animation APIs are unavailable.
   ======================================================= */
 
-  const heroSlides =
-    document.querySelectorAll(
-      ".hero-slide"
-    );
-
-  const heroDots =
-    document.querySelectorAll(
-      ".hero-dot"
-    );
-
-  const heroCurrent =
-    document.getElementById(
-      "heroCurrent"
-    );
-
-  const heroProgress =
-    document.getElementById(
-      "heroProgress"
-    );
-
-
+  const hero = document.querySelector(".hero");
+  const heroSlides = [...document.querySelectorAll(".hero-slide")];
+  const heroDots = [...document.querySelectorAll(".hero-dot")];
+  const heroCurrent = document.getElementById("heroCurrent");
+  const heroProgress = document.getElementById("heroProgress");
+  const heroPause = document.getElementById("heroPause");
+  const heroMedia = document.querySelector(".hero-slides");
+  const heroCopy = document.getElementById("heroContent");
+  const featuredPhoto = document.querySelector(".featured-gallery-main");
+  const featuredImage = featuredPhoto?.querySelector("img");
+  const story = document.querySelector(".brand-moment");
+  const storyPhrases = [...document.querySelectorAll(".story-phrase")];
+  const storyLine = document.querySelector(".brand-moment-line");
+  const revealElements = [...document.querySelectorAll(".reveal")];
+  const counters = [...document.querySelectorAll(".count-up")];
+  const counterGroup = document.querySelector(".featured-specs");
+  const reducedMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)") ||
+    { matches: true };
+  const desktopMotion = window.matchMedia?.(
+    "(min-width: 900px) and (hover: hover) and (pointer: fine)"
+  ) || { matches: false };
+  const connection = navigator.connection;
+  const constrainedDevice = (navigator.deviceMemory && navigator.deviceMemory <= 4) ||
+    (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4);
+  const supportsObserver = typeof window.IntersectionObserver === "function";
+  const activeAnimations = new Set();
+  const activeScenes = new Set();
   const HERO_DURATION = 5200;
-
+  const EASE = "cubic-bezier(.16,1,.3,1)";
+  let motionEnabled = false;
+  let richMotion = false;
   let heroIndex = 0;
-
+  let heroInView = false;
+  let heroUserPaused = false;
   let heroTimer = null;
+  let progressAnimation = null;
+  let scrollFrame = 0;
+  let counterFrame = 0;
+  let sceneObserver = null;
+  let revealObserver = null;
 
+  const clamp = (value) => Math.max(0, Math.min(1, value));
 
-
-  function restartProgress() {
-
-    if (!heroProgress) {
-      return;
-    }
-
-
-    heroProgress.classList.remove(
-      "running"
-    );
-
-
-    void heroProgress.offsetWidth;
-
-
-    heroProgress.classList.add(
-      "running"
-    );
-
+  function animateOnce(element, frames, options) {
+    if (!motionEnabled || document.hidden || !element?.animate) return;
+    const animation = element.animate(frames, { fill: "backwards", ...options });
+    activeAnimations.add(animation);
+    const release = () => activeAnimations.delete(animation);
+    animation.finished.then(release, release);
   }
 
+  function finishCounters() {
+    cancelAnimationFrame(counterFrame);
+    counterFrame = 0;
+    counters.forEach((element) => {
+      element.textContent = String(Number(element.dataset.count));
+    });
+  }
 
+  function reveal(element) {
+    element.classList.add("visible");
+    if (!motionEnabled || document.hidden) return;
+    const stagger = desktopMotion.matches
+      ? (element.classList.contains("delay-2") ? 120 :
+        element.classList.contains("delay-1") ? 60 : 0)
+      : 0;
+    animateOnce(element, [
+      { opacity: 0, transform: `translateY(${richMotion ? 32 : 14}px)` },
+      { opacity: 1, transform: "translateY(0)" }
+    ], { duration: richMotion ? 850 : 500, delay: stagger, easing: EASE });
+
+    if (element.matches(".editorial-image")) {
+      animateOnce(element.querySelector("img"), [
+        { transform: `scale(${richMotion ? 1.1 : 1.04})` },
+        { transform: "scale(1)" }
+      ], { duration: richMotion ? 1100 : 650, delay: stagger, easing: EASE });
+    }
+
+    if (element.matches(".brand-moment-content") && !richMotion) {
+      storyPhrases.forEach((phrase, index) => {
+        animateOnce(phrase, [{ opacity: .6 }, { opacity: 1 }], {
+          duration: 550, delay: index * 100, easing: "ease-out"
+        });
+      });
+    }
+  }
+
+  function stopHeroSlider() {
+    clearTimeout(heroTimer);
+    heroTimer = null;
+    progressAnimation?.cancel();
+    progressAnimation = null;
+  }
+
+  function syncHeroSlider() {
+    stopHeroSlider();
+    if (!motionEnabled || !heroInView || document.hidden ||
+        heroUserPaused || heroSlides.length < 2) return;
+    if (heroProgress?.animate) {
+      progressAnimation = heroProgress.animate(
+        [{ transform: "scaleX(0)" }, { transform: "scaleX(1)" }],
+        { duration: HERO_DURATION, easing: "linear", fill: "forwards" }
+      );
+    }
+    heroTimer = setTimeout(() => {
+      showHeroSlide((heroIndex + 1) % heroSlides.length);
+      syncHeroSlider();
+    }, HERO_DURATION);
+  }
 
   function showHeroSlide(index) {
-
-    heroSlides.forEach(
-      (slide, slideIndex) => {
-
-        slide.classList.toggle(
-          "active",
-          slideIndex === index
-        );
-
-      }
-    );
-
-
-    heroDots.forEach(
-      (dot, dotIndex) => {
-
-        dot.classList.toggle(
-          "active",
-          dotIndex === index
-        );
-
-      }
-    );
-
-
-    if (heroCurrent) {
-
-      heroCurrent.textContent =
-        String(index + 1)
-          .padStart(2, "0");
-
-    }
-
-
     heroIndex = index;
-
-
-    restartProgress();
-
+    heroSlides.forEach((slide, i) => slide.classList.toggle("active", i === index));
+    heroDots.forEach((dot, i) => {
+      dot.classList.toggle("active", i === index);
+      dot.setAttribute("aria-current", String(i === index));
+    });
+    if (heroCurrent) heroCurrent.textContent = String(index + 1).padStart(2, "0");
   }
 
+  heroDots.forEach((dot, index) => {
+    dot.setAttribute("aria-label", `عرض الصورة ${index + 1}`);
+    dot.addEventListener("click", () => {
+      showHeroSlide(index);
+      syncHeroSlider();
+    });
+  });
+  showHeroSlide(0);
 
+  heroPause?.addEventListener("click", () => {
+    heroUserPaused = !heroUserPaused;
+    heroPause.setAttribute("aria-pressed", String(heroUserPaused));
+    heroPause.textContent = heroUserPaused ? "متابعة العرض" : "إيقاف العرض";
+    syncHeroSlider();
+  });
 
-  function nextHeroSlide() {
-
-    const next =
-      (heroIndex + 1)
-      % heroSlides.length;
-
-
-    showHeroSlide(next);
-
-  }
-
-
-
-  function startHeroSlider() {
-
-    clearInterval(heroTimer);
-
-
-    if (heroSlides.length < 2) {
-      return;
-    }
-
-
-    heroTimer =
-      setInterval(
-        nextHeroSlide,
-        HERO_DURATION
-      );
-
-  }
-
-
-
-  heroDots.forEach(
-    (dot, index) => {
-
-      dot.addEventListener(
-        "click",
-        () => {
-
-          showHeroSlide(index);
-
-          startHeroSlider();
-
-        }
-      );
-
-    }
-  );
-
-
-  if (heroSlides.length) {
-
-    restartProgress();
-
-    startHeroSlider();
-
-  }
-
-
-
-  document.addEventListener(
-    "visibilitychange",
-    () => {
-
-      if (document.hidden) {
-
-        clearInterval(heroTimer);
-
-      } else {
-
-        restartProgress();
-
-        startHeroSlider();
-
-      }
-
-    }
-  );
-
-
-
-  /* =======================================================
-     REVEAL ANIMATION
-  ======================================================= */
-
-  const revealElements =
-    document.querySelectorAll(
-      ".reveal"
+  function resetScenes() {
+    [heroMedia, heroCopy, featuredImage].forEach((element) => {
+      element?.style.removeProperty("--motion-y");
+      element?.style.removeProperty("--motion-scale");
+    });
+    storyPhrases.forEach((phrase) => phrase.style.removeProperty("opacity"));
+    storyLine?.style.removeProperty("transform");
+    [hero, featuredPhoto, story].forEach((element) =>
+      element?.classList.remove("motion-in-view")
     );
+  }
 
-
-  if (
-    "IntersectionObserver" in window
-  ) {
-
-    const observer =
-      new IntersectionObserver(
-        (entries) => {
-
-          entries.forEach(
-            (entry) => {
-
-              if (
-                entry.isIntersecting
-              ) {
-
-                entry.target.classList.add(
-                  "visible"
-                );
-
-
-                observer.unobserve(
-                  entry.target
-                );
-
-              }
-
-            }
-          );
-
-        },
-        {
-          threshold: 0.12
-        }
-      );
-
-
-    revealElements.forEach(
-      (element) => {
-
-        observer.observe(
-          element
-        );
-
+  function renderScroll() {
+    scrollFrame = 0;
+    if (!richMotion || document.hidden) return;
+    const viewport = window.innerHeight;
+    // Complete all layout reads before any style writes (at most three scenes).
+    const positions = [...activeScenes].map((element) => ({
+      element, rect: element.getBoundingClientRect()
+    }));
+    positions.forEach(({ element, rect }) => {
+      if (rect.height <= 0) return;
+      if (element === hero) {
+        const progress = clamp(-rect.top / rect.height);
+        heroMedia?.style.setProperty("--motion-y", `${(progress * 64).toFixed(2)}px`);
+        heroCopy?.style.setProperty("--motion-y", `${(-progress * 28).toFixed(2)}px`);
+      } else if (element === featuredPhoto) {
+        const progress = clamp((viewport - rect.top) / (viewport + rect.height));
+        featuredImage?.style.setProperty("--motion-y", `${((progress - .5) * 16).toFixed(2)}px`);
+        featuredImage?.style.setProperty("--motion-scale", (1.1 - progress * .055).toFixed(4));
+      } else if (element === story) {
+        const progress = clamp((viewport * .86 - rect.top) / (viewport * .52));
+        storyPhrases.forEach((phrase, index) => {
+          phrase.style.opacity = String(.6 + .4 * clamp(progress * storyPhrases.length - index));
+        });
+        if (storyLine) storyLine.style.transform = `scaleX(${.35 + .65 * progress})`;
       }
-    );
+    });
+  }
 
+  function queueScroll() {
+    if (!scrollFrame && richMotion && !document.hidden && activeScenes.size) {
+      scrollFrame = requestAnimationFrame(renderScroll);
+    }
+  }
+
+  function syncMotionPolicy() {
+    motionEnabled = !reducedMotion.matches && !connection?.saveData;
+    richMotion = motionEnabled && desktopMotion.matches && !constrainedDevice &&
+      supportsObserver;
+    document.body.dataset.motion = motionEnabled ? (richMotion ? "full" : "light") : "off";
+    if (heroPause) heroPause.hidden = !motionEnabled || !supportsObserver || heroSlides.length < 2;
+    activeAnimations.forEach((animation) => animation.cancel());
+    activeAnimations.clear();
+    finishCounters();
+    cancelAnimationFrame(scrollFrame);
+    scrollFrame = 0;
+    window.removeEventListener("scroll", queueScroll);
+    sceneObserver?.disconnect();
+    activeScenes.clear();
+    resetScenes();
+    heroInView = false;
+    if (sceneObserver) {
+      if (hero) sceneObserver.observe(hero);
+      if (richMotion) {
+        if (featuredPhoto) sceneObserver.observe(featuredPhoto);
+        if (story) sceneObserver.observe(story);
+        window.addEventListener("scroll", queueScroll, { passive: true });
+      }
+    }
+    if (!motionEnabled) {
+      revealObserver?.disconnect();
+      revealElements.forEach((element) => element.classList.add("visible"));
+    }
+    syncHeroSlider();
+  }
+
+  if (supportsObserver) {
+    sceneObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.target === hero) {
+          heroInView = entry.isIntersecting;
+          syncHeroSlider();
+        }
+        if (!richMotion) return;
+        entry.target.classList.toggle("motion-in-view", entry.isIntersecting);
+        if (entry.isIntersecting) activeScenes.add(entry.target);
+        else activeScenes.delete(entry.target);
+      });
+      queueScroll();
+    }, { threshold: 0 });
+  }
+  syncMotionPolicy();
+
+  if (supportsObserver && motionEnabled) {
+    revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        revealObserver.unobserve(entry.target);
+        reveal(entry.target);
+      });
+    }, { threshold: .08 });
+    revealElements.forEach((element) => revealObserver.observe(element));
+
+    if (counterGroup) {
+      const counterObserver = new IntersectionObserver((entries) => {
+        if (!entries.some((entry) => entry.isIntersecting)) return;
+        counterObserver.disconnect();
+        if (!motionEnabled || document.hidden) return finishCounters();
+        const start = performance.now();
+        function tick(now) {
+          const progress = clamp((now - start) / 850);
+          counters.forEach((element) => {
+            const target = Number(element.dataset.count);
+            element.textContent = String(Math.round(target * (1 - Math.pow(1 - progress, 3))));
+          });
+          counterFrame = progress < 1 ? requestAnimationFrame(tick) : 0;
+        }
+        counterFrame = requestAnimationFrame(tick);
+      }, { threshold: .5 });
+      counterObserver.observe(counterGroup);
+    }
   } else {
-
-    revealElements.forEach(
-      (element) => {
-
-        element.classList.add(
-          "visible"
-        );
-
-      }
-    );
-
+    revealElements.forEach((element) => element.classList.add("visible"));
   }
 
-
-
-  /* =======================================================
-     NUMBER COUNTER
-  ======================================================= */
-
-  const counters =
-    document.querySelectorAll(
-      ".count-up"
-    );
-
-
-  const counterObserver =
-    new IntersectionObserver(
-      (entries) => {
-
-        entries.forEach(
-          (entry) => {
-
-            if (!entry.isIntersecting) {
-              return;
-            }
-
-
-            const element =
-              entry.target;
-
-
-            const target =
-              Number(
-                element.dataset.count
-              );
-
-
-            const duration = 1100;
-
-            const startTime =
-              performance.now();
-
-
-            function animate(now) {
-
-              const progress =
-                Math.min(
-                  (
-                    now - startTime
-                  ) / duration,
-                  1
-                );
-
-
-              const eased =
-                1 -
-                Math.pow(
-                  1 - progress,
-                  3
-                );
-
-
-              element.textContent =
-                Math.round(
-                  target * eased
-                );
-
-
-              if (progress < 1) {
-
-                requestAnimationFrame(
-                  animate
-                );
-
-              }
-
-            }
-
-
-            requestAnimationFrame(
-              animate
-            );
-
-
-            counterObserver.unobserve(
-              element
-            );
-
-          }
-        );
-
-      },
-      {
-        threshold: .6
-      }
-    );
-
-
-  counters.forEach(
-    (counter) => {
-
-      counterObserver.observe(
-        counter
-      );
-
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) {
+      cancelAnimationFrame(scrollFrame);
+      scrollFrame = 0;
+      finishCounters();
+      activeAnimations.forEach((animation) => animation.cancel());
+      activeAnimations.clear();
+    } else {
+      queueScroll();
     }
-  );
-
-
-
-  /* =======================================================
-     FEATURED PARALLAX
-  ======================================================= */
-
-  const parallaxImages =
-    document.querySelectorAll(
-      ".parallax-image"
-    );
-
-
-  let parallaxTicking = false;
-
-
-  function updateParallax() {
-
-    parallaxImages.forEach(
-      (image) => {
-
-        const parent =
-          image.parentElement;
-
-
-        const rect =
-          parent.getBoundingClientRect();
-
-
-        const viewport =
-          window.innerHeight;
-
-
-        if (
-          rect.bottom < 0 ||
-          rect.top > viewport
-        ) {
-          return;
-        }
-
-
-        const center =
-          rect.top +
-          rect.height / 2;
-
-
-        const offset =
-          (
-            center -
-            viewport / 2
-          ) / viewport;
-
-
-        const movement =
-          Math.max(
-            -22,
-            Math.min(
-              22,
-              offset * -35
-            )
-          );
-
-
-        image.style.setProperty(
-          "--parallax-y",
-          `${movement}px`
-        );
-
-      }
-    );
-
-
-    parallaxTicking = false;
-
-  }
-
-
-
-  window.addEventListener(
-    "scroll",
-    () => {
-
-      if (
-        parallaxTicking
-      ) {
-        return;
-      }
-
-
-      parallaxTicking = true;
-
-
-      requestAnimationFrame(
-        updateParallax
-      );
-
-    },
-    {
-      passive: true
-    }
-  );
-
-
-  updateParallax();
-
+    syncHeroSlider();
+  });
+  // Live preference changes and screen rotations must also stop unnecessary work.
+  reducedMotion.addEventListener?.("change", syncMotionPolicy);
+  desktopMotion.addEventListener?.("change", syncMotionPolicy);
+  connection?.addEventListener?.("change", syncMotionPolicy);
+  window.addEventListener("resize", queueScroll, { passive: true });
 
 
   /* =======================================================

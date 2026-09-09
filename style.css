@@ -98,18 +98,20 @@ a {
 .experience-title::after {
   content: "";
 
-  width: 0;
+  width: 70px;
   height: 1px;
 
   background: var(--accent-gold);
 
-  transition: width 1.2s ease .2s;
+  transform-origin: right center;
+
+  transition: transform .9s cubic-bezier(.16,1,.3,1) .12s;
 }
 
-.section-heading.visible::after,
-.why-heading.visible::after,
-.experience-title.visible::after {
-  width: 70px;
+.home-page[data-motion="full"] .section-heading:not(.visible)::after,
+.home-page[data-motion="full"] .why-heading:not(.visible)::after,
+.home-page[data-motion="full"] .experience-title:not(.visible)::after {
+  transform: scaleX(0);
 }
 
 .section-heading h2,
@@ -461,15 +463,9 @@ a {
 
   visibility: hidden;
 
-  filter: blur(4px);
-
-  transform: scale(1.015);
-
   transition:
-    opacity 1.55s cubic-bezier(.4,0,.2,1),
-    filter 1.55s ease,
-    transform 1.8s ease,
-    visibility 1.55s;
+    opacity 1s cubic-bezier(.4,0,.2,1),
+    visibility 1s;
 }
 
 .hero-slide img {
@@ -478,10 +474,6 @@ a {
 
   object-fit: cover;
 
-  transform: scale(1.09);
-
-  transition:
-    transform 7.8s cubic-bezier(.2,.6,.2,1);
 }
 
 .hero-slide.active {
@@ -489,15 +481,19 @@ a {
 
   visibility: visible;
 
-  filter: blur(0);
-
-  transform: scale(1);
-
   z-index: 1;
 }
 
-.hero-slide.active img {
-  transform: scale(1);
+.home-page[data-motion="full"] .hero-slides {
+  transform: translate3d(0, var(--motion-y, 0px), 0) scale(1.035);
+}
+
+.home-page[data-motion="full"] .hero-content {
+  transform: translate3d(0, var(--motion-y, 0px), 0);
+}
+
+.home-page[data-motion="full"] .hero.motion-in-view .hero-slides {
+  will-change: transform;
 }
 
 .hero-overlay {
@@ -612,13 +608,9 @@ a {
 .hero-copy-animate h1,
 .hero-copy-animate .hero-description,
 .hero-copy-animate .hero-actions {
-  opacity: 0;
-
-  transform: translateY(22px);
-
   animation:
-    heroTextEnter .9s forwards
-    cubic-bezier(.2,.7,.2,1);
+    heroTextEnter .95s backwards
+    cubic-bezier(.16,1,.3,1);
 }
 
 .hero-copy-animate h1 {
@@ -634,8 +626,11 @@ a {
 }
 
 @keyframes heroTextEnter {
+  from {
+    transform: translateY(22px);
+  }
+
   to {
-    opacity: 1;
     transform: translateY(0);
   }
 }
@@ -718,6 +713,35 @@ a {
   background: #e1c083;
 }
 
+.hero-pause {
+  min-height: 36px;
+  padding: 4px 12px;
+  border: 1px solid rgba(255,255,255,.45);
+  border-radius: 999px;
+  background: rgba(20,18,14,.25);
+  color: white;
+  font: inherit;
+  font-size: .65rem;
+  cursor: pointer;
+}
+
+.hero-pause:focus-visible,
+.hero-dot:focus-visible {
+  outline: 2px solid #e1c083;
+  outline-offset: 5px;
+}
+
+.hero-dot {
+  position: relative;
+}
+
+/* Keep the visual dots compact with a comfortable touch target. */
+.hero-dot::before {
+  content: "";
+  position: absolute;
+  inset: -17px -3px;
+}
+
 
 /* HERO PROGRESS */
 
@@ -737,8 +761,11 @@ a {
 .hero-progress-fill {
   display: block;
 
-  width: 0;
+  width: 100%;
   height: 100%;
+
+  transform: scaleX(0);
+  transform-origin: right center;
 
   background:
     linear-gradient(
@@ -746,21 +773,6 @@ a {
       #b58e4c,
       #eddaae
     );
-}
-
-.hero-progress-fill.running {
-  animation:
-    heroProgress 5.2s linear forwards;
-}
-
-@keyframes heroProgress {
-  from {
-    width: 0;
-  }
-
-  to {
-    width: 100%;
-  }
 }
 
 .hero-scroll {
@@ -902,15 +914,19 @@ a {
 
 .featured-gallery-main img {
   width: 100%;
-  height: 108%;
+  height: 100%;
 
   object-fit: cover;
+}
 
+.home-page[data-motion="full"] .featured-gallery-main img {
   transform:
-    translateY(var(--parallax-y, 0px))
-    scale(1.02);
+    translate3d(0, var(--motion-y, 0px), 0)
+    scale(var(--motion-scale, 1.075));
+}
 
-  transition: transform .3s linear;
+.home-page[data-motion="full"] .featured-gallery-main.motion-in-view img {
+  will-change: transform;
 }
 
 .featured-badge {
@@ -1224,19 +1240,18 @@ a {
 .brand-moment-line {
   display: block;
 
-  width: 0;
+  width: 70px;
   height: 1px;
 
   margin: auto;
 
   background: var(--accent-gold);
 
-  transition: width 1.2s ease .3s;
+  transform-origin: center;
 }
 
-.brand-moment-content.visible
-.brand-moment-line {
-  width: 70px;
+.story-phrase-gold {
+  color: var(--accent-gold-dark);
 }
 
 
@@ -2423,30 +2438,20 @@ a {
 }
 
 
-/* REVEAL */
+/* REVEAL: visible by default; JS animates only when entering the viewport. */
 
 .reveal {
-  opacity: 0;
-
-  transform: translateY(30px);
-
-  transition:
-    opacity .9s cubic-bezier(.2,.7,.2,1),
-    transform .9s cubic-bezier(.2,.7,.2,1);
-}
-
-.reveal.visible {
   opacity: 1;
-
-  transform: translateY(0);
 }
 
-.delay-1 {
-  transition-delay: .09s;
+.home-page[data-motion="off"] .hero-copy-animate > *,
+.home-page[data-motion="off"] .hero-slide {
+  animation: none;
+  transition: none;
 }
 
-.delay-2 {
-  transition-delay: .18s;
+.home-page[data-motion="light"] .hero-copy-animate > * {
+  animation-duration: .6s;
 }
 
 
@@ -2778,7 +2783,11 @@ a {
 
     animation-iteration-count: 1 !important;
 
+    animation-delay: 0s !important;
+
     transition-duration: .01ms !important;
+
+    transition-delay: 0s !important;
 
     scroll-behavior: auto !important;
   }
