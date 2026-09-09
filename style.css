@@ -1854,6 +1854,34 @@ a {
 }
 
 
+/* FINAL CTA WHATSAPP CONTACT PICKER */
+
+.final-whatsapp-picker .whatsapp-picker-menu {
+  right: auto;
+  left: 0;
+  transform-origin: bottom left;
+}
+
+.final-whatsapp-picker .whatsapp-picker-menu a {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 11px;
+  border-radius: 11px;
+  color: var(--text-main);
+  text-decoration: none;
+  font-size: .72rem;
+}
+
+.final-whatsapp-picker .whatsapp-picker-menu a:hover,
+.final-whatsapp-picker .whatsapp-picker-menu a:focus-visible {
+  background: rgba(185, 150, 85, .11);
+  color: var(--accent-gold-dark);
+  outline: none;
+}
+
 /* FOOTER */
 
 .site-footer {
