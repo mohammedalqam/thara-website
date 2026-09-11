@@ -284,13 +284,35 @@ a {
 /* BRAND */
 
 .brand {
-  display: flex;
+  display: inline-flex;
 
-  flex-direction: column;
+  flex-direction: row;
+  align-items: center;
+
+  gap: 10px;
 
   text-decoration: none;
 
   line-height: 1;
+}
+
+.brand-copy {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+}
+
+.brand-icon {
+  width: 34px;
+  height: 34px;
+
+  flex: 0 0 auto;
+
+  fill: none;
+  stroke: var(--accent-gold-dark);
+  stroke-width: 2.15;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 .brand-main,
@@ -2491,6 +2513,11 @@ a {
     margin-top: 4px;
     font-size: .38rem;
     letter-spacing: 3px;
+  }
+
+  .site-header.scrolled .brand-icon {
+    width: 30px;
+    height: 30px;
   }
 
   .site-header.scrolled .menu-button {
