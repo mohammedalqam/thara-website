@@ -302,17 +302,19 @@ a {
   line-height: 1;
 }
 
-.brand-icon {
-  width: 34px;
-  height: 34px;
+.header-brand-logo {
+  width: 30px !important;
+  height: 30px !important;
+  max-width: 30px !important;
+  max-height: 30px !important;
 
-  flex: 0 0 auto;
+  flex: 0 0 30px;
 
-  fill: none;
-  stroke: var(--accent-gold-dark);
-  stroke-width: 2.15;
-  stroke-linecap: round;
-  stroke-linejoin: round;
+  display: block;
+
+  object-fit: contain;
+
+  border-radius: 4px;
 }
 
 .brand-main,
@@ -2515,9 +2517,12 @@ a {
     letter-spacing: 3px;
   }
 
-  .site-header.scrolled .brand-icon {
-    width: 30px;
-    height: 30px;
+  .site-header.scrolled .header-brand-logo {
+    width: 27px !important;
+    height: 27px !important;
+    max-width: 27px !important;
+    max-height: 27px !important;
+    flex-basis: 27px;
   }
 
   .site-header.scrolled .menu-button {
