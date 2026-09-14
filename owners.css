@@ -17,6 +17,7 @@
 .owners-section { max-width: 1220px; margin-inline: auto; padding: 88px 18px; }
 .owners-eyebrow { margin: 0 0 12px; color: var(--owners-gold-dark); font-size: .72rem; font-weight: 800; letter-spacing: 2px; }
 .owners-section-heading { max-width: 760px; margin-bottom: 38px; }
+.owners-section-heading h1,
 .owners-section-heading h2,
 .owners-copy h2,
 .owners-form-intro h2 {
@@ -26,6 +27,7 @@
   line-height: 1.5;
   font-weight: 500;
 }
+.owners-section-heading h1 span,
 .owners-section-heading h2 span,
 .owners-copy h2 span,
 .owners-form-intro h2 span { display: block; color: var(--owners-gold-dark); }
@@ -50,8 +52,10 @@
 .owners-hero-glow { position: absolute; inset: 0; background: radial-gradient(circle at 78% 32%, rgba(212,178,108,.26), transparent 34%), linear-gradient(115deg, rgba(184,148,82,.16), transparent 52%); }
 .owners-hero-content { position: relative; z-index: 2; width: min(100%, 920px); padding: 170px 24px 100px; color: #fff; }
 .owners-hero .owners-eyebrow { color: #e5c98e; }
-.owners-hero h1 { margin: 0; max-width: 820px; font-family: "Marhey", sans-serif; font-size: clamp(2.45rem, 11vw, 5.5rem); font-weight: 500; line-height: 1.4; }
-.owners-hero h1 span { display: block; color: #e5c98e; }
+.owners-hero h1,
+.owners-hero h2 { margin: 0; max-width: 820px; font-family: "Marhey", sans-serif; font-size: clamp(2.45rem, 11vw, 5.5rem); font-weight: 500; line-height: 1.4; }
+.owners-hero h1 span,
+.owners-hero h2 span { display: block; color: #e5c98e; }
 .owners-hero-copy { max-width: 700px; margin: 20px 0 0; color: rgba(255,255,255,.78); font-size: .94rem; line-height: 2; }
 .owners-hero-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 30px; }
 .owners-hero-actions .button { min-width: 150px; }
