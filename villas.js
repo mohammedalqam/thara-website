@@ -1151,26 +1151,236 @@ const villasData = {
      WHATSAPP
   ========================================================= */
   
-  const villasWhatsappNumber =
-    "972532121036";
-  
-  
-  function openWhatsapp(message) {
-  
-    const encodedMessage =
-      encodeURIComponent(message);
-  
-  
-    const url =
-      `https://wa.me/${villasWhatsappNumber}?text=${encodedMessage}`;
-  
-  
-    window.open(
-      url,
-      "_blank"
+  const villasWhatsappContacts = [
+    {
+      name: "محمد",
+      number: "972532121036",
+      display: "+972 53-212-1036"
+    },
+    {
+      name: "نعيم",
+      number: "972584003302",
+      display: "+972 58-400-3302"
+    },
+    {
+      name: "مجد",
+      number: "972584429998",
+      display: "+972 58-442-9998"
+    }
+  ];
+
+
+  let pendingWhatsappMessage =
+    "مرحباً، أريد الاستفسار عن فلل THARA.";
+
+
+  const whatsappChooser =
+    document.createElement("div");
+
+
+  whatsappChooser.className =
+    "villa-whatsapp-chooser";
+
+
+  whatsappChooser.setAttribute(
+    "aria-hidden",
+    "true"
+  );
+
+
+  whatsappChooser.innerHTML = `
+    <button
+      class="villa-whatsapp-chooser-overlay"
+      type="button"
+      aria-label="إغلاق قائمة أرقام واتساب"
+    ></button>
+
+    <div
+      class="villa-whatsapp-chooser-box"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="villaWhatsappChooserTitle"
+    >
+      <button
+        class="villa-whatsapp-chooser-close"
+        type="button"
+        aria-label="إغلاق"
+      >
+        ×
+      </button>
+
+      <p class="villa-whatsapp-chooser-eyebrow">
+        فريق THARA
+      </p>
+
+      <h2 id="villaWhatsappChooserTitle">
+        اختر شخصاً للتواصل
+      </h2>
+
+      <div class="villa-whatsapp-contact-list">
+        ${villasWhatsappContacts.map((contact) => `
+          <button
+            class="villa-whatsapp-contact"
+            type="button"
+            data-whatsapp-number="${contact.number}"
+          >
+            <strong>${contact.name}</strong>
+            <span dir="ltr">${contact.display}</span>
+          </button>
+        `).join("")}
+      </div>
+    </div>
+  `;
+
+
+  document.body.appendChild(
+    whatsappChooser
+  );
+
+
+  function closeWhatsappChooser() {
+
+    whatsappChooser.classList.remove(
+      "active"
     );
-  
+
+
+    whatsappChooser.setAttribute(
+      "aria-hidden",
+      "true"
+    );
+
   }
+
+
+  function showWhatsappChooser(message) {
+
+    pendingWhatsappMessage =
+      message ||
+      "مرحباً، أريد الاستفسار عن فلل THARA.";
+
+
+    whatsappChooser.classList.add(
+      "active"
+    );
+
+
+    whatsappChooser.setAttribute(
+      "aria-hidden",
+      "false"
+    );
+
+
+    whatsappChooser
+      .querySelector(".villa-whatsapp-contact")
+      ?.focus();
+
+  }
+
+
+  function openWhatsapp(message) {
+
+    showWhatsappChooser(message);
+
+  }
+
+
+  whatsappChooser
+    .querySelectorAll(
+      ".villa-whatsapp-contact"
+    )
+    .forEach((button) => {
+
+      button.addEventListener(
+        "click",
+        () => {
+
+          const number =
+            button.dataset.whatsappNumber;
+
+
+          const url =
+            `https://wa.me/${number}?text=${encodeURIComponent(pendingWhatsappMessage)}`;
+
+
+          window.open(
+            url,
+            "_blank",
+            "noopener"
+          );
+
+
+          closeWhatsappChooser();
+
+        }
+      );
+
+    });
+
+
+  whatsappChooser
+    .querySelector(
+      ".villa-whatsapp-chooser-overlay"
+    )
+    ?.addEventListener(
+      "click",
+      closeWhatsappChooser
+    );
+
+
+  whatsappChooser
+    .querySelector(
+      ".villa-whatsapp-chooser-close"
+    )
+    ?.addEventListener(
+      "click",
+      closeWhatsappChooser
+    );
+
+
+  document
+    .querySelectorAll(
+      ".whatsapp-link"
+    )
+    .forEach((link) => {
+
+      link.addEventListener(
+        "click",
+        (event) => {
+
+          event.preventDefault();
+
+
+          showWhatsappChooser(
+            link.dataset.message
+          );
+
+        }
+      );
+
+    });
+
+
+  document.addEventListener(
+    "keydown",
+    (event) => {
+
+      if (
+        event.key === "Escape" &&
+        whatsappChooser.classList.contains(
+          "active"
+        )
+      ) {
+
+        event.stopPropagation();
+
+        closeWhatsappChooser();
+
+      }
+
+    },
+    true
+  );
   
   
   
