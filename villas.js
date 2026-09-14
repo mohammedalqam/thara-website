@@ -1085,7 +1085,10 @@ const villasData = {
   أريد معرفة التوفر والسعر.`;
   
   
-        openWhatsapp(message);
+        openWhatsapp(
+          message,
+          inquiryButton
+        );
   
       }
     );
@@ -1250,14 +1253,108 @@ const villasData = {
       "true"
     );
 
+
+    whatsappChooser.classList.remove(
+      "anchored"
+    );
+
+
+    whatsappChooser
+      .querySelector(
+        ".villa-whatsapp-chooser-box"
+      )
+      ?.removeAttribute("style");
+
   }
 
 
-  function showWhatsappChooser(message) {
+  function showWhatsappChooser(
+    message,
+    trigger = null
+  ) {
 
     pendingWhatsappMessage =
       message ||
       "مرحباً، أريد الاستفسار عن فلل THARA.";
+
+
+    const chooserBox =
+      whatsappChooser.querySelector(
+        ".villa-whatsapp-chooser-box"
+      );
+
+
+    whatsappChooser.classList.toggle(
+      "anchored",
+      Boolean(trigger)
+    );
+
+
+    chooserBox.removeAttribute("style");
+
+
+    if (trigger) {
+
+      const triggerRect =
+        trigger.getBoundingClientRect();
+
+
+      const boxWidth =
+        Math.min(
+          340,
+          window.innerWidth - 24
+        );
+
+
+      const estimatedHeight = 250;
+
+
+      const left =
+        Math.min(
+          Math.max(
+            12,
+            triggerRect.left +
+            triggerRect.width / 2 -
+            boxWidth / 2
+          ),
+          window.innerWidth -
+          boxWidth -
+          12
+        );
+
+
+      let top =
+        triggerRect.top -
+        estimatedHeight -
+        12;
+
+
+      if (top < 12) {
+
+        top =
+          Math.min(
+            triggerRect.bottom + 12,
+            window.innerHeight -
+            estimatedHeight -
+            12
+          );
+
+      }
+
+
+      chooserBox.style.position =
+        "fixed";
+
+      chooserBox.style.width =
+        `${boxWidth}px`;
+
+      chooserBox.style.left =
+        `${left}px`;
+
+      chooserBox.style.top =
+        `${Math.max(12, top)}px`;
+
+    }
 
 
     whatsappChooser.classList.add(
@@ -1278,9 +1375,15 @@ const villasData = {
   }
 
 
-  function openWhatsapp(message) {
+  function openWhatsapp(
+    message,
+    trigger = null
+  ) {
 
-    showWhatsappChooser(message);
+    showWhatsappChooser(
+      message,
+      trigger
+    );
 
   }
 
@@ -1352,7 +1455,8 @@ const villasData = {
 
 
           showWhatsappChooser(
-            link.dataset.message
+            link.dataset.message,
+            link
           );
 
         }
