@@ -67,8 +67,9 @@ if (document.body.classList.contains("owners-page")) {
     counter.dataset.counted = "true";
 
     const target = Number(counter.dataset.count || 0);
-    const duration = Number(counter.dataset.duration || 3000);
-    const staggerDelay = 360 + (index * 130);
+    const requestedDuration = Number(counter.dataset.duration || 3000);
+    const duration = Math.round(requestedDuration * 0.68);
+    const staggerDelay = 220 + (index * 90);
 
     window.setTimeout(() => {
       const startedAt = performance.now();
