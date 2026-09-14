@@ -714,6 +714,118 @@
       </section>
 
       <!-- =====================================================
+         QUICK INQUIRY
+    ====================================================== -->
+
+      <section class="home-inquiry section-space" aria-labelledby="homeInquiryTitle">
+        <div class="home-inquiry-panel reveal">
+          <div class="home-inquiry-heading">
+            <p class="eyebrow">استفسار سريع</p>
+            <h2 id="homeInquiryTitle">تفاصيل الاستفسار</h2>
+            <p>
+              ما في حجز تلقائي من الموقع، الرسالة بتوصل مباشرة عبر واتساب.
+            </p>
+          </div>
+
+          <form class="home-inquiry-form" id="homeInquiryForm">
+            <label>
+              <span>الاسم</span>
+              <input
+                id="homeInquiryName"
+                type="text"
+                placeholder="اسمك"
+                autocomplete="name"
+                required
+              />
+            </label>
+
+            <div class="home-inquiry-row">
+              <label>
+                <span>التاريخ</span>
+                <input id="homeInquiryDate" type="date" />
+              </label>
+
+              <label>
+                <span>عدد الأشخاص</span>
+                <input
+                  id="homeInquiryGuests"
+                  type="number"
+                  min="1"
+                  placeholder="مثلاً 8"
+                  inputmode="numeric"
+                />
+              </label>
+            </div>
+
+            <label>
+              <span>عدد الغرف</span>
+              <select id="homeInquiryRooms">
+                <option value="">مش محدد</option>
+                <option value="3 غرف">3 غرف</option>
+                <option value="4 غرف">4 غرف</option>
+              </select>
+            </label>
+
+            <label>
+              <span>ملاحظات</span>
+              <textarea
+                id="homeInquiryNotes"
+                placeholder="مثلاً: بدي مسبح خاص، جاكوزي..."
+              ></textarea>
+            </label>
+
+            <button class="home-inquiry-submit" type="submit">
+              إرسال الاستفسار عبر واتساب
+            </button>
+
+            <div
+              class="home-inquiry-contacts"
+              id="homeInquiryContacts"
+              aria-live="polite"
+              hidden
+            >
+              <p>اختر عضو الفريق لإرسال الاستفسار:</p>
+
+              <div class="home-inquiry-contact-grid">
+                <a
+                  href="#"
+                  class="home-inquiry-contact"
+                  data-whatsapp-number="972532121036"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <strong>محمد</strong>
+                  <span dir="ltr">+972 53-212-1036</span>
+                </a>
+
+                <a
+                  href="#"
+                  class="home-inquiry-contact"
+                  data-whatsapp-number="972584003302"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <strong>نعيم</strong>
+                  <span dir="ltr">+972 58-400-3302</span>
+                </a>
+
+                <a
+                  href="#"
+                  class="home-inquiry-contact"
+                  data-whatsapp-number="972584429998"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <strong>مجد</strong>
+                  <span dir="ltr">+972 58-442-9998</span>
+                </a>
+              </div>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <!-- =====================================================
          FINAL CTA
     ====================================================== -->
 
