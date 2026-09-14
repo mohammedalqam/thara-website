@@ -47,35 +47,70 @@ if (document.body.classList.contains("owners-page")) {
     });
   });
 
-  const ownersCounters = document.querySelectorAll(".owners-count");
-  const ownersCounterObserver = "IntersectionObserver" in window
-    ? new IntersectionObserver((entries, observer) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-          const counter = entry.target;
-          const target = Number(counter.dataset.count || 0);
-          const start = performance.now();
-          const duration = 1000;
+  const ownersCounters = Array.from(document.querySelectorAll(".owners-count"));
+  const ownersReduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const ownersNumberFormatter = new Intl.NumberFormat("en-US");
 
-          function animateCounter(now) {
-            const progress = Math.min((now - start) / duration, 1);
-            const eased = 1 - Math.pow(1 - progress, 3);
-            counter.textContent = String(Math.round(target * eased)).padStart(2, "0");
-            if (progress < 1) requestAnimationFrame(animateCounter);
-          }
+  function formatOwnersCount(counter, value) {
+    const prefix = counter.dataset.prefix || "";
+    const suffix = counter.dataset.suffix || "";
+    return `${prefix}${ownersNumberFormatter.format(value)}${suffix}`;
+  }
 
-          requestAnimationFrame(animateCounter);
-          observer.unobserve(counter);
-        });
-      }, { threshold: .55 })
-    : null;
+  function showOwnersFinalCount(counter) {
+    counter.textContent = formatOwnersCount(counter, Number(counter.dataset.count || 0));
+    counter.dataset.counted = "true";
+  }
 
-  ownersCounters.forEach((counter) => {
-    if (ownersCounterObserver) ownersCounterObserver.observe(counter);
-    else counter.textContent = String(Number(counter.dataset.count || 0)).padStart(2, "0");
-  });
+  function animateOwnersCount(counter, index) {
+    if (counter.dataset.counted === "true") return;
+    counter.dataset.counted = "true";
 
-  const ownersForm = document.getElementById("ownersForm");
+    const target = Number(counter.dataset.count || 0);
+    const duration = Number(counter.dataset.duration || 3000);
+    const staggerDelay = 360 + (index * 130);
+
+    window.setTimeout(() => {
+      const startedAt = performance.now();
+
+      function updateCount(now) {
+        const progress = Math.min((now - startedAt) / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        const current = Math.round(target * eased);
+        counter.textContent = formatOwnersCount(counter, current);
+
+        if (progress < 1) {
+          requestAnimationFrame(updateCount);
+        } else {
+          counter.textContent = formatOwnersCount(counter, target);
+        }
+      }
+
+      requestAnimationFrame(updateCount);
+    }, staggerDelay);
+  }
+
+  if (ownersReduceMotion) {
+    ownersCounters.forEach(showOwnersFinalCount);
+  } else if ("IntersectionObserver" in window) {
+    const ownersCounterObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        const counter = entry.target;
+        animateOwnersCount(counter, ownersCounters.indexOf(counter));
+        observer.unobserve(counter);
+      });
+    }, { threshold: .35 });
+
+    ownersCounters.forEach((counter) => {
+      counter.textContent = formatOwnersCount(counter, 0);
+      ownersCounterObserver.observe(counter);
+    });
+  } else {
+    ownersCounters.forEach(showOwnersFinalCount);
+  }
+
+    const ownersForm = document.getElementById("ownersForm");
   const ownersContactPicker = document.getElementById("ownersContactPicker");
 
   ownersForm?.addEventListener("input", () => {
