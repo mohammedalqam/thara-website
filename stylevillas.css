@@ -2146,3 +2146,136 @@
   }
 }
 
+
+
+/* VILLA WHATSAPP CONTACT CHOOSER */
+
+.villa-whatsapp-chooser {
+  position: fixed;
+  inset: 0;
+  z-index: 3000;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .2s ease, visibility .2s ease;
+}
+
+.villa-whatsapp-chooser.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.villa-whatsapp-chooser-overlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  background: rgba(24, 21, 16, .58);
+  backdrop-filter: blur(7px);
+  cursor: pointer;
+}
+
+.villa-whatsapp-chooser-box {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 390px);
+  padding: 28px 22px 22px;
+  border: 1px solid rgba(185, 150, 85, .28);
+  border-radius: 26px;
+  background: #fffdf8;
+  box-shadow: 0 24px 70px rgba(35, 27, 16, .24);
+  text-align: right;
+  transform: translateY(14px) scale(.98);
+  transition: transform .2s ease;
+}
+
+.villa-whatsapp-chooser.active .villa-whatsapp-chooser-box {
+  transform: translateY(0) scale(1);
+}
+
+.villa-whatsapp-chooser-close {
+  position: absolute;
+  top: 13px;
+  left: 15px;
+  width: 36px;
+  height: 36px;
+  border: 1px solid rgba(185, 150, 85, .22);
+  border-radius: 50%;
+  background: #fff;
+  color: #2b261f;
+  font: inherit;
+  font-size: 1.45rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.villa-whatsapp-chooser-eyebrow {
+  margin: 0 0 5px;
+  color: #a77d34;
+  font-size: .78rem;
+  font-weight: 700;
+  letter-spacing: .04em;
+}
+
+.villa-whatsapp-chooser-box h2 {
+  margin: 0 0 18px;
+  padding-left: 42px;
+  color: #211d18;
+  font-size: 1.35rem;
+}
+
+.villa-whatsapp-contact-list {
+  display: grid;
+  gap: 10px;
+}
+
+.villa-whatsapp-contact {
+  width: 100%;
+  min-height: 62px;
+  padding: 12px 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  border: 1px solid rgba(185, 150, 85, .22);
+  border-radius: 16px;
+  background: #fff;
+  color: #211d18;
+  font: inherit;
+  text-align: right;
+  cursor: pointer;
+  transition: border-color .18s ease, background .18s ease, transform .18s ease;
+}
+
+.villa-whatsapp-contact:hover,
+.villa-whatsapp-contact:focus-visible {
+  border-color: rgba(185, 150, 85, .72);
+  background: rgba(185, 150, 85, .09);
+  outline: none;
+  transform: translateY(-1px);
+}
+
+.villa-whatsapp-contact strong {
+  font-size: 1rem;
+}
+
+.villa-whatsapp-contact span {
+  color: #756a5d;
+  font-size: .88rem;
+}
+
+@media (max-width: 480px) {
+  .villa-whatsapp-chooser {
+    align-items: end;
+    padding: 12px;
+  }
+
+  .villa-whatsapp-chooser-box {
+    width: 100%;
+    border-radius: 24px;
+    padding: 26px 18px 18px;
+  }
+}
