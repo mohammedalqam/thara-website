@@ -113,10 +113,110 @@
 .owners-proof-grid article { padding: 24px; border: 1px solid rgba(91,73,42,.11); border-radius: 19px; background: rgba(255,255,255,.66); }
 .owners-proof-grid strong { font-family: "Marhey", sans-serif; font-weight: 500; }
 .owners-proof-grid p { margin: 7px 0 0; color: var(--owners-muted); font-size: .78rem; line-height: 1.9; }
-.owners-stats { display: grid; grid-template-columns: repeat(2, 1fr); border: 1px solid rgba(91,73,42,.12); border-radius: 26px; overflow: hidden; background: rgba(255,255,255,.68); }
-.owners-stats article { min-height: 160px; display: grid; place-items: center; align-content: center; padding: 18px; text-align: center; border: 1px solid rgba(91,73,42,.07); }
-.owners-stats strong { color: var(--owners-gold-dark); font: 500 clamp(2.2rem, 10vw, 4rem) Georgia, serif; }
-.owners-stats span { color: var(--owners-muted); font-size: .74rem; }
+.owners-numbers {
+  position: relative;
+  max-width: none;
+  padding-block: 84px;
+  background:
+    radial-gradient(circle at 12% 18%, rgba(184,148,82,.12), transparent 30%),
+    linear-gradient(180deg, #f2ecdf 0%, #fbf8f1 100%);
+}
+.owners-numbers::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 50%;
+  width: min(94%, 1220px);
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(184,148,82,.48), transparent);
+  transform: translateX(50%);
+}
+.owners-numbers-inner { width: min(100%, 1220px); margin-inline: auto; }
+.owners-numbers-heading { margin-bottom: 34px; }
+.owners-numbers-heading h2 { max-width: 760px; }
+.owners-stats {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+.owners-stat-card {
+  position: relative;
+  min-width: 0;
+  min-height: 190px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  overflow: hidden;
+  padding: 26px;
+  border: 1px solid rgba(91,73,42,.12);
+  border-radius: 24px;
+  background: rgba(255,255,255,.8);
+  box-shadow: 0 18px 50px rgba(61,48,25,.055);
+  transition: transform .35s cubic-bezier(.2,.7,.2,1), box-shadow .35s ease, border-color .35s ease;
+}
+.owners-stat-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 26px;
+  width: 48px;
+  height: 2px;
+  background: var(--owners-gold);
+  transition: width .4s ease;
+}
+.owners-stat-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(184,148,82,.34);
+  box-shadow: 0 24px 58px rgba(61,48,25,.085);
+}
+.owners-stat-card:hover::before { width: 78px; }
+.owners-stat-card strong {
+  display: block;
+  max-width: 100%;
+  color: var(--owners-gold-dark);
+  font: 500 clamp(2.55rem, 11vw, 4.7rem)/1.05 Georgia, "Times New Roman", serif;
+  letter-spacing: -.04em;
+  direction: ltr;
+  text-align: right;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+.owners-stat-card span {
+  display: block;
+  max-width: 390px;
+  margin-top: 16px;
+  color: var(--owners-muted);
+  font-size: clamp(.76rem, 2.4vw, .9rem);
+  line-height: 1.9;
+}
+.owners-stat-featured { min-height: 270px; padding: 30px; }
+.owners-stat-featured strong { font-size: clamp(3.15rem, 13vw, 6.1rem); }
+.owners-stat-dark {
+  border-color: rgba(255,255,255,.08);
+  background:
+    radial-gradient(circle at 10% 15%, rgba(210,174,98,.17), transparent 34%),
+    linear-gradient(145deg, #29241b, #14120e);
+  box-shadow: 0 26px 65px rgba(28,22,14,.18);
+}
+.owners-stat-dark strong { color: #e5c98e; }
+.owners-stat-dark span { color: rgba(255,255,255,.72); }
+.owners-stat-gold {
+  border-color: rgba(132,102,49,.2);
+  background:
+    radial-gradient(circle at 88% 12%, rgba(255,255,255,.5), transparent 32%),
+    linear-gradient(145deg, #d9bf87, #b99350);
+  box-shadow: 0 26px 65px rgba(132,102,49,.16);
+}
+.owners-stat-gold::before { background: rgba(255,255,255,.72); }
+.owners-stat-gold strong { color: #171510; }
+.owners-stat-gold span { color: rgba(23,21,16,.72); }
+.owners-stats-disclaimer {
+  max-width: 780px;
+  margin: 24px 0 0;
+  color: #817a6d;
+  font-size: .68rem;
+  line-height: 1.9;
+}
 
 /* COMPARISON */
 .owners-comparison { display: grid; grid-template-columns: 1fr; gap: 12px; }
@@ -201,7 +301,9 @@
   .owners-service-card { padding: 32px; }
   .owners-proof-grid { grid-template-columns: repeat(2, 1fr); }
   .owners-fit-grid { grid-template-columns: repeat(2, 1fr); }
-  .owners-stats { grid-template-columns: repeat(4, 1fr); }
+  .owners-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .owners-stat-card { min-height: 210px; }
+  .owners-stat-featured { min-height: 290px; }
   .owners-form-grid { grid-template-columns: repeat(2, 1fr); }
   .owners-checkbox-grid { grid-template-columns: repeat(3, 1fr); }
   .owners-contact-picker > div { grid-template-columns: repeat(3, 1fr); }
@@ -226,6 +328,14 @@
   .owners-timeline li { grid-template-columns: 1fr; gap: 22px; padding: 0 18px; }
   .owners-timeline li > span { box-shadow: 0 0 0 8px var(--owners-cream); }
   .owners-proof-grid { grid-template-columns: repeat(3, 1fr); }
+  .owners-stats { grid-template-columns: repeat(12, minmax(0, 1fr)); grid-auto-rows: minmax(118px, auto); }
+  .owners-stat-card { grid-column: span 4; min-height: 0; }
+  .owners-stat-featured { grid-column: span 7; grid-row: span 2; min-height: 310px; }
+  .owners-stat-card:nth-child(2),
+  .owners-stat-card:nth-child(3) { grid-column: span 5; }
+  .owners-stat-card:nth-child(4),
+  .owners-stat-card:nth-child(5) { grid-column: span 5; }
+  .owners-stat-gold { grid-column: span 7; }
   .owners-comparison { grid-template-columns: 1fr 68px 1fr; align-items: center; }
   .owners-comparison-arrow { transform: none; }
   .owners-fit-grid { grid-template-columns: repeat(4, 1fr); }
@@ -235,6 +345,11 @@
 }
 
 @media (max-width: 430px) {
+  .owners-numbers { padding-block: 68px; }
+  .owners-stat-card { min-height: 175px; padding: 22px; }
+  .owners-stat-featured { min-height: 235px; padding: 24px 20px; }
+  .owners-stat-card strong { font-size: clamp(2.35rem, 12.7vw, 3.5rem); }
+  .owners-stat-featured strong { font-size: clamp(2.75rem, 14.2vw, 4.2rem); }
   .owners-problem-grid { grid-template-columns: 1fr; }
   .owners-mini-card { min-height: 120px; }
   .owners-checkbox-grid { grid-template-columns: 1fr 1fr; }
@@ -242,6 +357,7 @@
 
 @media (prefers-reduced-motion: reduce) {
   .owners-hero-image { transform: none !important; }
+  .owners-stat-card { transition: none; }
   .owners-hero-reveal { opacity: 1; transform: none; animation: none; }
   .owners-scroll-cue i { animation: none; }
 }
