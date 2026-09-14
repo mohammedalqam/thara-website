@@ -328,14 +328,23 @@
   .owners-timeline li { grid-template-columns: 1fr; gap: 22px; padding: 0 18px; }
   .owners-timeline li > span { box-shadow: 0 0 0 8px var(--owners-cream); }
   .owners-proof-grid { grid-template-columns: repeat(3, 1fr); }
-  .owners-stats { grid-template-columns: repeat(12, minmax(0, 1fr)); grid-auto-rows: minmax(118px, auto); }
-  .owners-stat-card { grid-column: span 4; min-height: 0; }
-  .owners-stat-featured { grid-column: span 7; grid-row: span 2; min-height: 310px; }
-  .owners-stat-card:nth-child(2),
-  .owners-stat-card:nth-child(3) { grid-column: span 5; }
-  .owners-stat-card:nth-child(4),
-  .owners-stat-card:nth-child(5) { grid-column: span 5; }
-  .owners-stat-gold { grid-column: span 7; }
+  .owners-stats {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    grid-template-areas:
+      "primary primary primary primary primary primary primary stat2 stat2 stat2 stat2 stat2"
+      "primary primary primary primary primary primary primary stat3 stat3 stat3 stat3 stat3"
+      "stat4 stat4 stat4 stat4 stat4 secondary secondary secondary secondary secondary secondary secondary"
+      "stat5 stat5 stat5 stat5 stat5 secondary secondary secondary secondary secondary secondary secondary";
+    grid-auto-rows: minmax(132px, auto);
+  }
+  .owners-stat-card { grid-column: auto; grid-row: auto; min-height: 0; }
+  .owners-stat-card:nth-child(1) { grid-area: primary; }
+  .owners-stat-card:nth-child(2) { grid-area: stat2; }
+  .owners-stat-card:nth-child(3) { grid-area: stat3; }
+  .owners-stat-card:nth-child(4) { grid-area: stat4; }
+  .owners-stat-card:nth-child(5) { grid-area: stat5; }
+  .owners-stat-card:nth-child(6) { grid-area: secondary; }
+  .owners-stat-featured { min-height: 310px; }
   .owners-comparison { grid-template-columns: 1fr 68px 1fr; align-items: center; }
   .owners-comparison-arrow { transform: none; }
   .owners-fit-grid { grid-template-columns: repeat(4, 1fr); }
