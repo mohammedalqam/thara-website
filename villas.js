@@ -131,7 +131,7 @@ const villasData = {
       facts: [
         {
           icon: "🛏️",
-          value: "غرفتين",
+          value: "4 غرف",
           label: "غرف النوم"
         },
         {
@@ -152,7 +152,7 @@ const villasData = {
       ],
   
       features: [
-        "غرفتين نوم",
+        "4 غرف نوم",
         "مسبح خاص",
         "جلسات",
         "مطبخ",
