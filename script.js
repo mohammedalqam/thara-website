@@ -628,6 +628,92 @@ if (
 
 
   /* =======================================================
+     HOME QUICK INQUIRY
+  ======================================================= */
+
+  const homeInquiryForm =
+    document.getElementById(
+      "homeInquiryForm"
+    );
+
+  const homeInquiryContacts =
+    document.getElementById(
+      "homeInquiryContacts"
+    );
+
+  homeInquiryForm?.addEventListener(
+    "input",
+    () => {
+      if (homeInquiryContacts) {
+        homeInquiryContacts.hidden = true;
+      }
+    }
+  );
+
+  homeInquiryForm?.addEventListener(
+    "submit",
+    (event) => {
+      event.preventDefault();
+
+      if (!homeInquiryForm.reportValidity()) {
+        return;
+      }
+
+      const fieldValue =
+        (id, fallback = "غير محدد") =>
+          document
+            .getElementById(id)
+            ?.value
+            ?.trim() || fallback;
+
+      const message =
+`مرحباً THARA،
+
+الاسم: ${fieldValue("homeInquiryName")}
+التاريخ: ${fieldValue("homeInquiryDate")}
+عدد الأشخاص: ${fieldValue("homeInquiryGuests")}
+عدد الغرف: ${fieldValue("homeInquiryRooms")}
+
+ملاحظات:
+${fieldValue("homeInquiryNotes", "لا يوجد")}
+
+أريد معرفة الخيارات المتاحة.`;
+
+      homeInquiryContacts
+        ?.querySelectorAll(
+          ".home-inquiry-contact"
+        )
+        .forEach((link) => {
+          const number =
+            String(
+              link.dataset
+                .whatsappNumber || ""
+            ).replace(/\D/g, "");
+
+          link.href =
+            `https://wa.me/${number}?text=${encodeURIComponent(message)}`;
+        });
+
+      if (homeInquiryContacts) {
+        homeInquiryContacts.hidden = false;
+
+        homeInquiryContacts
+          .scrollIntoView({
+            behavior: "smooth",
+            block: "nearest"
+          });
+
+        homeInquiryContacts
+          .querySelector("a")
+          ?.focus({
+            preventScroll: true
+          });
+      }
+    }
+  );
+
+
+  /* =======================================================
      WHATSAPP CONTACT PICKERS
   ======================================================= */
 
