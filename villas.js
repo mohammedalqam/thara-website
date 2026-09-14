@@ -1306,9 +1306,6 @@ const villasData = {
         );
 
 
-      const estimatedHeight = 250;
-
-
       const left =
         Math.min(
           Math.max(
@@ -1323,9 +1320,25 @@ const villasData = {
         );
 
 
+      chooserBox.style.position =
+        "fixed";
+
+      chooserBox.style.width =
+        `${boxWidth}px`;
+
+      chooserBox.style.left =
+        `${left}px`;
+
+      chooserBox.style.top = "0";
+
+
+      const boxHeight =
+        chooserBox.offsetHeight;
+
+
       let top =
         triggerRect.top -
-        estimatedHeight -
+        boxHeight -
         12;
 
 
@@ -1335,21 +1348,12 @@ const villasData = {
           Math.min(
             triggerRect.bottom + 12,
             window.innerHeight -
-            estimatedHeight -
+            boxHeight -
             12
           );
 
       }
 
-
-      chooserBox.style.position =
-        "fixed";
-
-      chooserBox.style.width =
-        `${boxWidth}px`;
-
-      chooserBox.style.left =
-        `${left}px`;
 
       chooserBox.style.top =
         `${Math.max(12, top)}px`;
