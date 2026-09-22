@@ -374,3 +374,19 @@
   .owners-hero-reveal { opacity: 1; transform: none; animation: none; }
   .owners-scroll-cue i { animation: none; }
 }
+
+
+/* Home page: selected-villas strip precedes this standalone owners spotlight. */
+.home-page .home-owners-hero {
+  margin: 28px 14px 24px;
+  border: 1px solid rgba(184, 148, 82, .30);
+  border-radius: 34px;
+  overflow: hidden;
+}
+
+@media (min-width: 760px) {
+  .home-page .home-owners-hero {
+    margin: 38px 24px 30px;
+    border-radius: 40px;
+  }
+}
