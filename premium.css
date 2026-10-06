@@ -237,6 +237,13 @@ html { scroll-padding-top: 112px; }
 .thara-premium .floating-whatsapp { border: 1px solid rgba(221,201,159,.35); background: #172824; color: #e9dec9; box-shadow: 0 8px 28px rgba(12,24,21,.2); }
 .thara-premium .whatsapp-circle { background: #d2b783; color: #152623; }
 .thara-premium .whatsapp-picker-menu { border-radius: 10px; }
+.thara-premium .whatsapp-picker-menu a {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  min-height: 44px; padding: 10px 11px; border-radius: 6px;
+  color: var(--ink); text-decoration: none;
+}
+.thara-premium .whatsapp-picker-menu a:hover,
+.thara-premium .whatsapp-picker-menu a:focus-visible { background: #eee7d7; color: #7b6035; }
 
 /* Catalog and internal pages: retain all information and existing interactions. */
 .thara-premium .catalog-hero {
