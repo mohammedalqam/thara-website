@@ -271,6 +271,7 @@ export function mountVillaScene(host) {
   let themeCurrent = themeTarget;
   let userPaused = reducedMotion.matches || rendererKind === 'svg';
   let pauseAngle = 0;
+  let pausePitch = 0;
   let movingTime = 0;
   let pointerX = 0, pointerY = 0;
   let turn = 0;
@@ -308,7 +309,7 @@ export function mountVillaScene(host) {
       applyTheme();
       const orbit = moving ? Math.sin(movingTime*.18)*.07 : 0;
       const targetY = userPaused ? pauseAngle : turn + (reducedMotion.matches ? 0 : orbit + pointerX*.1 + scrollTilt);
-      const targetX = moving ? pointerY*.025 : 0;
+      const targetX = userPaused ? pausePitch : moving ? pointerY*.025 : 0;
       world.rotation.y = reducedMotion.matches ? targetY : damp(world.rotation.y,targetY,9,delta);
       world.rotation.x = reducedMotion.matches ? 0 : damp(world.rotation.x,targetX,9,delta);
       waterMaterial.uniforms.time.value = movingTime;
@@ -326,7 +327,7 @@ export function mountVillaScene(host) {
     pauseButton.textContent = paused ? 'تشغيل الحركة' : 'إيقاف الحركة';
     pauseButton.disabled = reducedMotion.matches;
   }
-  const onPause = () => { pauseAngle = world.rotation.y; userPaused = !userPaused; updatePauseButton(); loop.request(); };
+  const onPause = () => { pauseAngle = world.rotation.y; pausePitch = world.rotation.x; userPaused = !userPaused; updatePauseButton(); loop.request(); };
   pauseButton.addEventListener('click', onPause,events);
   updatePauseButton();
   themeButtons.forEach(button => {

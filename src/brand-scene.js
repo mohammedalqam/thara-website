@@ -52,7 +52,7 @@ export function mountBrandScene(host) {
     target = storyProgress(rect.top,rect.height,stage.getBoundingClientRect().height,parseFloat(getComputedStyle(stage).top) || 0);
     loop.request();
   }
-  addEventListener('scroll',() => { if (loop.isVisible()) update(); },{passive:true,signal:loop.events.signal});
+  addEventListener('scroll',() => { if (loop.isVisible() && !reduced.matches) update(); },{passive:true,signal:loop.events.signal});
   addEventListener('resize',update,{passive:true,signal:loop.events.signal});
   reduced.addEventListener('change',update,{signal:loop.events.signal});
   update();
