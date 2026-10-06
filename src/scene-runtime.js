@@ -50,6 +50,9 @@ export function addStudioEnvironment(surface, scene, resources) {
     scene.environment = target.texture;
     scene.environmentIntensity = .65;
     resources.add(target);
+  } catch {
+    // A limited GPU can still render with the scene's direct lights.
+    scene.environment = null;
   } finally {
     room.dispose();
     generator.dispose();
