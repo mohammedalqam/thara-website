@@ -2,13 +2,14 @@ import { Scene, OrthographicCamera, MeshStandardMaterial, AmbientLight, Directio
 import { createSurface, createSceneLoop, addStudioEnvironment } from './scene-runtime.js';
 import { createBrandWordmark } from './brand-geometry.js';
 import { damp, storyProgress, orthographicFrame } from './scene-math.js';
+import { motionPreference } from './motion-preference.js';
 
 export function mountBrandScene(host) {
   const surface = createSurface(host);
   if (!surface) return;
   const story = host.closest('[data-brand-story]');
   const stage = story.querySelector('.brand-story-stage');
-  const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+  const reduced = motionPreference();
   const resources = new Set();
   const face = new MeshStandardMaterial({ color: 0xcdb382, metalness: .72, roughness: .3 });
   const edge = new MeshStandardMaterial({ color: 0x82663f, metalness: .65, roughness: .35 });
@@ -51,7 +52,7 @@ export function mountBrandScene(host) {
     target = storyProgress(rect.top,rect.height,stage.getBoundingClientRect().height,parseFloat(getComputedStyle(stage).top) || 0);
     loop.request();
   }
-  addEventListener('scroll',update,{passive:true,signal:loop.events.signal});
+  addEventListener('scroll',() => { if (loop.isVisible()) update(); },{passive:true,signal:loop.events.signal});
   addEventListener('resize',update,{passive:true,signal:loop.events.signal});
   reduced.addEventListener('change',update,{signal:loop.events.signal});
   update();

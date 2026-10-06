@@ -31,8 +31,10 @@ Review a branch preview before merging. Confirm that the published GitHub Pages 
 ## Progress
 
 - [x] Stage 1: audit and development plan.
-- [ ] Stage 2: scroll-following THARA.
-- [ ] Stage 3: villa and rendering quality.
+- [x] Stage 2: scroll-following THARA; reviewed the original extruded serif wordmark in the branch browser preview.
+- [x] Stage 3: refined stone slabs, glazing, timber facade and pool; shared demand-driven renderer, elapsed-time motion and continuous bounds-based camera fitting.
 - [ ] Stage 4: responsive integration.
 - [ ] Stage 5: reliability and browser verification.
 - [ ] Stage 6: published result verified.
+
+Automated geometry and motion checks pass: 12/30/60 fps transition equivalence, bounded scroll progress, full camera containment over eight aspect ratios and five angles, finite original THARA geometry with shared A outlines. Scene controls are at least 44 px; a persistent reduce-motion button uses the same scene behavior as the system preference.

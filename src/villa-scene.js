@@ -1,75 +1,54 @@
 import {
-  WebGLRenderer, Scene, PerspectiveCamera, Group, Color,
+  Scene, OrthographicCamera, Group, Color, Box3,
   BoxGeometry, CylinderGeometry, SphereGeometry,
   PlaneGeometry, TorusGeometry, BufferGeometry, Float32BufferAttribute,
   Mesh, MeshStandardMaterial, MeshBasicMaterial, ShaderMaterial, ShadowMaterial,
-  AmbientLight, DirectionalLight, HemisphereLight, PointLight,
-  ACESFilmicToneMapping, SRGBColorSpace, PCFSoftShadowMap, DoubleSide
+  AmbientLight, DirectionalLight, HemisphereLight, PointLight, DoubleSide,
+  LineSegments, LineBasicMaterial
 } from 'three';
-import { SVGRenderer } from 'three/addons/renderers/SVGRenderer.js';
+import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
+import { createSurface, createSceneLoop, addStudioEnvironment } from './scene-runtime.js';
+import { damp, clamp } from './scene-math.js';
+import { fitVillaCamera } from './scene-camera.js';
+import { motionPreference } from './motion-preference.js';
 export { mountBrandScene } from './brand-scene.js';
 
 // A small, locally bundled architectural scene. No remote models or textures.
 export function mountVillaScene(host) {
-  const canvas = host.querySelector('canvas');
-  const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+  const surface = createSurface(host);
+  if (!surface) return;
+  const reducedMotion = motionPreference();
   const coarsePointer = matchMedia('(pointer: coarse)');
   const pauseButton = host.querySelector('[data-scene-pause]');
   const themeButtons = [...host.querySelectorAll('[data-scene-theme]')];
-  let renderer;
-  let rendererKind = 'webgl';
-  try {
-    renderer = new WebGLRenderer({ canvas, antialias: true, alpha: true, powerPreference: 'low-power' });
-  } catch {
-    // A CPU-projected 3D scene still works when a browser disables its GPU.
-    // It starts paused, and uses a lower frame budget if the user enables motion.
-    try {
-      renderer = new SVGRenderer();
-      rendererKind = 'svg';
-      renderer.setQuality('high');
-      renderer.domElement.classList.add('scene-svg');
-      renderer.domElement.setAttribute('aria-hidden', 'true');
-      host.appendChild(renderer.domElement);
-      canvas.style.display = 'none';
-    } catch {
-      host.dataset.sceneState = 'fallback';
-      return;
-    }
-  }
-
-  if (rendererKind === 'webgl') {
-    renderer.setPixelRatio(Math.min(devicePixelRatio || 1, coarsePointer.matches ? 1.25 : 1.5));
-    renderer.outputColorSpace = SRGBColorSpace;
-    renderer.toneMapping = ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.25;
-    renderer.shadowMap.enabled = !coarsePointer.matches;
-    renderer.shadowMap.type = PCFSoftShadowMap;
-    renderer.setClearColor(0x000000, 0);
-  }
-  host.dataset.sceneRenderer = rendererKind;
+  const renderer = surface.renderer, rendererKind = surface.kind;
+  if (rendererKind === 'webgl') renderer.shadowMap.enabled = !coarsePointer.matches;
 
   const scene = new Scene();
-  const camera = new PerspectiveCamera(33, 1, 0.1, 90);
+  const camera = new OrthographicCamera(-9,9,7,-7,.1,100);
   camera.position.set(13, 10, 16);
-  camera.lookAt(0, 1, 0);
+  camera.lookAt(0, 1.8, 0);
+  camera.updateMatrixWorld();
   const world = new Group();
   scene.add(world);
   const resources = new Set();
   const keep = (resource) => { resources.add(resource); return resource; };
   const material = (color, options = {}) => keep(new MeshStandardMaterial({ color, roughness: .65, metalness: .08, ...options }));
-  const stone = material(0xd8cfba);
-  const stoneTop = material(0xece5d6, { roughness: .8 });
+  const stone = material(0xc5c2b6, { metalness: 0, roughness: .88 });
+  const stoneTop = material(0xe0ddd2, { metalness: 0, roughness: .8 });
   const charcoal = material(0x242b2c, { roughness: .45, metalness: .3 });
-  const gold = material(0xbfa36a, { roughness: .3, metalness: .6 });
-  const timber = material(0x79634b, { roughness: .88 });
-  const green = material(0x49604d, { roughness: .9 });
-  const glass = material(0x354d51, { roughness: .18, metalness: .6 });
-  const glow = material(0xe0b777, { emissive: 0xffb969, emissiveIntensity: .9 });
-  const interior = material(0xd4aa70, { emissive: 0xebaf69, emissiveIntensity: .4, roughness: .9 });
+  const gold = material(0xb09b72, { roughness: .35, metalness: .55 });
+  const timber = material(0x81664c, { roughness: .9, metalness: 0 });
+  const green = material(0x3e5848, { roughness: .96, metalness: 0 });
+  const glass = material(0x354f53, { roughness: .16, metalness: .25 });
+  const clearGlass = material(0x698080, { roughness: .15, transparent: true, opacity: rendererKind === 'svg' ? .16 : .25, depthWrite: false });
+  const glow = material(0xbda87d, { emissive: 0xffd39a, emissiveIntensity: .5 });
+  const interior = material(0xc2b294, { emissive: 0xe5ba7c, emissiveIntensity: .2, roughness: .9 });
   const cushion = material(0xebdfc8, { roughness: .92 });
 
   function box(w, h, d, x, y, z, mat, parent = world) {
-    const mesh = new Mesh(keep(new BoxGeometry(w, h, d)), mat);
+    const softened = (mat === stoneTop && w > 5 && h > .12) || (mat === cushion && w > 1 && h > .3 && d > .5);
+    const mesh = new Mesh(keep(softened ? new RoundedBoxGeometry(w,h,d,1,.028) : new BoxGeometry(w, h, d)), mat);
     mesh.position.set(x, y, z);
     mesh.castShadow = true;
     mesh.receiveShadow = true;
@@ -104,24 +83,32 @@ export function mountVillaScene(host) {
   box(.22, 2.35, 4.3, -3.35, 1.45, -1.7, stone);
   box(1.50, 2.35, 4.25, 3.45, 1.45, -1.7, stone);
   box(7.9, .23, 4.62, .4, 2.75, -1.7, charcoal);
-  box(8.1, .035, 4.72, .4, 2.88, -1.7, gold);
+  box(8.1, .035, 4.72, .4, 2.88, -1.7, stoneTop);
+  box(7.9, .018, .025, .4, 2.78, .625, glow);
   box(6.0, .13, 3.65, -.10, 3.0, -1.95, stoneTop);
   box(.21, 2.02, 3.4, -3, 4.03, -2, stone);
   box(6.0, 2.02, .22, -.10, 4.03, -3.65, stone);
   box(.21, 2.02, 3.4, 2.80, 4.03, -2, stone);
   box(6.40, .22, 3.92, -.10, 5.16, -2, stoneTop);
-  box(6.45, .035, 3.97, -.10, 5.28, -2, gold);
+  box(6.45, .035, 3.97, -.10, 5.28, -2, stoneTop);
+  box(6.1, .02, .03, -.1, 5.04, -.045, glow);
 
   // Window frames and warm rooms remain visible through the dark glass.
   for (const x of [-2.65, -1.55, -.45, .65, 1.75, 2.5]) {
     box(.045, 2.18, .08, x, 1.50, .52, charcoal);
   }
+  for (const x of [-2.10,-1.0,.10,1.20,2.13]) {
+    box(1.02,2.08,.018,x,1.50,.48,clearGlass);
+  }
+  box(5.4,.06,.09,-.08,.41,.53,charcoal);
+  box(5.4,.06,.09,-.08,2.59,.53,charcoal);
   for (const x of [-2.4, -.95, .50, 1.95]) {
     box(1.30, 1.69, .07, x, 4.01, -.28, glass);
-    box(.035, 1.85, .13, x - .67, 4.01, -.23, gold);
+    box(.04, 1.85, .13, x - .67, 4.01, -.23, charcoal);
   }
-  box(5.8, .065, .12, -.1, 4.93, -.24, gold);
-  box(5.8, .07, .12, -.1, 3.05, -.24, gold);
+  box(5.8, .065, .12, -.1, 4.93, -.24, charcoal);
+  box(5.8, .07, .12, -.1, 3.05, -.24, charcoal);
+  for (let i=0;i<7;i++) box(.08,1.73,.13,-2.69+i*.10,4.02,-.17,timber);
   for (const x of [-2.8, 2.5]) box(.14, 2.35, .14, x, 1.5, .50, charcoal);
   box(1.55, 1.60, .065, 2.70, 1.45, -1.0, glass);
   box(5.2, 1.85, .065, -.25, 1.40, -3.71, interior);
@@ -170,11 +157,21 @@ export function mountVillaScene(host) {
       }`,
     side: DoubleSide
   }));
-  const svgWater = keep(new MeshBasicMaterial({ color: 0x2e6f72, transparent: true, opacity: .96 }));
+  const svgWater = keep(new MeshBasicMaterial({ color: 0x245d64 }));
   const water = new Mesh(keep(new PlaneGeometry(4.6, 2.8)), rendererKind === 'svg' ? svgWater : waterMaterial);
   water.rotation.x = -Math.PI / 2;
   water.position.set(-1.55, .205, 1.96);
   world.add(water);
+  if (rendererKind === 'svg') {
+    const positions = [];
+    for (let i=0;i<9;i++) {
+      const x=-3.65+i*.51;
+      positions.push(x,.211,.66,x+.15,.211,1.37,x+.15,.211,1.37,x-.06,.211,2.1,x-.06,.211,2.1,x+.12,.211,3.22);
+    }
+    const geometry = keep(new BufferGeometry());
+    geometry.setAttribute('position',new Float32BufferAttribute(positions,3));
+    world.add(new LineSegments(geometry,keep(new LineBasicMaterial({color:0x70a7a7,transparent:true,opacity:.12}))));
+  }
   box(4.95, .12, .16, -1.55, .19, .39, stoneTop);
   box(4.95, .12, .16, -1.55, .19, 3.53, stoneTop);
   box(.16, .12, 3.0, -4.06, .19, 1.96, stoneTop);
@@ -239,14 +236,14 @@ export function mountVillaScene(host) {
   floor.position.y = -.7;
   floor.receiveShadow = true;
   if (rendererKind === 'webgl') scene.add(floor);
-  const ring = new Mesh(keep(new TorusGeometry(8.7, .012, 4, 90)), keep(new MeshBasicMaterial({ color: 0x827251, transparent: true, opacity: .36 })));
+  const ring = new Mesh(keep(new TorusGeometry(7.6, .009, 3, 64)), keep(new MeshBasicMaterial({ color: 0x827251, transparent: true, opacity: .20 })));
   ring.rotation.x = -Math.PI / 2;
   ring.position.y = -.68;
   scene.add(ring);
 
   const ambient = new AmbientLight(0xc8dedf, 1.0);
   const sky = new HemisphereLight(0xc4d9e2, 0x5a4930, 1.8);
-  const sun = new DirectionalLight(0xffe6be, 3.5);
+  const sun = new DirectionalLight(0xfff3dd, 3.5);
   sun.position.set(-4, 10, 6);
   sun.castShadow = true;
   sun.shadow.mapSize.set(1024, 1024);
@@ -261,164 +258,99 @@ export function mountVillaScene(host) {
   roomLight.position.set(0, 1.8, -.8);
   scene.add(ambient, sky, sun, rim, roomLight);
 
-  let themeTarget = 1;
-  let themeCurrent = 1;
+  addStudioEnvironment(surface,scene,resources);
+  const bounds = new Box3().setFromObject(world);
+  let themeTarget = host.dataset.sceneTheme === 'day' ? 0 : 1;
+  let themeCurrent = themeTarget;
   let userPaused = reducedMotion.matches || rendererKind === 'svg';
   let pauseAngle = 0;
-  let visible = false;
-  let lost = false;
-  let disposed = false;
-  let frame = 0;
-  let lastTime = 0;
-  let lastRender = 0;
   let movingTime = 0;
   let pointerX = 0, pointerY = 0;
   let turn = 0;
   let scrollTilt = 0;
-  const dayGlass = new Color(0x627e80);
-  const nightGlass = new Color(0x2a434b);
-
-  function sizeScene() {
-    if (disposed || lost) return;
-    const { width, height } = host.getBoundingClientRect();
-    if (!width || !height) return;
-    camera.aspect = width / height;
-    // Keep the whole villa on narrower phones and landscape screens.
-    camera.position.set(13, 10, 16).multiplyScalar(camera.aspect < 1.25 ? 1.35 : 1.03);
-    camera.lookAt(0, 1.1, 0);
-    camera.updateProjectionMatrix();
-    renderer.setSize(width, height, false);
-    if (rendererKind === 'webgl') renderer.setPixelRatio(Math.min(devicePixelRatio || 1, coarsePointer.matches ? 1.25 : 1.5));
-    requestRender();
-  }
+  const dayGlass = new Color(0x5c7b80), nightGlass = new Color(0x273d43);
+  const dayWater = new Color(0x397b82), nightWater = new Color(0x245d64);
 
   function applyTheme() {
     const n = themeCurrent;
-    ambient.intensity = 1.3 - n * .65;
-    sky.intensity = 2.4 - n * 1.45;
-    sun.intensity = 3.4 - n * 1.5;
-    rim.intensity = 1.2 + n * 1.4;
-    roomLight.intensity = 2 + n * 16;
+    ambient.intensity = .85 - n * .3;
+    sky.intensity = 1.5 - n * .7;
+    sun.intensity = 2.8 - n * 1.4;
+    rim.intensity = 1.0 + n * .3;
+    roomLight.intensity = 1 + n * 7;
     // SVG uses a simpler lighting model without physical light attenuation.
     if (rendererKind === 'svg') {
-      ambient.intensity = .55 - n * .12;
-      sun.intensity = .70 - n * .30;
-      rim.intensity = .20 + n * .15;
-      roomLight.intensity = .05 + n * .18;
+      ambient.intensity = .48 - n * .12;
+      sun.intensity = .66 - n * .18;
+      rim.intensity = .17 + n * .06;
+      roomLight.intensity = .025 + n * .075;
     }
-    glow.emissiveIntensity = .08 + n * 1.7;
-    interior.emissiveIntensity = .05 + n * .70;
+    glow.emissiveIntensity = .04 + n * (rendererKind === 'svg' ? .4 : 1.1);
+    interior.emissiveIntensity = .02 + n * .22;
     glass.color.copy(dayGlass).lerp(nightGlass, n);
     waterMaterial.uniforms.night.value = n;
-    svgWater.color.set(n > .5 ? 0x2e6f72 : 0x42999a);
+    svgWater.color.copy(dayWater).lerp(nightWater,n);
   }
-
-  function tick(now) {
-    frame = 0;
-    if (disposed || lost || !visible || document.hidden) return;
-    // A maximum of 30 rendered frames per second keeps this decorative scene modest.
-    if (now - lastRender < 1000 / (rendererKind === 'svg' ? 12 : 30)) { requestRender(); return; }
-    lastRender = now;
-    const delta = Math.min((now - lastTime) / 1000 || 0, .05);
-    lastTime = now;
-    const moving = !userPaused && !reducedMotion.matches;
-    if (moving) movingTime += delta;
-    themeCurrent += (themeTarget - themeCurrent) * (reducedMotion.matches ? 1 : .09);
-    applyTheme();
-    const orbit = moving ? Math.sin(movingTime * .18) * .09 : 0;
-    const targetRotation = userPaused ? pauseAngle : turn + orbit + (reducedMotion.matches ? 0 : pointerX * .11 + scrollTilt);
-    const smoothing = userPaused || reducedMotion.matches ? 1 : .09;
-    world.rotation.y += (targetRotation - world.rotation.y) * smoothing;
-    world.rotation.x += ((reducedMotion.matches || userPaused ? 0 : pointerY * .025) - world.rotation.x) * smoothing;
-    waterMaterial.uniforms.time.value = movingTime;
-    renderer.render(scene, camera);
-    host.dataset.sceneState = 'ready';
-    const settling = Math.abs(themeTarget - themeCurrent) > .002 || Math.abs(targetRotation - world.rotation.y) > .001;
-    if (moving || settling) requestRender();
-  }
-
-  function requestRender() {
-    if (!frame && !disposed && !lost && visible && !document.hidden) frame = requestAnimationFrame(tick);
-  }
+  const loop = createSceneLoop(host,surface,{
+    resize(aspect) { fitVillaCamera(camera,bounds,aspect); },
+    render(delta) {
+      const moving = !userPaused && !reducedMotion.matches;
+      if (moving) movingTime += delta;
+      themeCurrent = reducedMotion.matches ? themeTarget : damp(themeCurrent,themeTarget,7,delta);
+      if (Math.abs(themeTarget-themeCurrent)<.001) themeCurrent=themeTarget;
+      applyTheme();
+      const orbit = moving ? Math.sin(movingTime*.18)*.07 : 0;
+      const targetY = userPaused ? pauseAngle : turn + (reducedMotion.matches ? 0 : orbit + pointerX*.1 + scrollTilt);
+      const targetX = moving ? pointerY*.025 : 0;
+      world.rotation.y = reducedMotion.matches ? targetY : damp(world.rotation.y,targetY,9,delta);
+      world.rotation.x = reducedMotion.matches ? 0 : damp(world.rotation.x,targetX,9,delta);
+      waterMaterial.uniforms.time.value = movingTime;
+      renderer.render(scene,camera);
+      return moving || Math.abs(themeTarget-themeCurrent)>.001 || Math.abs(targetY-world.rotation.y)>.0005 || Math.abs(targetX-world.rotation.x)>.0005;
+    },
+    dispose() { resources.forEach(resource=>resource.dispose()); }
+  });
+  const events = { signal: loop.events.signal };
 
   function updatePauseButton() {
-    pauseButton.setAttribute('aria-pressed', String(userPaused));
-    pauseButton.setAttribute('aria-label', userPaused ? 'تشغيل حركة المشهد' : 'إيقاف حركة المشهد');
-    pauseButton.textContent = userPaused ? 'تشغيل الحركة' : 'إيقاف الحركة';
+    const paused = userPaused || reducedMotion.matches;
+    pauseButton.setAttribute('aria-pressed', String(paused));
+    pauseButton.setAttribute('aria-label', paused ? 'تشغيل حركة المشهد' : 'إيقاف حركة المشهد');
+    pauseButton.textContent = paused ? 'تشغيل الحركة' : 'إيقاف الحركة';
+    pauseButton.disabled = reducedMotion.matches;
   }
-  const onPause = () => { pauseAngle = world.rotation.y; userPaused = !userPaused; updatePauseButton(); requestRender(); };
-  pauseButton.addEventListener('click', onPause);
+  const onPause = () => { pauseAngle = world.rotation.y; userPaused = !userPaused; updatePauseButton(); loop.request(); };
+  pauseButton.addEventListener('click', onPause,events);
   updatePauseButton();
   themeButtons.forEach(button => {
     button.addEventListener('click', () => {
       themeTarget = button.dataset.sceneTheme === 'night' ? 1 : 0;
       host.dataset.sceneTheme = button.dataset.sceneTheme;
       themeButtons.forEach(item => item.setAttribute('aria-pressed', String(item === button)));
-      requestRender();
-    });
+      loop.request();
+    },events);
   });
   host.querySelector('[data-scene-turn]')?.addEventListener('click', () => {
     turn = turn === 0 ? -.55 : 0;
     if (userPaused) pauseAngle = turn;
-    requestRender();
-  });
+    loop.request();
+  },events);
 
   function onPointer(event) {
     if (event.pointerType !== 'mouse' || coarsePointer.matches || userPaused || reducedMotion.matches) return;
     const rect = host.getBoundingClientRect();
-    pointerX = (event.clientX - rect.left) / rect.width - .5;
-    pointerY = (event.clientY - rect.top) / rect.height - .5;
-    requestRender();
+    pointerX = clamp((event.clientX - rect.left) / rect.width) - .5;
+    pointerY = clamp((event.clientY - rect.top) / rect.height) - .5;
+    loop.request();
   }
-  const resetPointer = () => { pointerX = pointerY = 0; requestRender(); };
-  host.addEventListener('pointermove', onPointer, { passive: true });
-  host.addEventListener('pointerleave', resetPointer);
+  const resetPointer = () => { pointerX = pointerY = 0; loop.request(); };
+  host.addEventListener('pointermove', onPointer, { passive: true,...events });
+  host.addEventListener('pointerleave', resetPointer,events);
   function onScroll() {
-    if (!visible || reducedMotion.matches || userPaused) return;
-    scrollTilt = Math.min(window.scrollY / Math.max(innerHeight, 1), 1) * -.14;
-    requestRender();
+    if (!loop.isVisible() || reducedMotion.matches || userPaused) return;
+    scrollTilt = clamp(-host.getBoundingClientRect().top / Math.max(innerHeight,1)) * -.09;
+    loop.request();
   }
-  window.addEventListener('scroll', onScroll, { passive: true });
-  const onVisibility = () => { lastTime = 0; requestRender(); };
-  document.addEventListener('visibilitychange', onVisibility);
-  const onMotionChange = () => { pauseAngle = world.rotation.y; userPaused = reducedMotion.matches; updatePauseButton(); requestRender(); };
-  reducedMotion.addEventListener('change', onMotionChange);
-  const onLost = (event) => {
-    event.preventDefault();
-    lost = true;
-    host.dataset.sceneState = 'fallback';
-    cancelAnimationFrame(frame);
-    frame = 0;
-  };
-  const onRestored = () => { lost = false; sizeScene(); requestRender(); };
-  canvas.addEventListener('webglcontextlost', onLost);
-  canvas.addEventListener('webglcontextrestored', onRestored);
-
-  const intersection = new IntersectionObserver(([entry]) => {
-    visible = entry.isIntersecting;
-    if (visible) { lastTime = 0; requestRender(); }
-    else { cancelAnimationFrame(frame); frame = 0; }
-  }, { threshold: 0 });
-  intersection.observe(host);
-  const resize = new ResizeObserver(sizeScene);
-  resize.observe(host);
-  sizeScene();
-
-  function dispose() {
-    disposed = true;
-    cancelAnimationFrame(frame);
-    intersection.disconnect();
-    resize.disconnect();
-    window.removeEventListener('scroll', onScroll);
-    document.removeEventListener('visibilitychange', onVisibility);
-    host.removeEventListener('pointermove', onPointer);
-    host.removeEventListener('pointerleave', resetPointer);
-    reducedMotion.removeEventListener('change', onMotionChange);
-    canvas.removeEventListener('webglcontextlost', onLost);
-    canvas.removeEventListener('webglcontextrestored', onRestored);
-    resources.forEach(resource => resource.dispose());
-    renderer.dispose?.();
-  }
-  // BFCache suspends the page and keeps the scene; actual navigation frees GPU memory.
-  window.addEventListener('pagehide', event => { if (!event.persisted) dispose(); });
+  window.addEventListener('scroll', onScroll, { passive: true,...events });
+  reducedMotion.addEventListener('change',() => { pauseAngle = world.rotation.y; resetPointer(); updatePauseButton(); },events);
 }

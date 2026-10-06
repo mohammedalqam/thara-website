@@ -3,6 +3,7 @@ import { SVGRenderer } from 'three/addons/renderers/SVGRenderer.js';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 
 export function createSurface(host) {
+  const viewport = host.querySelector('[data-scene-viewport]') || host;
   const canvas = host.querySelector('canvas');
   let renderer, kind = 'webgl';
   try {
@@ -18,7 +19,7 @@ export function createSurface(host) {
       renderer.overdraw = .15;
       renderer.domElement.classList.add('scene-svg');
       renderer.domElement.setAttribute('aria-hidden', 'true');
-      host.appendChild(renderer.domElement);
+      viewport.appendChild(renderer.domElement);
       canvas.style.display = 'none';
     } catch {
       host.dataset.sceneState = 'fallback';
@@ -37,7 +38,7 @@ export function createSurface(host) {
     if (kind === 'webgl') renderer.setPixelRatio(Math.min(devicePixelRatio || 1, matchMedia('(pointer: coarse)').matches ? 1.25 : 1.5));
     renderer.setSize(width, height, false);
   }
-  return { renderer, kind, canvas, setSize };
+  return { renderer, kind, canvas, viewport, setSize };
 }
 
 export function addStudioEnvironment(surface, scene, resources) {
@@ -75,6 +76,7 @@ export function createSceneLoop(host, surface, { render, resize, dispose }) {
       const continuing = render(delta);
       host.dataset.sceneState = 'ready';
       if (continuing) request();
+      else lastTime = 0;
     } catch {
       host.dataset.sceneState = 'fallback';
       destroy();
@@ -82,7 +84,7 @@ export function createSceneLoop(host, surface, { render, resize, dispose }) {
   }
   function measure() {
     if (disposed || lost) return;
-    const { width, height } = host.getBoundingClientRect();
+    const { width, height } = surface.viewport.getBoundingClientRect();
     if (!width || !height) return;
     surface.setSize(width, height);
     resize(width / height);
