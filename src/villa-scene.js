@@ -6,6 +6,7 @@ import {
   AmbientLight, DirectionalLight, HemisphereLight, PointLight,
   ACESFilmicToneMapping, SRGBColorSpace, PCFSoftShadowMap, DoubleSide
 } from 'three';
+import { SVGRenderer } from 'three/addons/renderers/SVGRenderer.js';
 
 // A small, locally bundled architectural scene. No remote models or textures.
 export function mountVillaScene(host) {
@@ -15,20 +16,36 @@ export function mountVillaScene(host) {
   const pauseButton = host.querySelector('[data-scene-pause]');
   const themeButtons = [...host.querySelectorAll('[data-scene-theme]')];
   let renderer;
+  let rendererKind = 'webgl';
   try {
     renderer = new WebGLRenderer({ canvas, antialias: true, alpha: true, powerPreference: 'low-power' });
   } catch {
-    host.dataset.sceneState = 'fallback';
-    return;
+    // A CPU-projected 3D scene still works when a browser disables its GPU.
+    // It starts paused, and uses a lower frame budget if the user enables motion.
+    try {
+      renderer = new SVGRenderer();
+      rendererKind = 'svg';
+      renderer.setQuality('high');
+      renderer.domElement.classList.add('scene-svg');
+      renderer.domElement.setAttribute('aria-hidden', 'true');
+      host.appendChild(renderer.domElement);
+      canvas.style.display = 'none';
+    } catch {
+      host.dataset.sceneState = 'fallback';
+      return;
+    }
   }
 
-  renderer.setPixelRatio(Math.min(devicePixelRatio || 1, coarsePointer.matches ? 1.25 : 1.5));
-  renderer.outputColorSpace = SRGBColorSpace;
-  renderer.toneMapping = ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 1.25;
-  renderer.shadowMap.enabled = !coarsePointer.matches;
-  renderer.shadowMap.type = PCFSoftShadowMap;
-  renderer.setClearColor(0x000000, 0);
+  if (rendererKind === 'webgl') {
+    renderer.setPixelRatio(Math.min(devicePixelRatio || 1, coarsePointer.matches ? 1.25 : 1.5));
+    renderer.outputColorSpace = SRGBColorSpace;
+    renderer.toneMapping = ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.25;
+    renderer.shadowMap.enabled = !coarsePointer.matches;
+    renderer.shadowMap.type = PCFSoftShadowMap;
+    renderer.setClearColor(0x000000, 0);
+  }
+  host.dataset.sceneRenderer = rendererKind;
 
   const scene = new Scene();
   const camera = new PerspectiveCamera(33, 1, 0.1, 90);
@@ -152,7 +169,8 @@ export function mountVillaScene(host) {
       }`,
     side: DoubleSide
   }));
-  const water = new Mesh(keep(new PlaneGeometry(4.6, 2.8)), waterMaterial);
+  const svgWater = keep(new MeshBasicMaterial({ color: 0x2e6f72, transparent: true, opacity: .96 }));
+  const water = new Mesh(keep(new PlaneGeometry(4.6, 2.8)), rendererKind === 'svg' ? svgWater : waterMaterial);
   water.rotation.x = -Math.PI / 2;
   water.position.set(-1.55, .205, 1.96);
   world.add(water);
@@ -219,7 +237,7 @@ export function mountVillaScene(host) {
   floor.rotation.x = -Math.PI / 2;
   floor.position.y = -.7;
   floor.receiveShadow = true;
-  scene.add(floor);
+  if (rendererKind === 'webgl') scene.add(floor);
   const ring = new Mesh(keep(new TorusGeometry(8.7, .012, 4, 90)), keep(new MeshBasicMaterial({ color: 0x827251, transparent: true, opacity: .36 })));
   ring.rotation.x = -Math.PI / 2;
   ring.position.y = -.68;
@@ -244,7 +262,7 @@ export function mountVillaScene(host) {
 
   let themeTarget = 1;
   let themeCurrent = 1;
-  let userPaused = reducedMotion.matches;
+  let userPaused = reducedMotion.matches || rendererKind === 'svg';
   let pauseAngle = 0;
   let visible = false;
   let lost = false;
@@ -261,7 +279,7 @@ export function mountVillaScene(host) {
 
   function sizeScene() {
     if (disposed || lost) return;
-    const { width, height } = canvas.getBoundingClientRect();
+    const { width, height } = host.getBoundingClientRect();
     if (!width || !height) return;
     camera.aspect = width / height;
     // Keep the whole villa on narrower phones and landscape screens.
@@ -269,7 +287,7 @@ export function mountVillaScene(host) {
     camera.lookAt(0, 1.1, 0);
     camera.updateProjectionMatrix();
     renderer.setSize(width, height, false);
-    renderer.setPixelRatio(Math.min(devicePixelRatio || 1, coarsePointer.matches ? 1.25 : 1.5));
+    if (rendererKind === 'webgl') renderer.setPixelRatio(Math.min(devicePixelRatio || 1, coarsePointer.matches ? 1.25 : 1.5));
     requestRender();
   }
 
@@ -284,13 +302,14 @@ export function mountVillaScene(host) {
     interior.emissiveIntensity = .05 + n * .70;
     glass.color.copy(dayGlass).lerp(nightGlass, n);
     waterMaterial.uniforms.night.value = n;
+    svgWater.color.set(n > .5 ? 0x2e6f72 : 0x42999a);
   }
 
   function tick(now) {
     frame = 0;
     if (disposed || lost || !visible || document.hidden) return;
     // A maximum of 30 rendered frames per second keeps this decorative scene modest.
-    if (now - lastRender < 1000 / 30) { requestRender(); return; }
+    if (now - lastRender < 1000 / (rendererKind === 'svg' ? 12 : 30)) { requestRender(); return; }
     lastRender = now;
     const delta = Math.min((now - lastTime) / 1000 || 0, .05);
     lastTime = now;
@@ -338,7 +357,7 @@ export function mountVillaScene(host) {
 
   function onPointer(event) {
     if (event.pointerType !== 'mouse' || coarsePointer.matches || userPaused || reducedMotion.matches) return;
-    const rect = canvas.getBoundingClientRect();
+    const rect = host.getBoundingClientRect();
     pointerX = (event.clientX - rect.left) / rect.width - .5;
     pointerY = (event.clientY - rect.top) / rect.height - .5;
     requestRender();
@@ -374,7 +393,7 @@ export function mountVillaScene(host) {
   }, { threshold: 0 });
   intersection.observe(host);
   const resize = new ResizeObserver(sizeScene);
-  resize.observe(canvas);
+  resize.observe(host);
   sizeScene();
 
   function dispose() {
@@ -390,7 +409,7 @@ export function mountVillaScene(host) {
     canvas.removeEventListener('webglcontextlost', onLost);
     canvas.removeEventListener('webglcontextrestored', onRestored);
     resources.forEach(resource => resource.dispose());
-    renderer.dispose();
+    renderer.dispose?.();
   }
   // BFCache suspends the page and keeps the scene; actual navigation frees GPU memory.
   window.addEventListener('pagehide', event => { if (!event.persisted) dispose(); });

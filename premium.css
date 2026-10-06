@@ -119,6 +119,7 @@ html { scroll-padding-top: 112px; }
   font: normal clamp(65px, 9vw, 150px)/1 Georgia, serif; letter-spacing: .12em; pointer-events: none;
 }
 .scene-stage canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
+.scene-stage .scene-svg { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; background: transparent !important; }
 .scene-fallback {
   position: absolute; inset: 15% 2% 8%; width: 96%; height: 77%; object-fit: cover;
   border-radius: 8px; opacity: .9; transition: opacity .5s ease;

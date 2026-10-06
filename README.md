@@ -6,7 +6,7 @@ Arabic villa catalog and owner services website, served directly from `main` by 
 
 `premium.css` supplies the shared typography, charcoal/brass palette, responsive layout and motion fallbacks. `premium.js` adds keyboard navigation, reading progress, photographic depth and lazy scene loading. All seven existing pages share this layer; original gallery, villa filters, owner form and WhatsApp flows keep their existing scripts.
 
-The home page's **conceptual** villa is generated with local Three.js geometry in `src/villa-scene.js`. It does not depict an available property; real catalog photographs are shown immediately below it. The scene has day/evening lighting, angle and pause controls, a 30 fps cap, bounded device pixel ratio, and no render loop while off screen or in a hidden tab. Reduced motion starts it paused. A real villa photograph remains visible when WebGL or the bundle is unavailable.
+The home page's **conceptual** villa is generated with local Three.js geometry in `src/villa-scene.js`. It does not depict an available property; real catalog photographs are shown immediately below it. The scene has day/evening lighting, angle and pause controls, a 30 fps cap, bounded device pixel ratio, and no render loop while off screen or in a hidden tab. Reduced motion starts it paused. When WebGL is disabled, a CPU-projected SVG version of the same 3D scene starts paused and is capped at 12 fps if motion is enabled. A real villa photograph remains visible when both renderers or the bundle are unavailable.
 
 ## Build
 
