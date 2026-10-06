@@ -63,11 +63,17 @@ export function mountVillaScene(host) {
     parent.add(mesh);
     return mesh;
   }
+  const groundLayer = (mesh,order) => {
+    // SVG has no depth buffer: explicit ground layers prevent a large plinth
+    // triangle from incorrectly painting over the recessed pool.
+    if (rendererKind === 'svg') mesh.renderOrder=order;
+    return mesh;
+  };
 
   // Floating plinth, garden and terrace.
-  box(12, .34, 10, 0, -.15, 0, charcoal);
-  box(11.94, .055, 9.94, 0, .05, 0, stone);
-  box(12.04, .028, 10.04, 0, -.04, 0, gold);
+  groundLayer(box(12, .34, 10, 0, -.15, 0, charcoal),-3);
+  groundLayer(box(11.94, .055, 9.94, 0, .05, 0, stone),-2);
+  groundLayer(box(12.04, .028, 10.04, 0, -.04, 0, gold),-3);
   box(11.4, .07, 1.4, 0, .10, -4.15, green);
   box(1.25, .07, 6, -5.13, .10, -.1, green);
   for (let i = 0; i < 10; i++) {
@@ -142,7 +148,7 @@ export function mountVillaScene(host) {
   cylinder(.045, .08, .37, 3.75, .30, 2.55, charcoal);
 
   // Recessed pool with restrained animated caustics.
-  box(4.9, .11, 3.1, -1.55, .14, 1.96, charcoal);
+  groundLayer(box(4.9, .11, 3.1, -1.55, .14, 1.96, charcoal),-1.5);
   const waterMaterial = keep(new ShaderMaterial({
     transparent: true,
     uniforms: { time: { value: 0 }, night: { value: 1 } },
@@ -161,7 +167,7 @@ export function mountVillaScene(host) {
   const water = new Mesh(keep(new PlaneGeometry(4.6, 2.8)), rendererKind === 'svg' ? svgWater : waterMaterial);
   water.rotation.x = -Math.PI / 2;
   water.position.set(-1.55, .205, 1.96);
-  world.add(water);
+  groundLayer(water,-1); world.add(water);
   if (rendererKind === 'svg') {
     const positions = [];
     for (let i=0;i<9;i++) {
@@ -170,16 +176,16 @@ export function mountVillaScene(host) {
     }
     const geometry = keep(new BufferGeometry());
     geometry.setAttribute('position',new Float32BufferAttribute(positions,3));
-    world.add(new LineSegments(geometry,keep(new LineBasicMaterial({color:0x70a7a7,transparent:true,opacity:.12}))));
+    world.add(groundLayer(new LineSegments(geometry,keep(new LineBasicMaterial({color:0x70a7a7,transparent:true,opacity:.12}))),-.9));
   }
-  box(4.95, .12, .16, -1.55, .19, .39, stoneTop);
-  box(4.95, .12, .16, -1.55, .19, 3.53, stoneTop);
-  box(.16, .12, 3.0, -4.06, .19, 1.96, stoneTop);
-  box(.16, .12, 3.0, .96, .19, 1.96, stoneTop);
-  box(4.60, .025, .025, -1.55, .23, .52, glow);
+  groundLayer(box(4.95, .12, .16, -1.55, .19, .39, stoneTop),-.8);
+  groundLayer(box(4.95, .12, .16, -1.55, .19, 3.53, stoneTop),-.8);
+  groundLayer(box(.16, .12, 3.0, -4.06, .19, 1.96, stoneTop),-.8);
+  groundLayer(box(.16, .12, 3.0, .96, .19, 1.96, stoneTop),-.8);
+  groundLayer(box(4.60, .025, .025, -1.55, .23, .52, glow),-.7);
 
   // Steps and sun loungers.
-  for (let i = 0; i < 3; i++) box(1.7, .09, .35, .30, .19 + i * .085, .51 - i * .25, stoneTop);
+  for (let i = 0; i < 3; i++) box(.85, .09, .35, 1.65, .19 + i * .085, .51 - i * .25, stoneTop);
   for (const x of [-3.1, -1.9]) {
     const lounger = box(.70, .09, 1.40, x, .36, 4.1, cushion);
     lounger.rotation.y = -.15;
@@ -239,6 +245,7 @@ export function mountVillaScene(host) {
   const ring = new Mesh(keep(new TorusGeometry(7.6, .009, 3, 64)), keep(new MeshBasicMaterial({ color: 0x827251, transparent: true, opacity: .20 })));
   ring.rotation.x = -Math.PI / 2;
   ring.position.y = -.68;
+  if (rendererKind === 'svg') ring.renderOrder=-4;
   scene.add(ring);
 
   const ambient = new AmbientLight(0xc8dedf, 1.0);

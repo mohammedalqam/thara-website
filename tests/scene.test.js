@@ -4,6 +4,7 @@ import { Box3, Vector3, Matrix4, OrthographicCamera, MeshBasicMaterial } from 't
 import { damp, storyProgress, orthographicFrame } from '../src/scene-math.js';
 import { fitVillaCamera, villaAngles } from '../src/scene-camera.js';
 import { createBrandWordmark, brandShapes } from '../src/brand-geometry.js';
+import { createSceneLoop } from '../src/scene-runtime.js';
 
 test('elapsed-time transitions match across 12, 30 and 60 fps', () => {
   const results = [12,30,60].map(fps => {
@@ -57,4 +58,40 @@ test('THARA geometry has five letters, shared A outlines and bounded finite geom
   }
   assert.ok(triangles<1800);
   resources.forEach(resource=>resource.dispose()); material.dispose();
+});
+
+test('rendering sleeps when idle, hidden and off screen; navigation releases resources', () => {
+  const names=['window','document','requestAnimationFrame','cancelAnimationFrame','IntersectionObserver','ResizeObserver'];
+  const originals=names.map(name=>Object.getOwnPropertyDescriptor(globalThis,name));
+  const queued=new Map(); let nextId=1, intersection, resizeObserver, released=0, rendered=0, delta;
+  const fakeDocument=new EventTarget(); fakeDocument.hidden=false;
+  try {
+    globalThis.window=new EventTarget(); globalThis.document=fakeDocument;
+    globalThis.requestAnimationFrame=callback=>{const id=nextId++;queued.set(id,callback);return id;};
+    globalThis.cancelAnimationFrame=id=>queued.delete(id);
+    globalThis.IntersectionObserver=class { constructor(callback){this.callback=callback;intersection=this;} observe(){} disconnect(){this.disconnected=true;} };
+    globalThis.ResizeObserver=class { constructor(callback){this.callback=callback;resizeObserver=this;} observe(){} disconnect(){this.disconnected=true;} };
+    const canvas=new EventTarget(), host={dataset:{},getBoundingClientRect:()=>({width:320,height:350})};
+    const surface={canvas,viewport:host,kind:'svg',setSize(){},renderer:{dispose(){released++;}}};
+    const loop=createSceneLoop(host,surface,{resize(){},render(dt){rendered++;delta=dt;return false;},dispose(){released++;}});
+    const run=now=>{const [id,callback]=queued.entries().next().value;queued.delete(id);callback(now);};
+    assert.equal(queued.size,0);
+    intersection.callback([{isIntersecting:true}]); assert.equal(queued.size,1);
+    run(100); assert.equal(rendered,1); assert.equal(queued.size,0);
+    loop.request(); run(10100); assert.equal(delta,1/12,'idle time must not jump the animation');
+    loop.request(); fakeDocument.hidden=true; fakeDocument.dispatchEvent(new Event('visibilitychange')); assert.equal(queued.size,0);
+    loop.request(); assert.equal(queued.size,0);
+    fakeDocument.hidden=false; fakeDocument.dispatchEvent(new Event('visibilitychange')); assert.equal(queued.size,1);
+    intersection.callback([{isIntersecting:false}]); assert.equal(queued.size,0);
+    intersection.callback([{isIntersecting:true}]);
+    canvas.dispatchEvent(new Event('webglcontextlost',{cancelable:true})); assert.equal(queued.size,0); assert.equal(host.dataset.sceneState,'fallback');
+    canvas.dispatchEvent(new Event('webglcontextrestored')); assert.equal(queued.size,1);
+    const suspend=new Event('pagehide'); suspend.persisted=true; window.dispatchEvent(suspend); assert.equal(released,0); assert.equal(queued.size,0);
+    const resume=new Event('pageshow'); resume.persisted=true; window.dispatchEvent(resume); assert.equal(queued.size,1);
+    window.dispatchEvent(new Event('pagehide')); assert.equal(released,2); assert.equal(queued.size,0);
+    assert.ok(intersection.disconnected && resizeObserver.disconnected);
+    loop.request(); assert.equal(queued.size,0);
+  } finally {
+    names.forEach((name,index)=>{if(originals[index])Object.defineProperty(globalThis,name,originals[index]);else delete globalThis[name];});
+  }
 });
