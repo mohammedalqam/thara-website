@@ -1,6 +1,12 @@
 /* Progressive enhancement: the villa photos, text and contact links work without 3D. */
 (() => {
-  const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+  document.documentElement.classList.add('js-enhanced');
+  const systemMotion = matchMedia('(prefers-reduced-motion: reduce)');
+  try {
+    if (localStorage.getItem('thara-motion') === 'reduced') document.documentElement.dataset.motion = 'reduced';
+  } catch { /* Storage is optional, including in restricted embedded previews. */ }
+  const reduced = { get matches() { return systemMotion.matches || document.documentElement.dataset.motion === 'reduced'; } };
+  const motionToggle = document.querySelector('[data-motion-toggle]');
   const progress = document.querySelector('.reading-progress');
   const deck = document.querySelector('.discovery-deck');
   const header = document.getElementById('siteHeader') || document.querySelector('.site-header');
@@ -26,11 +32,26 @@
   addEventListener('scroll', scheduleScroll, { passive: true });
   addEventListener('resize', scheduleScroll, { passive: true });
   updateScroll();
-  reduced.addEventListener('change', () => {
+  function updateMotion() {
     document.documentElement.classList.toggle('motion-ready', !reduced.matches);
     if (reduced.matches) deck?.style.removeProperty('--deck-shift');
+    if (motionToggle) {
+      motionToggle.setAttribute('aria-pressed', String(reduced.matches));
+      motionToggle.disabled = systemMotion.matches;
+      motionToggle.textContent = reduced.matches ? 'تفعيل الحركة' : 'تقليل الحركة';
+      if (systemMotion.matches) motionToggle.textContent = 'الحركة مخففة';
+    }
     scheduleScroll();
+  }
+  motionToggle?.addEventListener('click', () => {
+    const value = reduced.matches ? 'full' : 'reduced';
+    document.documentElement.dataset.motion = value;
+    try { localStorage.setItem('thara-motion',value); } catch { /* Preference works for this page even without storage. */ }
+    document.dispatchEvent(new Event('thara:motionchange'));
   });
+  systemMotion.addEventListener('change', updateMotion);
+  document.addEventListener('thara:motionchange', updateMotion);
+  updateMotion();
 
   if (menuButton && menu) {
     menuButton.setAttribute('aria-label', 'فتح القائمة الرئيسية');
@@ -55,6 +76,7 @@
     document.addEventListener('click', event => {
       if (menu.classList.contains('active') && !header?.contains(event.target)) closeMenu();
     });
+    addEventListener('resize', () => { if (innerWidth > 979 && menu.classList.contains('active')) closeMenu(); });
   }
 
   // Add focus management while keeping the existing viewer's open/close handlers.
@@ -90,21 +112,21 @@
     }).observe(button.closest('.faq-item'), { attributes: true, attributeFilter: ['class'] });
   });
 
-  const host = document.querySelector('[data-villa-scene]');
-  if (!host || !('IntersectionObserver' in window) || !('ResizeObserver' in window)) return;
-  let requested = false;
-  const sceneObserver = new IntersectionObserver(entries => {
-    if (requested || !entries.some(entry => entry.isIntersecting)) return;
-    requested = true;
-    sceneObserver.disconnect();
-    const start = () => {
-      import('./assets/villa-scene.js').then(module => module.mountVillaScene(host)).catch(() => {
-        host.dataset.sceneState = 'fallback';
-      });
-    };
-    // Let the heading, CTA and real image paint before the 3D bundle is parsed.
-    if ('requestIdleCallback' in window) requestIdleCallback(start, { timeout: 1200 });
-    else setTimeout(start, 120);
-  }, { rootMargin: '120px' });
-  sceneObserver.observe(host);
+  if (!('IntersectionObserver' in window) || !('ResizeObserver' in window)) return;
+  let sceneModule;
+  const loadModule = () => sceneModule ||= import('./assets/villa-scene.js?v=20261007');
+  document.querySelectorAll('[data-villa-scene], [data-brand-scene]').forEach(host => {
+    const sceneObserver = new IntersectionObserver(entries => {
+      if (!entries.some(entry => entry.isIntersecting)) return;
+      sceneObserver.disconnect();
+      const start = () => loadModule().then(module => {
+        if (host.hasAttribute('data-brand-scene')) module.mountBrandScene(host);
+        else module.mountVillaScene(host);
+      }).catch(() => { host.dataset.sceneState = 'fallback'; });
+      // Let text and real photographs paint before parsing the shared local bundle.
+      if ('requestIdleCallback' in window) requestIdleCallback(start, { timeout: 1200 });
+      else setTimeout(start, 120);
+    }, { rootMargin: '160px' });
+    sceneObserver.observe(host);
+  });
 })();
