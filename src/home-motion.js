@@ -11,6 +11,11 @@ export function portalPose(angleIndex, pointerX = 0, pointerY = 0, reduced = fal
   };
 }
 
+export function brandPose(progress, reduced = false) {
+  const p = reduced ? .5 : clamp(progress);
+  return {x:8 - p * 12, y:-21 + p * 36, z:-2 + p * 4, lift:-16 + p * 32, scale:.94 + Math.sin(p * Math.PI) * .06};
+}
+
 // One request at a time; nothing renders while idle, off screen or in a hidden tab.
 export function observeMotion(host, draw, preference) {
   const events = new AbortController();

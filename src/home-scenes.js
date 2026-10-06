@@ -1,4 +1,5 @@
-import { portalScale, portalPose, observeMotion } from './home-motion.js';
+import { portalScale, portalPose, brandPose, observeMotion } from './home-motion.js';
+import { storyProgress } from './scene-math.js';
 import { motionPreference } from './motion-preference.js';
 
 export function mountPortalScene(host) {
@@ -42,5 +43,37 @@ export function mountPortalScene(host) {
   host.addEventListener('pointerleave',() => { pointerX = pointerY = 0; lifecycle.request(); },options);
   host.dataset.sceneState = 'ready';
   host.dataset.sceneRenderer = 'css3d';
+  draw();
+}
+
+export function mountScrollSculpture(host) {
+  if (host.dataset.sceneState === 'ready') return;
+  const story = host.closest('[data-brand-story]');
+  const stage = story.querySelector('.brand-story-stage');
+  const orbit = host.querySelector('[data-brand-orbit]');
+  const letters = host.querySelector('[data-brand-letters]');
+  const preference = motionPreference();
+  // Closely spaced faces form the actual thickness; the front remains selectable in no-script mode.
+  const edgeCount = 22;
+  for (let index = edgeCount; index > 0; index--) {
+    const edge = document.createElement('span');
+    edge.className = 'brand-metal-edge'; edge.textContent = 'THARA';
+    edge.style.setProperty('--edge',String(index));
+    letters.prepend(edge);
+  }
+  function draw() {
+    const rect = story.getBoundingClientRect();
+    const inset = parseFloat(getComputedStyle(stage).top) || 0;
+    const progress = storyProgress(rect.top,rect.height,stage.getBoundingClientRect().height,inset);
+    const pose = brandPose(progress,preference.matches);
+    orbit.style.transform = `translateY(${pose.lift.toFixed(2)}px) rotateX(${pose.x.toFixed(2)}deg) rotateY(${pose.y.toFixed(2)}deg) rotateZ(${pose.z.toFixed(2)}deg) scale(${pose.scale.toFixed(4)})`;
+    story.style.setProperty('--story-progress',progress.toFixed(4));
+    story.dataset.storyStep = progress < .33 ? 'enter' : progress > .67 ? 'leave' : 'stay';
+  }
+  const lifecycle = observeMotion(host,draw,preference);
+  addEventListener('scroll',() => {
+    if (!preference.matches && lifecycle.isVisible()) lifecycle.request();
+  },{passive:true,signal:lifecycle.events.signal});
+  host.dataset.sceneState = 'ready'; host.dataset.sceneRenderer = 'css3d';
   draw();
 }

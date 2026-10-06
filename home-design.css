@@ -80,7 +80,7 @@
 .portal-photo span { position: absolute; bottom: 9px; right: 12px; color: #56705f; font: 600 11px/1.4 'Cairo',sans-serif; }
 .portal-photo-back { left: 15px; top: 141px; width: 164px; height: 225px; transform: translateZ(98px) rotateY(13deg) rotateZ(-7deg); }
 .portal-photo-front { left: 438px; top: 289px; width: 153px; height: 161px; transform: translateZ(128px) rotateY(-12deg) rotateZ(8deg); }
-.portal-plinth { position: absolute; left: 85px; top: 447px; width: 455px; height: 28px; transform-style: preserve-3d; transform: translateZ(32px); }
+.portal-plinth { position: absolute; left: 85px; top: 470px; width: 455px; height: 28px; transform-style: preserve-3d; transform: translateZ(32px); }
 .portal-plinth-face { position: absolute; inset: 0; background: linear-gradient(#bb9a66,#81643c); border: 1px solid #c6ad7b; transform: translateZ(28px); }
 .portal-plinth-side { position: absolute; right: 0; width: 28px; height: 28px; background: #745a37; transform: rotateY(90deg); transform-origin: right; }
 .portal-plinth-top { position: absolute; inset: 0; height: 28px; background: linear-gradient(90deg,#e4d7bb,#ba9f75); transform: rotateX(90deg); transform-origin: top; }
@@ -155,3 +155,324 @@
   .thara-home-v3 .portal-orbit { transition: none; }
 }
 html[data-motion='reduced'] .thara-home-v3 .portal-orbit { transition: none; }
+
+/* A continuous brand chapter: native pinning, metallic relief and real photography. */
+.thara-home-v3 .brand-story { background: #153932; color: #f4ecd9; border: 0; isolation: auto; }
+.thara-home-v3 .brand-story::before { background: radial-gradient(ellipse at 50% 48%,#38735d48,transparent 63%),linear-gradient(115deg,#12312c,#1d4136); z-index: 0; }
+.thara-home-v3 .brand-story::after { content:''; position: absolute; pointer-events: none; inset: 0 5.7vw; border-inline: 1px solid #dddbb814; }
+.motion-ready .thara-home-v3 .brand-story { height: calc(100svh + 600px); }
+.thara-home-v3 .brand-story-stage { padding: 50px 6vw 40px; min-height: 600px; height: auto; z-index: 1; gap: 0; }
+.motion-ready .thara-home-v3 .brand-story-stage { top: 96px; height: calc(100svh - 112px); min-height: 600px; }
+.thara-home-v3 .brand-story-heading { width: min(100%,1150px); display: flex; justify-content: space-between; align-items: start; text-align: right; }
+.thara-home-v3 .brand-story-heading .eyebrow { color: #c8b787; margin-top: 12px; font-size: .74rem; }
+.thara-home-v3 .brand-story-heading h2 { color: #f1ecd9; font-size: clamp(2rem,3.4vw,3.1rem); line-height: 1.45; letter-spacing: -1px; }
+.thara-home-v3 .brand-story-heading h2 span { color: #cbb688; }
+.thara-home-v3 .brand-perspective { width: min(100%,1200px); height: 340px; margin-block: 13px 26px; perspective: 1500px; perspective-origin: 50% 46%; flex-shrink: 0; }
+.brand-orbit { position: absolute; inset: 0; transform-style: preserve-3d; transform: rotateX(2deg) rotateY(-3deg); }
+.brand-letters { position: absolute; top: 70px; left: 0; right: 0; height: 190px; transform-style: preserve-3d; transform: translateZ(115px); text-align: center; font: normal clamp(60px,14vw,195px)/1.08 Georgia,'Times New Roman',serif; letter-spacing: .04em; white-space: nowrap; }
+.brand-metal-face,.brand-metal-edge { position: absolute; inset: 0; display: block; font: inherit; letter-spacing: inherit; }
+.brand-metal-edge { color: #8c6938; text-shadow: .3px .5px #4b361d; transform: translateZ(calc(var(--edge) * -1px)); }
+.brand-metal-face { background: linear-gradient(154deg,#775225 0%,#e5c991 18%,#fff0c2 27%,#967039 40%,#d9b475 48%,#f5dfad 56%,#a88343 65%,#ead2a0 86%,#9f7b42 100%); color: #d8b679; background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 0 .5px #ffe2a433; transform: translateZ(.5px); filter: drop-shadow(1px 1px 0 #f9e7b688); }
+.brand-reflection { position: absolute; top: 245px; left: 0; right: 0; font: normal clamp(60px,14vw,195px)/1.08 Georgia,'Times New Roman',serif; letter-spacing: .04em; text-align: center; color: #c3af7145; transform: translateZ(-10px) rotateX(73deg) scaleY(-.65); transform-origin: center top; mask-image: linear-gradient(to bottom,transparent 10%,#000 80%); pointer-events: none; }
+.brand-floor { position: absolute; top: 228px; left: 4%; right: 4%; height: 113px; background: radial-gradient(ellipse,#9e875432,transparent 68%); border-bottom: 1px solid #bdbe951a; transform: translateZ(-58px) rotateX(66deg); }
+.story-photo { position: absolute; padding: 7px 7px 28px; background: #ded6b9; border: 1px solid #8e8e6c; box-shadow: 0 13px 30px #001c2180; }
+.story-photo img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.story-photo span { position: absolute; bottom: 9px; left: 12px; right: 12px; color: #3d5948; font: 7px/1 monospace; letter-spacing: 1.4px; }
+.story-photo-left { left: 1%; top: 25px; width: 170px; height: 222px; transform: translateZ(-80px) rotateY(17deg) rotateZ(-9deg); }
+.story-photo-right { right: 1%; top: 47px; width: 171px; height: 219px; transform: translateZ(-65px) rotateY(-19deg) rotateZ(8deg); }
+.thara-home-v3 .brand-story-footer { width: min(100%,1050px); gap: 28px; position: relative; z-index: 3; }
+.thara-home-v3 .brand-story-footer p { color: #c4cabc; font-size: .84rem; line-height: 2; }
+.thara-home-v3 .brand-story-footer .text-link { color: #ead1a0; }
+.thara-home-v3 .brand-story-actions { gap: 24px; }
+.thara-home-v3 .motion-toggle { border-color: #698275; color: #d7dacb; border-radius: 3px; font-size: .7rem; padding-inline: 14px; }
+.thara-home-v3 .brand-story-note { color: #8ca79a; margin-top: 38px; font-size: .58rem; letter-spacing: 2px; }
+.brand-story-track { display: flex; width: 120px; gap: 5px; margin-top: 16px; }
+.brand-story-track span { height: 2px; flex: 1; background: #77958250; }
+.brand-story[data-story-step='enter'] .brand-story-track span:first-child,.brand-story[data-story-step='stay'] .brand-story-track span:nth-child(2),.brand-story[data-story-step='leave'] .brand-story-track span:last-child { background: #d6bd84; }
+@media(max-width:979px) { .story-photo-left,.story-photo-right { width: 136px; height: 188px; } .brand-letters { top: 94px; } }
+@media(max-width:760px) {
+  .motion-ready .thara-home-v3 .brand-story { height: calc(100svh + 280px); }
+  .thara-home-v3 .brand-story-stage,.motion-ready .thara-home-v3 .brand-story-stage { padding: 42px 22px 28px; min-height: 575px; }
+  .motion-ready .thara-home-v3 .brand-story-stage { top: 92px; height: calc(100svh - 108px); }
+  .thara-home-v3 .brand-story-heading { display: block; text-align: center; }
+  .thara-home-v3 .brand-story-heading .eyebrow { margin: 0 0 12px; }
+  .thara-home-v3 .brand-story-heading h2 { font-size: 2rem; }
+  .thara-home-v3 .brand-perspective { height: 245px; margin: 17px 0 20px; perspective: 800px; }
+  .brand-letters { top: 92px; height: 100px; font-size: clamp(48px,14vw,106px); transform: translateZ(44px); }
+  .brand-metal-edge { transform: translateZ(calc(var(--edge) * -.45px)); }
+  .brand-reflection { top: 166px; font-size: clamp(48px,14vw,106px); }
+  .brand-floor { top: 177px; height: 60px; }
+  .story-photo-left { top: 18px; left: -2px; width: 87px; height: 114px; transform: translateZ(-20px) rotateY(17deg) rotateZ(-10deg); }
+  .story-photo-right { top: 69px; right: -2px; width: 86px; height: 116px; transform: translateZ(-20px) rotateY(-15deg) rotateZ(9deg); }
+  .story-photo { padding: 4px 4px 18px; }
+  .story-photo span { left: 5px; right: 5px; bottom: 6px; font-size: 4px; letter-spacing: .8px; }
+  .thara-home-v3 .brand-story-footer { flex-direction: column; text-align: center; gap: 12px; }
+  .thara-home-v3 .brand-story-footer p { font-size: .8rem; }
+  .thara-home-v3 .brand-story-actions { gap: 20px; }
+  .thara-home-v3 .brand-story-note { margin-top: 28px; font-size: .48rem; letter-spacing: .7px; }
+}
+html[data-motion='reduced'] .thara-home-v3 .brand-story { height: auto; }
+html[data-motion='reduced'] .thara-home-v3 .brand-story-stage { position: relative; height: auto; min-height: 575px; }
+
+/* The same type, borders and space carry through every existing section. */
+.thara-home-v3 .section-space { padding: 100px 5.7vw; }
+.thara-home-v3 .section-heading { max-width: 1280px; margin: 0 auto 45px; flex-direction: row; justify-content: space-between; align-items: end; gap: 40px; }
+.thara-home-v3 .section-heading::after,.thara-home-v3 .why-heading::after,.thara-home-v3 .experience-title::after { display: none; }
+.thara-home-v3 .section-heading h2,.thara-home-v3 .why-heading h2,.thara-home-v3 .experience-title h2 { color: #173b35; font-size: clamp(2.1rem,3.45vw,3.2rem); line-height: 1.5; letter-spacing: -1px; }
+.thara-home-v3 .section-heading h2 span,.thara-home-v3 .why-heading h2 span,.thara-home-v3 .experience-title h2 span { color: #8a6c43; }
+.thara-home-v3 .section-description { max-width: 350px; color: #666f65; font-size: .87rem; line-height: 2; padding: 0 0 9px; }
+.thara-home-v3 .intro-strip { max-width: 1280px; margin: 0 auto; padding: 35px 25px; border-bottom: 1px solid #d8d3c3; gap: 20px; justify-content: space-around; }
+.thara-home-v3 .intro-item { text-align: right; }
+.thara-home-v3 .intro-item strong { color: #244a3e; font-size: .9rem; }
+.thara-home-v3 .intro-item span { color: #676f60; font-size: .72rem; }
+.thara-home-v3 .intro-divider { background: #d1cebb; }
+.thara-home-v3 .escape-discovery { max-width: 1460px; padding: 100px 5.7vw 110px; }
+.thara-home-v3 .discovery-header { margin-bottom: 44px; gap: 35px; }
+.thara-home-v3 .discovery-header h2 { color: #173b35; font-size: clamp(2rem,3.45vw,3.2rem); line-height: 1.5; }
+.thara-home-v3 .discovery-header h2 span { color: #8a6c43; }
+.thara-home-v3 .discovery-deck { grid-template-columns: 1.25fr 1fr 1fr; gap: 28px; align-items: start; }
+.thara-home-v3 .discovery-card { height: 485px; background: transparent; border-radius: 0; overflow: visible; color: #173b35; box-shadow: none; transform: none !important; }
+.thara-home-v3 .discovery-card:nth-child(2) { height: 400px; margin-top: 68px; }
+.thara-home-v3 .discovery-card:nth-child(3) { height: 430px; margin-top: 24px; }
+.thara-home-v3 .discovery-card::after { display: none; }
+.thara-home-v3 .discovery-card img { height: calc(100% - 78px); width: 100%; border-radius: 5px; object-fit: cover; }
+.thara-home-v3 .discovery-card:hover { box-shadow: none; }
+.thara-home-v3 .discovery-card:hover img { transform: translateY(-5px); }
+.thara-home-v3 .discovery-card-copy { position: relative; inset: auto; padding: 16px 0 0; min-height: 78px; }
+.thara-home-v3 .discovery-card-copy > span { color: #727962; font: .55rem/1.5 monospace; letter-spacing: 1.5px; margin-bottom: 7px; }
+.thara-home-v3 .discovery-card-copy strong { color: #244a3e; font-size: 1.15rem; line-height: 1.6; }
+.thara-home-v3 .discovery-index { top: 16px; right: 16px; background: #f5efdfed; color: #4c6150; padding: 7px 10px; font-size: .54rem; }
+.thara-home-v3 .featured-home { background: #e7e9df; border-block: 1px solid #d4dbca; }
+.thara-home-v3 .featured-showcase { max-width: 1280px; margin: auto; grid-template-columns: 1.34fr .88fr; align-items: center; gap: 65px; }
+.thara-home-v3 .featured-gallery { gap: 12px; }
+.thara-home-v3 .featured-gallery-main { border-radius: 5px; height: 530px; }
+.thara-home-v3 .featured-gallery-main img { transform: none; }
+.thara-home-v3 .featured-gallery-small { gap: 12px; }
+.thara-home-v3 .featured-gallery-small button { height: 105px; border-radius: 3px; }
+.thara-home-v3 .featured-badge { background: #f2ecd7ed; color: #4c5c41; border: 1px solid #ddd3ae; border-radius: 2px; font-size: .55rem; padding: 9px 14px; letter-spacing: 1.7px; }
+.thara-home-v3 .featured-image-text { padding: 28px; }
+.thara-home-v3 .featured-image-text strong { font-size: 1.22rem; }
+.thara-home-v3 .featured-number { font: .85rem monospace; color: #8d7450; letter-spacing: 3px; margin-bottom: 14px; }
+.thara-home-v3 .featured-info h3 { color: #173b35; font-size: clamp(2rem,3.5vw,3.2rem); letter-spacing: -1px; margin: 0 0 16px; }
+.thara-home-v3 .featured-description { color: #626e60; font-size: .88rem; line-height: 2.1; margin-bottom: 28px; }
+.thara-home-v3 .featured-specs { display: grid; grid-template-columns: repeat(3,1fr); background: transparent; padding-block: 20px; gap: 0; border-color: #c8cfbe; }
+.thara-home-v3 .featured-specs div { border: 0; border-radius: 0; background: transparent; box-shadow: none; padding: 0 15px; }
+.thara-home-v3 .featured-specs div + div { border-inline-start: 1px solid #c6cebd; }
+.thara-home-v3 .featured-specs strong { color: #21493b; font-size: 1.85rem; }
+.thara-home-v3 .featured-specs span { color: #596957; font-size: .7rem; }
+.thara-home-v3 .featured-divider { display: none; }
+.thara-home-v3 .featured-feature-list { margin-block: 26px; color: #596957; font-size: .8rem; gap: 14px; }
+.thara-home-v3 .featured-feature-list li::before { color: #6e937d; }
+.thara-home-v3 .featured-actions { gap: 10px; flex-wrap: wrap; }
+.thara-home-v3 .home-owners-hero { margin: 0; max-width: none; min-height: 600px; height: auto; display: grid; grid-template-columns: 1fr 1fr; gap: 0; border-radius: 0; border: 0; background: #193c33; overflow: hidden; }
+.thara-home-v3 .home-owners-hero .owners-hero-image { position: relative; inset: auto; grid-column: 2; grid-row: 1; width: 100%; height: 100%; min-height: 600px; object-fit: cover; opacity: 1; }
+.thara-home-v3 .home-owners-hero .owners-hero-overlay,.thara-home-v3 .home-owners-hero .owners-hero-glow { display: none; }
+.thara-home-v3 .home-owners-hero .owners-hero-content { grid-column: 1; grid-row: 1; max-width: 660px; justify-self: end; padding: 80px 5.7vw 75px; color: #e6e9da; }
+.thara-home-v3 .home-owners-hero .owners-eyebrow { color: #cabb8d; font-size: .6rem; letter-spacing: 2px; }
+.thara-home-v3 .home-owners-hero h2 { color: #f5ecd7; font-size: clamp(2.1rem,3.4vw,3.1rem); line-height: 1.6; letter-spacing: -1px; }
+.thara-home-v3 .home-owners-hero h2 span { color: #d2bb87; }
+.thara-home-v3 .home-owners-hero .owners-hero-copy { color: #c1cbbd; font-size: .85rem; line-height: 2.1; }
+.thara-home-v3 .home-owners-hero .owners-hero-actions { gap: 12px; margin-top: 30px; }
+.thara-home-v3 .home-owners-hero .button-gold,.thara-home-v3 .final-cta .button-gold { color: #203c2e; background: #d6c197; border-color: #d6c197; }
+.thara-home-v3 .home-owners-hero .button-glass { color: #e8e3cf; border-color: #849986; }
+.thara-home-v3 .home-owners-hero .owners-scroll-cue { left: 5.7vw; right: auto; bottom: 26px; color: #f0e8ce; transform: none; }
+.thara-home-v3 .brand-moment { margin: 0; background: #f3efe6; color: #173b35; border-bottom: 1px solid #ded9ca; }
+.thara-home-v3 .brand-moment-content { max-width: 1280px; display: grid; grid-template-columns: .6fr 1.4fr; align-items: center; gap: 60px; text-align: right; }
+.thara-home-v3 .brand-mark { font: 2.9rem/1.2 Georgia,serif; color: #987d52; letter-spacing: 8px; }
+.thara-home-v3 .brand-moment p { max-width: 790px; color: #3b5c4c; font-size: clamp(1.3rem,2.2vw,2rem); line-height: 2; margin: 0; }
+.thara-home-v3 .brand-moment-line { display: none; }
+.thara-home-v3 .home-gallery { padding-bottom: 90px; }
+.thara-home-v3 .editorial-gallery { max-width: 1280px; margin: auto; grid-template-columns: 1.25fr .9fr .9fr; grid-auto-rows: 253px; gap: 16px; }
+.thara-home-v3 .editorial-image { height: auto; width: 100%; min-height: 0; border-radius: 4px; }
+.thara-home-v3 .editorial-tall { grid-row: span 2; }
+.thara-home-v3 .editorial-wide { grid-column: span 2; }
+.thara-home-v3 .gallery-hover-icon { width: 44px; height: 44px; opacity: 1; transform: none; background: #f1ecdfeb; color: #254536; border: 1px solid #e8ddc8; border-radius: 50%; left: 16px; bottom: 16px; }
+.thara-home-v3 .gallery-button { margin-top: 30px; }
+.thara-home-v3 .why-thara { background: #e6e9df; border-top: 1px solid #d6ddcd; }
+.thara-home-v3 .why-heading,.thara-home-v3 .why-grid { max-width: 1280px; margin-inline: auto; }
+.thara-home-v3 .why-heading { margin-bottom: 45px; }
+.thara-home-v3 .why-grid { gap: 0; grid-template-columns: repeat(3,1fr); }
+.thara-home-v3 .why-card { background: transparent; border: 0; border-radius: 0; padding: 16px 35px 0; box-shadow: none; }
+.thara-home-v3 .why-card + .why-card { border-inline-start: 1px solid #c6cebc; }
+.thara-home-v3 .why-card:hover { background: transparent; transform: none; box-shadow: none; }
+.thara-home-v3 .why-number { color: #8d7d56; font-size: .74rem; }
+.thara-home-v3 .why-icon { width: 44px; height: 44px; color: #365d49; border: 0; background: transparent; margin: 15px 0 24px; }
+.thara-home-v3 .why-card h3 { color: #173b35; font-size: 1.2rem; margin-bottom: 15px; }
+.thara-home-v3 .why-card p { color: #606e5b; font-size: .84rem; line-height: 2; max-width: 300px; }
+.thara-home-v3 .experience { background: #e6e9df; padding-top: 0; }
+.thara-home-v3 .experience-wrap { max-width: 1280px; background: #f2efe4; border: 1px solid #d4d8c6; border-radius: 4px; padding: 50px 45px; display: block; }
+.thara-home-v3 .experience-title h2 { font-size: clamp(1.7rem,2.8vw,2.5rem); }
+.thara-home-v3 .experience-steps { grid-template-columns: repeat(3,1fr); margin-top: 36px; gap: 35px; }
+.thara-home-v3 .experience-step { border: 0; padding: 20px 0 0; border-top: 1px solid #c9d0bb; grid-template-columns: 44px 1fr; gap: 15px; }
+.thara-home-v3 .experience-step:last-child { border-top: 1px solid #c9d0bb; }
+.thara-home-v3 .experience-step > span { color: #9b8458; font: 2.1rem/1.2 Georgia,serif; }
+.thara-home-v3 .experience-step h3 { color: #254938; font-size: 1.05rem; }
+.thara-home-v3 .experience-step p { color: #646f5b; font-size: .78rem; line-height: 1.95; }
+.thara-home-v3 .team-grid { max-width: 1280px; margin: auto; display: grid; grid-template-columns: repeat(3,1fr); gap: 28px; }
+.thara-home-v3 .team-card { border-radius: 0; background: transparent; }
+.thara-home-v3 .team-card:hover { transform: none; }
+.thara-home-v3 .team-image { height: auto; aspect-ratio: 4/4.9; border-radius: 4px; background: #e4e5d8; }
+.thara-home-v3 .team-image img { object-position: center 28%; }
+.thara-home-v3 .team-card:hover img { filter: none; transform: scale(1.02); }
+.thara-home-v3 .team-hover { opacity: 1; pointer-events: auto; transform: none; border-radius: 3px; background: #f4efdee8; color: #244837; backdrop-filter: blur(8px); min-height: 49px; font-size: .75rem; }
+.thara-home-v3 .team-info { padding: 20px 0; border-bottom: 1px solid #d8d4c3; }
+.thara-home-v3 .team-info p { color: #8c794e; font-size: .53rem; letter-spacing: 2px; }
+.thara-home-v3 .team-info h3 { color: #244837; font-size: 1.55rem; }
+.thara-home-v3 .team-info > span { color: #64745e; font-size: .75rem; }
+.thara-home-v3 .team-phone { color: #587649; font-size: .8rem; margin-top: 8px; }
+.thara-home-v3 .home-inquiry { padding-top: 10px; }
+.thara-home-v3 .home-inquiry-panel { max-width: 1280px; display: grid; grid-template-columns: .8fr 1.2fr; gap: 65px; padding: 45px; border-radius: 5px; background: #faf7ef; border-color: #d4d9c7; }
+.thara-home-v3 .home-inquiry-heading { margin: 0; }
+.thara-home-v3 .home-inquiry-heading h2 { color: #173b35; font-size: clamp(2rem,3vw,2.8rem); font-family: 'Cairo',sans-serif; }
+.thara-home-v3 .home-inquiry-heading p:last-child { color: #606e5b; max-width: 290px; font-size: .84rem; margin-top: 22px; }
+.thara-home-v3 .home-inquiry-form label > span { color: #365340; font-size: .8rem; }
+.thara-home-v3 .home-inquiry-panel input,.thara-home-v3 .home-inquiry-panel select,.thara-home-v3 .home-inquiry-panel textarea { min-height: 51px; background: #f7f6ee; color: #274634; border-color: #d1d6c7; border-radius: 3px; font: .85rem 'Cairo',sans-serif; }
+.thara-home-v3 .home-inquiry-panel textarea { min-height: 100px; }
+.thara-home-v3 .home-inquiry-row { grid-template-columns: 1fr 1fr; gap: 13px; }
+.thara-home-v3 .home-inquiry-submit { min-height: 54px; background: #173b35; color: #f3ecd6; border-radius: 3px; font: 700 .83rem 'Cairo',sans-serif; box-shadow: none; }
+.thara-home-v3 .home-inquiry-submit:hover { background: #265246; box-shadow: none; transform: none; }
+.thara-home-v3 .home-inquiry-contacts { border-radius: 3px; background: #e9eddf; border-color: #cbd5bf; }
+.thara-home-v3 .home-inquiry-contact-grid { grid-template-columns: 1fr; }
+.thara-home-v3 .home-inquiry-contact { border-radius: 2px; background: #f5f5e9; border-color: #cad4bd; }
+.thara-home-v3 .final-cta { padding: 0; background: #193c33; }
+.thara-home-v3 .final-cta-box { max-width: none; border-radius: 0; padding: 85px 5.7vw 90px; background: radial-gradient(ellipse at 15% 70%,#2d5e474a,transparent 55%),#193c33; border: 0; box-shadow: none; }
+.thara-home-v3 .final-cta-box::before { content:'THARA'; background: transparent; color: #75917018; font: 12vw/1 Georgia,serif; letter-spacing: .08em; width: auto; height: auto; inset: auto 0 28px; border-radius: 0; }
+.thara-home-v3 .final-small { color: #cebc8d; font-size: .75rem; }
+.thara-home-v3 .final-cta-box h2 { color: #f6eed9; font-size: clamp(2.2rem,3.7vw,3.4rem); line-height: 1.5; margin-block: 24px; }
+.thara-home-v3 .final-cta-box h2 span { color: #d1bb85; }
+.thara-home-v3 .final-cta p { color: #c9d0bd; font-size: .88rem; }
+.thara-home-v3 .final-cta .button-light { color: #e6ead7; border-color: #81997e; background: transparent; }
+.thara-home-v3 .final-actions { margin-top: 32px; }
+.thara-home-v3 .site-footer { background: #112d27; padding: 60px 5.7vw 26px; }
+.thara-home-v3 .footer-main { max-width: 1280px; margin-inline: auto; gap: 50px; }
+.thara-home-v3 .footer-column h3 { color: #cebd8c; font-size: .85rem; }
+.thara-home-v3 .footer-column a,.thara-home-v3 .footer-brand p,.thara-home-v3 .footer-location { color: #aebfa9; font-size: .76rem; }
+.thara-home-v3 .footer-wordmark { max-width: 1280px; margin: 45px auto 20px; font: clamp(60px,14.5vw,190px)/1 Georgia,serif; letter-spacing: .12em; text-align: center; color: #b9ae7840; border-top: 1px solid #81957529; padding-top: 32px; overflow: hidden; }
+.thara-home-v3 .footer-bottom { max-width: 1280px; margin-inline: auto; color: #a5b99f; border-color: #81957529; }
+.thara-home-v3 .footer-social-icon { color: #c9c498; border-color: #7b937459; }
+.thara-home-v3 .floating-whatsapp { background: #183c31; color: #f1edce; border-color: #bac499; }
+.thara-home-v3 .whatsapp-picker-menu { background: #f9f6eb; border: 1px solid #d4d6bf; border-radius: 4px; color: #173b35; }
+.thara-home-v3 .whatsapp-picker-menu a { color: #173b35; border-radius: 2px; }
+.thara-home-v3 .whatsapp-picker-menu a:hover { background: #e8eddf; }
+
+@media(max-width:1100px) {
+  .thara-home-v3 .featured-showcase { gap: 34px; grid-template-columns: 1.15fr 1fr; }
+  .thara-home-v3 .featured-gallery-main { height: 485px; }
+  .thara-home-v3 .home-inquiry-panel { gap: 35px; padding: 34px; }
+  .thara-home-v3 .experience-steps { gap: 24px; }
+}
+@media(max-width:979px) {
+  .thara-home-v3 .section-heading { align-items: start; gap: 25px; }
+  .thara-home-v3 .discovery-deck { gap: 20px; }
+  .thara-home-v3 .discovery-card-copy strong { font-size: 1rem; }
+  .thara-home-v3 .featured-showcase { grid-template-columns: 1.15fr 1fr; gap: 25px; }
+  .thara-home-v3 .featured-gallery-main { height: 450px; }
+  .thara-home-v3 .featured-actions .button { padding-inline: 17px; font-size: .74rem; }
+  .thara-home-v3 .home-owners-hero,.thara-home-v3 .home-owners-hero .owners-hero-image { min-height: 570px; }
+  .thara-home-v3 .home-owners-hero .owners-hero-content { padding: 65px 30px; }
+  .thara-home-v3 .why-card { padding-inline: 23px; }
+  .thara-home-v3 .experience-wrap { padding: 35px; }
+  .thara-home-v3 .experience-steps { grid-template-columns: 1fr; margin-top: 25px; gap: 12px; }
+  .thara-home-v3 .team-grid { gap: 18px; }
+  .thara-home-v3 .footer-main { gap: 28px; }
+}
+@media(max-width:760px) {
+  .thara-home-v3 .section-space { padding: 66px 22px; }
+  .thara-home-v3 .section-heading { display: block; margin-bottom: 30px; }
+  .thara-home-v3 .section-heading h2,.thara-home-v3 .why-heading h2,.thara-home-v3 .experience-title h2 { font-size: 2rem; line-height: 1.5; letter-spacing: -.5px; }
+  .thara-home-v3 .section-description { margin-top: 18px; padding: 0; font-size: .82rem; max-width: 430px; }
+  .thara-home-v3 .intro-strip { padding: 30px 22px; gap: 10px; }
+  .thara-home-v3 .intro-item strong { font-size: .73rem; }
+  .thara-home-v3 .intro-item span { font-size: .63rem; }
+  .thara-home-v3 .escape-discovery { padding: 64px 22px 70px; }
+  .thara-home-v3 .discovery-header { display: block; margin-bottom: 27px; }
+  .thara-home-v3 .discovery-header h2 { font-size: 1.95rem; }
+  .thara-home-v3 .discovery-header .text-link { margin-top: 15px; font-size: .76rem; }
+  .thara-home-v3 .discovery-deck { grid-template-columns: 1fr 1fr; gap: 18px 14px; }
+  .thara-home-v3 .discovery-card:first-child { grid-column: span 2; height: 370px; }
+  .thara-home-v3 .discovery-card:nth-child(2),.thara-home-v3 .discovery-card:nth-child(3) { height: 300px; margin-top: 0; }
+  .thara-home-v3 .discovery-card img { height: calc(100% - 84px); }
+  .thara-home-v3 .discovery-card-copy { padding-top: 13px; min-height: 84px; }
+  .thara-home-v3 .discovery-card-copy strong { font-size: .96rem; }
+  .thara-home-v3 .discovery-card-copy > span { font-size: .44rem; letter-spacing: .6px; }
+  .thara-home-v3 .discovery-index { top: 10px; right: 10px; font-size: .48rem; padding: 6px 8px; }
+  .thara-home-v3 .featured-showcase { grid-template-columns: 1fr; gap: 36px; }
+  .thara-home-v3 .featured-gallery-main { height: 415px; }
+  .thara-home-v3 .featured-gallery-small { gap: 9px; }
+  .thara-home-v3 .featured-gallery-small button { height: 94px; }
+  .thara-home-v3 .featured-info h3 { font-size: 2.25rem; }
+  .thara-home-v3 .featured-description { font-size: .85rem; }
+  .thara-home-v3 .featured-specs { padding-block: 18px; }
+  .thara-home-v3 .featured-image-text { padding: 20px; }
+  .thara-home-v3 .featured-image-text strong { font-size: 1.05rem; }
+  .thara-home-v3 .home-owners-hero { display: grid; grid-template-columns: 1fr; margin: 0; min-height: 0; }
+  .thara-home-v3 .home-owners-hero .owners-hero-content { grid-column: 1; grid-row: 1; padding: 62px 22px; max-width: none; }
+  .thara-home-v3 .home-owners-hero .owners-hero-image { grid-column: 1; grid-row: 2; height: 310px; min-height: 0; object-position: center 60%; }
+  .thara-home-v3 .home-owners-hero h2 { font-size: 2rem; }
+  .thara-home-v3 .home-owners-hero .owners-scroll-cue { left: 22px; bottom: 20px; }
+  .thara-home-v3 .brand-moment-content { grid-template-columns: 1fr; gap: 28px; text-align: center; }
+  .thara-home-v3 .brand-mark { font-size: 2rem; letter-spacing: 7px; }
+  .thara-home-v3 .brand-moment p { font-size: 1.28rem; }
+  .thara-home-v3 .editorial-gallery { grid-template-columns: 1fr 1fr; grid-auto-rows: 205px; gap: 12px; }
+  .thara-home-v3 .editorial-tall { grid-column: span 2; grid-row: span 1; }
+  .thara-home-v3 .editorial-wide { grid-column: span 2; }
+  .thara-home-v3 .editorial-image:first-child { min-height: 290px; grid-row: span 2; }
+  .thara-home-v3 .gallery-button { margin-top: 24px; }
+  .thara-home-v3 .why-heading { margin-bottom: 30px; }
+  .thara-home-v3 .why-grid { grid-template-columns: 1fr; gap: 0; }
+  .thara-home-v3 .why-card { padding: 25px 0; display: grid; grid-template-columns: 40px 1fr; gap: 0 20px; }
+  .thara-home-v3 .why-card + .why-card { border-inline-start: 0; border-top: 1px solid #c5cfba; }
+  .thara-home-v3 .why-number { grid-column: 1; grid-row: 1; }
+  .thara-home-v3 .why-icon { grid-column: 1; grid-row: 2; width: 34px; height: 34px; margin: 14px 0 0; }
+  .thara-home-v3 .why-card h3 { grid-column: 2; grid-row: 1; margin: 0; font-size: 1.1rem; }
+  .thara-home-v3 .why-card p { grid-column: 2; grid-row: 2; margin: 12px 0 0; max-width: none; font-size: .8rem; }
+  .thara-home-v3 .experience { padding-top: 0; }
+  .thara-home-v3 .experience-wrap { padding: 32px 22px; }
+  .thara-home-v3 .experience-title h2 { font-size: 1.65rem; }
+  .thara-home-v3 .experience-steps { gap: 10px; }
+  .thara-home-v3 .experience-step { padding-top: 22px; }
+  .thara-home-v3 .team-grid { grid-template-columns: 1fr; gap: 17px; }
+  .thara-home-v3 .team-card { display: grid; grid-template-columns: 120px 1fr; gap: 20px; padding: 15px 0; border-bottom: 1px solid #d9d6c7; align-items: center; }
+  .thara-home-v3 .team-image { width: 120px; height: 151px; aspect-ratio: auto; }
+  .thara-home-v3 .team-hover { inset: auto auto 8px 8px; width: 44px; height: 44px; min-height: 44px; padding: 0; justify-content: center; border-radius: 50%; }
+  .thara-home-v3 .team-hover span { display: none; }
+  .thara-home-v3 .team-info { border: 0; padding: 0; min-width: 0; }
+  .thara-home-v3 .team-info h3 { font-size: 1.4rem; }
+  .thara-home-v3 .team-info > span { font-size: .69rem; }
+  .thara-home-v3 .team-info .team-phone { font-size: .67rem; }
+  .thara-home-v3 .home-inquiry { padding-top: 0; }
+  .thara-home-v3 .home-inquiry-panel { grid-template-columns: 1fr; padding: 28px 20px; gap: 30px; }
+  .thara-home-v3 .home-inquiry-heading h2 { font-size: 1.9rem; }
+  .thara-home-v3 .home-inquiry-heading p:last-child { margin-top: 14px; max-width: none; font-size: .8rem; }
+  .thara-home-v3 .home-inquiry-row { gap: 10px; }
+  .thara-home-v3 .home-inquiry-panel input,.thara-home-v3 .home-inquiry-panel select,.thara-home-v3 .home-inquiry-panel textarea { font-size: .78rem; min-width: 0; }
+  .thara-home-v3 .final-cta { padding: 0; }
+  .thara-home-v3 .final-cta-box { padding: 64px 22px; }
+  .thara-home-v3 .final-cta-box h2 { font-size: 2rem; }
+  .thara-home-v3 .final-actions { gap: 12px; }
+  .thara-home-v3 .final-actions .button { padding-inline: 20px; font-size: .75rem; }
+  .thara-home-v3 .site-footer { padding: 50px 22px 24px; }
+  .thara-home-v3 .footer-main { grid-template-columns: 1fr 1fr; gap: 30px 24px; }
+  .thara-home-v3 .footer-brand { grid-column: span 2; }
+  .thara-home-v3 .footer-wordmark { margin-top: 30px; font-size: clamp(46px,13vw,95px); letter-spacing: .1em; padding-top: 30px; }
+}
+@media(max-width:370px) {
+  .thara-home-v3 .section-space,.thara-home-v3 .escape-discovery { padding-inline: 16px; }
+  .thara-home-v3 .section-heading h2,.thara-home-v3 .why-heading h2 { font-size: 1.75rem; }
+  .thara-home-v3 .intro-strip { padding-inline: 16px; gap: 8px; }
+  .thara-home-v3 .intro-item strong { font-size: .64rem; }
+  .thara-home-v3 .intro-item span { font-size: .57rem; }
+  .thara-home-v3 .discovery-header h2 { font-size: 1.75rem; }
+  .thara-home-v3 .discovery-card:nth-child(2),.thara-home-v3 .discovery-card:nth-child(3) { height: 266px; }
+  .thara-home-v3 .discovery-card-copy strong { font-size: .81rem; }
+  .thara-home-v3 .featured-gallery-main { height: 340px; }
+  .thara-home-v3 .featured-gallery-small button { height: 78px; }
+  .thara-home-v3 .featured-specs div { padding-inline: 8px; }
+  .thara-home-v3 .home-owners-hero .owners-hero-content { padding-inline: 16px; }
+  .thara-home-v3 .team-card { grid-template-columns: 105px 1fr; gap: 15px; }
+  .thara-home-v3 .team-image { width: 105px; height: 145px; }
+  .thara-home-v3 .home-inquiry-panel { padding: 25px 16px; }
+  .thara-home-v3 .home-inquiry-row { grid-template-columns: 1fr; }
+  .thara-home-v3 .final-actions .button { padding-inline: 15px; font-size: .7rem; }
+  .thara-home-v3 .footer-column a { font-size: .69rem; }
+}
