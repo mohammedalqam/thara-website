@@ -40,7 +40,7 @@ export function mountPortalScene(host) {
     pointerY = (event.clientY - rect.top) / rect.height * 2 - 1;
     lifecycle.request();
   },{...options,passive:true});
-  host.addEventListener('pointerleave',() => { pointerX = pointerY = 0; lifecycle.request(); },options);
+  host.addEventListener('pointerleave',() => { if (!paused) { pointerX = pointerY = 0; lifecycle.request(); } },options);
   host.dataset.sceneState = 'ready';
   host.dataset.sceneRenderer = 'css3d';
   draw();

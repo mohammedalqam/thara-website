@@ -47,11 +47,11 @@
 .thara-home-v3 .hero-content h1 { color: #173b35; font-size: clamp(3.2rem,4.8vw,4.8rem); line-height: 1.5; letter-spacing: -2px; margin: 0 0 20px; }
 .thara-home-v3 .hero-content h1 span { color: #896c42; }
 .thara-home-v3 .hero-eyebrow { color: #86683e; letter-spacing: 2px; font-size: .62rem; margin-bottom: 22px; }
-.thara-home-v3 .hero-description { color: #627168; max-width: 410px; font-size: .95rem; line-height: 2.1; }
+.thara-home-v3 .hero-description { color: #5b6a61; max-width: 410px; font-size: .95rem; line-height: 2.1; }
 .thara-home-v3 .hero-actions { margin-top: 30px; gap: 12px; }
-.thara-home-v3 .hero-location { color: #627168; font-size: .73rem; margin-top: 28px; }
+.thara-home-v3 .hero-location { color: #5b6a61; font-size: .73rem; margin-top: 28px; }
 .thara-home-v3 .location-dot { background: #6a988a; }
-.thara-home-v3 .hero-footnote { border-color: #d3d0bf; color: #788073; max-width: 1320px; margin-top: 24px; font-size: .61rem; padding-top: 20px; }
+.thara-home-v3 .hero-footnote { border-color: #d3d0bf; color: #626a54; max-width: 1320px; margin-top: 24px; font-size: .61rem; padding-top: 20px; }
 .thara-home-v3 .hero-footnote a { color: #173b35; min-height: 44px; }
 
 /* Physical depth comes from separate planes, with no GPU/engine dependency. */
@@ -95,7 +95,7 @@
 .thara-home-v3 .portal-stage .scene-turn { left: 0; bottom: 52px; color: #173b35; background: #f6f2e6; border-color: #b6b9a3; }
 .thara-home-v3 .portal-stage .scene-coordinate { top: 20px; right: 5px; color: #7f8876; }
 .thara-home-v3 .portal-stage figcaption { display: flex; justify-content: center; align-items: center; gap: 9px; color: #365b4e; font-size: .71rem; bottom: 0; }
-.portal-stage figcaption > span:last-child { color: #808575; }
+.portal-stage figcaption > span:last-child { color: #616a58; }
 .scene-caption-dot { width: 5px; height: 5px; border-radius: 50%; background: #69947f; flex: 0 0 auto; }
 .portal-stage[data-scene-theme='night'] .portal-wall-face { background: repeating-linear-gradient(0deg,#b5ad9420 0 1px,transparent 1px 31px),linear-gradient(125deg,#cac6ae,#aa9d7b 60%,#796e55); border-color: #d2c69e; box-shadow: inset 8px 0 20px #edce9620,inset -6px -5px 8px #433c3055; }
 .portal-stage[data-scene-theme='night'] .portal-inlay { border-color: #e2b879; box-shadow: 0 0 14px #ffc67766,inset 0 0 8px #ffd28866; }
@@ -106,12 +106,14 @@
 .portal-stage[data-motion-reduced='true'] .portal-float { animation: none !important; }
 
 @media (max-width:1100px) {
+  .portal-world { --portal-scale: .65; }
   .thara-home-v3 .main-nav a { padding-inline: 8px; font-size: .69rem; }
   .thara-home-v3 .hero-content h1 { font-size: clamp(2.8rem,4.9vw,4rem); }
   .thara-home-v3 .hero-description { font-size: .87rem; }
   .thara-home-v3 .portal-stage { height: 480px; }
 }
 @media (max-width:979px) {
+  .portal-world { --portal-scale: .5; }
   .thara-home-v3 .main-nav { background: #f8f5eb; border-color: #d4cbb7; box-shadow: 0 15px 30px #33402d19; padding: 12px; }
   .thara-home-v3 .main-nav a { color: #385048; min-height: 48px; font-size: .84rem; padding-inline: 18px; }
   .thara-home-v3 .main-nav a:hover { background: #e5e1d5; color: #173b35; }
@@ -166,6 +168,7 @@ html[data-motion='reduced'] .thara-home-v3 .portal-orbit { transition: none; }
 .thara-home-v3 .brand-story-heading { width: min(100%,1150px); display: flex; justify-content: space-between; align-items: start; text-align: right; }
 .thara-home-v3 .brand-story-heading .eyebrow { color: #c8b787; margin-top: 12px; font-size: .74rem; }
 .thara-home-v3 .brand-story-heading h2 { color: #f1ecd9; font-size: clamp(2rem,3.4vw,3.1rem); line-height: 1.45; letter-spacing: -1px; }
+.thara-home-v3 .brand-story-heading h2 { order: -1; }
 .thara-home-v3 .brand-story-heading h2 span { color: #cbb688; }
 .thara-home-v3 .brand-perspective { width: min(100%,1200px); height: 340px; margin-block: 13px 26px; perspective: 1500px; perspective-origin: 50% 46%; flex-shrink: 0; }
 .brand-orbit { position: absolute; inset: 0; transform-style: preserve-3d; transform: rotateX(2deg) rotateY(-3deg); }
@@ -173,7 +176,7 @@ html[data-motion='reduced'] .thara-home-v3 .portal-orbit { transition: none; }
 .brand-metal-face,.brand-metal-edge { position: absolute; inset: 0; display: block; font: inherit; letter-spacing: inherit; }
 .brand-metal-edge { color: #8c6938; text-shadow: .3px .5px #4b361d; transform: translateZ(calc(var(--edge) * -1px)); }
 .brand-metal-face { background: linear-gradient(154deg,#775225 0%,#e5c991 18%,#fff0c2 27%,#967039 40%,#d9b475 48%,#f5dfad 56%,#a88343 65%,#ead2a0 86%,#9f7b42 100%); color: #d8b679; background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 0 .5px #ffe2a433; transform: translateZ(.5px); filter: drop-shadow(1px 1px 0 #f9e7b688); }
-.brand-reflection { position: absolute; top: 245px; left: 0; right: 0; font: normal clamp(60px,14vw,195px)/1.08 Georgia,'Times New Roman',serif; letter-spacing: .04em; text-align: center; color: #c3af7145; transform: translateZ(-10px) rotateX(73deg) scaleY(-.65); transform-origin: center top; mask-image: linear-gradient(to bottom,transparent 10%,#000 80%); pointer-events: none; }
+.brand-reflection { position: absolute; top: 246px; left: 12%; right: 12%; height: 75px; border-radius: 50%; background: radial-gradient(ellipse,#b79a4f32,transparent 68%); transform: translateZ(-45px) rotateX(64deg); transform-origin: center top; pointer-events: none; }
 .brand-floor { position: absolute; top: 228px; left: 4%; right: 4%; height: 113px; background: radial-gradient(ellipse,#9e875432,transparent 68%); border-bottom: 1px solid #bdbe951a; transform: translateZ(-58px) rotateX(66deg); }
 .story-photo { position: absolute; padding: 7px 7px 28px; background: #ded6b9; border: 1px solid #8e8e6c; box-shadow: 0 13px 30px #001c2180; }
 .story-photo img { display: block; width: 100%; height: 100%; object-fit: cover; }
@@ -200,7 +203,7 @@ html[data-motion='reduced'] .thara-home-v3 .portal-orbit { transition: none; }
   .thara-home-v3 .brand-perspective { height: 245px; margin: 17px 0 20px; perspective: 800px; }
   .brand-letters { top: 92px; height: 100px; font-size: clamp(48px,14vw,106px); transform: translateZ(44px); }
   .brand-metal-edge { transform: translateZ(calc(var(--edge) * -.45px)); }
-  .brand-reflection { top: 166px; font-size: clamp(48px,14vw,106px); }
+  .brand-reflection { top: 169px; height: 44px; }
   .brand-floor { top: 177px; height: 60px; }
   .story-photo-left { top: 18px; left: -2px; width: 87px; height: 114px; transform: translateZ(-20px) rotateY(17deg) rotateZ(-10deg); }
   .story-photo-right { top: 69px; right: -2px; width: 86px; height: 116px; transform: translateZ(-20px) rotateY(-15deg) rotateZ(9deg); }
@@ -239,7 +242,7 @@ html[data-motion='reduced'] .thara-home-v3 .brand-story-stage { position: relati
 .thara-home-v3 .discovery-card:hover { box-shadow: none; }
 .thara-home-v3 .discovery-card:hover img { transform: translateY(-5px); }
 .thara-home-v3 .discovery-card-copy { position: relative; inset: auto; padding: 16px 0 0; min-height: 78px; }
-.thara-home-v3 .discovery-card-copy > span { color: #727962; font: .55rem/1.5 monospace; letter-spacing: 1.5px; margin-bottom: 7px; }
+.thara-home-v3 .discovery-card-copy > span { color: #626a54; font: .55rem/1.5 monospace; letter-spacing: 1.5px; margin-bottom: 7px; }
 .thara-home-v3 .discovery-card-copy strong { color: #244a3e; font-size: 1.15rem; line-height: 1.6; }
 .thara-home-v3 .discovery-index { top: 16px; right: 16px; background: #f5efdfed; color: #4c6150; padding: 7px 10px; font-size: .54rem; }
 .thara-home-v3 .featured-home { background: #e7e9df; border-block: 1px solid #d4dbca; }
@@ -252,9 +255,9 @@ html[data-motion='reduced'] .thara-home-v3 .brand-story-stage { position: relati
 .thara-home-v3 .featured-badge { background: #f2ecd7ed; color: #4c5c41; border: 1px solid #ddd3ae; border-radius: 2px; font-size: .55rem; padding: 9px 14px; letter-spacing: 1.7px; }
 .thara-home-v3 .featured-image-text { padding: 28px; }
 .thara-home-v3 .featured-image-text strong { font-size: 1.22rem; }
-.thara-home-v3 .featured-number { font: .85rem monospace; color: #8d7450; letter-spacing: 3px; margin-bottom: 14px; }
+.thara-home-v3 .featured-number { font: .85rem monospace; color: #7c6643; letter-spacing: 3px; margin-bottom: 14px; }
 .thara-home-v3 .featured-info h3 { color: #173b35; font-size: clamp(2rem,3.5vw,3.2rem); letter-spacing: -1px; margin: 0 0 16px; }
-.thara-home-v3 .featured-description { color: #626e60; font-size: .88rem; line-height: 2.1; margin-bottom: 28px; }
+.thara-home-v3 .featured-description { color: #5b6659; font-size: .88rem; line-height: 2.1; margin-bottom: 28px; }
 .thara-home-v3 .featured-specs { display: grid; grid-template-columns: repeat(3,1fr); background: transparent; padding-block: 20px; gap: 0; border-color: #c8cfbe; }
 .thara-home-v3 .featured-specs div { border: 0; border-radius: 0; background: transparent; box-shadow: none; padding: 0 15px; }
 .thara-home-v3 .featured-specs div + div { border-inline-start: 1px solid #c6cebd; }
@@ -282,10 +285,11 @@ html[data-motion='reduced'] .thara-home-v3 .brand-story-stage { position: relati
 .thara-home-v3 .brand-moment p { max-width: 790px; color: #3b5c4c; font-size: clamp(1.3rem,2.2vw,2rem); line-height: 2; margin: 0; }
 .thara-home-v3 .brand-moment-line { display: none; }
 .thara-home-v3 .home-gallery { padding-bottom: 90px; }
-.thara-home-v3 .editorial-gallery { max-width: 1280px; margin: auto; grid-template-columns: 1.25fr .9fr .9fr; grid-auto-rows: 253px; gap: 16px; }
+.thara-home-v3 .editorial-gallery { max-width: 1280px; margin: auto; grid-template-columns: minmax(0,1.3fr) minmax(0,.9fr) minmax(0,.9fr) minmax(0,.75fr); grid-auto-rows: 253px; gap: 16px; }
 .thara-home-v3 .editorial-image { height: auto; width: 100%; min-height: 0; border-radius: 4px; }
 .thara-home-v3 .editorial-tall { grid-row: span 2; }
-.thara-home-v3 .editorial-wide { grid-column: span 2; }
+.thara-home-v3 .editorial-wide { grid-column: span 1; }
+.thara-home-v3 .editorial-image:last-child { grid-column: 4; grid-row: 1 / span 2; }
 .thara-home-v3 .gallery-hover-icon { width: 44px; height: 44px; opacity: 1; transform: none; background: #f1ecdfeb; color: #254536; border: 1px solid #e8ddc8; border-radius: 50%; left: 16px; bottom: 16px; }
 .thara-home-v3 .gallery-button { margin-top: 30px; }
 .thara-home-v3 .why-thara { background: #e6e9df; border-top: 1px solid #d6ddcd; }
@@ -319,16 +323,17 @@ html[data-motion='reduced'] .thara-home-v3 .brand-story-stage { position: relati
 .thara-home-v3 .team-info p { color: #8c794e; font-size: .53rem; letter-spacing: 2px; }
 .thara-home-v3 .team-info h3 { color: #244837; font-size: 1.55rem; }
 .thara-home-v3 .team-info > span { color: #64745e; font-size: .75rem; }
-.thara-home-v3 .team-phone { color: #587649; font-size: .8rem; margin-top: 8px; }
+.thara-home-v3 .team-phone { color: #526f43; font-size: .8rem; margin-top: 8px; }
 .thara-home-v3 .home-inquiry { padding-top: 10px; }
 .thara-home-v3 .home-inquiry-panel { max-width: 1280px; display: grid; grid-template-columns: .8fr 1.2fr; gap: 65px; padding: 45px; border-radius: 5px; background: #faf7ef; border-color: #d4d9c7; }
 .thara-home-v3 .home-inquiry-heading { margin: 0; }
 .thara-home-v3 .home-inquiry-heading h2 { color: #173b35; font-size: clamp(2rem,3vw,2.8rem); font-family: 'Cairo',sans-serif; }
 .thara-home-v3 .home-inquiry-heading p:last-child { color: #606e5b; max-width: 290px; font-size: .84rem; margin-top: 22px; }
+.thara-home-v3 .home-inquiry-form,.thara-home-v3 .home-inquiry-form label { min-width: 0; }
 .thara-home-v3 .home-inquiry-form label > span { color: #365340; font-size: .8rem; }
 .thara-home-v3 .home-inquiry-panel input,.thara-home-v3 .home-inquiry-panel select,.thara-home-v3 .home-inquiry-panel textarea { min-height: 51px; background: #f7f6ee; color: #274634; border-color: #d1d6c7; border-radius: 3px; font: .85rem 'Cairo',sans-serif; }
 .thara-home-v3 .home-inquiry-panel textarea { min-height: 100px; }
-.thara-home-v3 .home-inquiry-row { grid-template-columns: 1fr 1fr; gap: 13px; }
+.thara-home-v3 .home-inquiry-row { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 13px; }
 .thara-home-v3 .home-inquiry-submit { min-height: 54px; background: #173b35; color: #f3ecd6; border-radius: 3px; font: 700 .83rem 'Cairo',sans-serif; box-shadow: none; }
 .thara-home-v3 .home-inquiry-submit:hover { background: #265246; box-shadow: none; transform: none; }
 .thara-home-v3 .home-inquiry-contacts { border-radius: 3px; background: #e9eddf; border-color: #cbd5bf; }
@@ -416,6 +421,7 @@ html[data-motion='reduced'] .thara-home-v3 .brand-story-stage { position: relati
   .thara-home-v3 .editorial-gallery { grid-template-columns: 1fr 1fr; grid-auto-rows: 205px; gap: 12px; }
   .thara-home-v3 .editorial-tall { grid-column: span 2; grid-row: span 1; }
   .thara-home-v3 .editorial-wide { grid-column: span 2; }
+  .thara-home-v3 .editorial-image:last-child { grid-column: auto; grid-row: auto; }
   .thara-home-v3 .editorial-image:first-child { min-height: 290px; grid-row: span 2; }
   .thara-home-v3 .gallery-button { margin-top: 24px; }
   .thara-home-v3 .why-heading { margin-bottom: 30px; }
@@ -475,4 +481,22 @@ html[data-motion='reduced'] .thara-home-v3 .brand-story-stage { position: relati
   .thara-home-v3 .home-inquiry-row { grid-template-columns: 1fr; }
   .thara-home-v3 .final-actions .button { padding-inline: 15px; font-size: .7rem; }
   .thara-home-v3 .footer-column a { font-size: .69rem; }
+}
+
+/* All content and direct contact links remain usable when scripting is absent. */
+.thara-home-v3 .portal-stage:not([data-scene-state='ready']) figcaption > span:last-child { display: none; }
+.thara-home-v3 .inquiry-static-note { color: #38583d; font-size: .9rem; line-height: 2; }
+.thara-home-v3 .inquiry-static-note a { color: #173b35; text-decoration: underline; }
+@media (scripting:none) {
+  .thara-home-v3 .site-header,.thara-home-v3 .site-header.scrolled { position: relative; inset: auto; transform: none; margin: 16px; display: block; width: auto; padding: 18px; }
+  .thara-home-v3 .main-nav { position: static; display: flex; width: 100%; height: auto; max-height: none; flex-wrap: wrap; flex-direction: row; gap: 4px; opacity: 1; visibility: visible; border: 0; background: transparent; box-shadow: none; }
+  .thara-home-v3 .main-nav a { padding: 9px 12px; }
+  .thara-home-v3 .menu-button,.thara-home-v3 .home-inquiry-form { display: none; }
+  .thara-home-v3 .hero.immersive-hero { padding-top: 44px; }
+}
+html:not(.js-enhanced) .thara-home-v3 .brand-story { height: auto; }
+html:not(.js-enhanced) .thara-home-v3 .brand-story-stage { position: relative; height: auto; }
+@media(prefers-reduced-motion:reduce) {
+  .motion-ready .thara-home-v3 .brand-story { height: auto; }
+  .motion-ready .thara-home-v3 .brand-story-stage { position: relative; height: auto; }
 }
