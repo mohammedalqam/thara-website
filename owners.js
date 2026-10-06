@@ -10,7 +10,12 @@ if (document.body.classList.contains("owners-page")) {
 
   function updateOwnersParallax() {
     ownersParallaxFrame = null;
-    if (!ownersHero || !ownersHeroImage || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    if (!ownersHero || !ownersHeroImage) {
+      return;
+    }
+
+    if (tharaReducedMotion()) {
+      ownersHeroImage.style.removeProperty("--owners-parallax");
       return;
     }
 
@@ -24,6 +29,8 @@ if (document.body.classList.contains("owners-page")) {
     ownersParallaxFrame = requestAnimationFrame(updateOwnersParallax);
   }, { passive: true });
   updateOwnersParallax();
+  document.addEventListener("thara:motionchange", updateOwnersParallax);
+  window.matchMedia("(prefers-reduced-motion: reduce)").addEventListener("change", updateOwnersParallax);
 
   document.querySelectorAll(".owners-faq-item").forEach((item) => {
     const button = item.querySelector("button");
@@ -48,7 +55,7 @@ if (document.body.classList.contains("owners-page")) {
   });
 
   const ownersCounters = Array.from(document.querySelectorAll(".owners-count"));
-  const ownersReduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const ownersReduceMotion = tharaReducedMotion();
   const ownersNumberFormatter = new Intl.NumberFormat("en-US");
 
   function formatOwnersCount(counter, value) {
@@ -75,6 +82,10 @@ if (document.body.classList.contains("owners-page")) {
       const startedAt = performance.now();
 
       function updateCount(now) {
+        if (tharaReducedMotion()) {
+          showOwnersFinalCount(counter);
+          return;
+        }
         const progress = Math.min((now - startedAt) / duration, 1);
         const eased = 1 - Math.pow(1 - progress, 3);
         const current = Math.round(target * eased);
@@ -153,7 +164,7 @@ ${value("ownersDetails", "لا توجد تفاصيل إضافية")}`;
 
     if (ownersContactPicker) {
       ownersContactPicker.hidden = false;
-      ownersContactPicker.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      ownersContactPicker.scrollIntoView({ behavior: tharaReducedMotion() ? "auto" : "smooth", block: "nearest" });
       ownersContactPicker.querySelector("a")?.focus({ preventScroll: true });
     }
   });

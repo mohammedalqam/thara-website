@@ -7,6 +7,17 @@
    HEADER
 ========================================================= */
 
+const tharaSystemMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)");
+let tharaSavedMotion;
+try {
+  tharaSavedMotion = localStorage.getItem("thara-motion");
+} catch { /* Contact forms also work when storage is unavailable. */ }
+
+function tharaReducedMotion() {
+  return Boolean(tharaSystemMotion?.matches) ||
+    (document.documentElement.dataset.motion || tharaSavedMotion) === "reduced";
+}
+
 const siteHeader =
   document.getElementById("siteHeader");
 
@@ -375,7 +386,8 @@ if (
 
 
   const counterObserver =
-    new IntersectionObserver(
+    "IntersectionObserver" in window && !tharaReducedMotion()
+      ? new IntersectionObserver(
       (entries) => {
 
         entries.forEach(
@@ -395,6 +407,11 @@ if (
                 element.dataset.count
               );
 
+            if (tharaReducedMotion()) {
+              element.textContent = target;
+              counterObserver.unobserve(element);
+              return;
+            }
 
             const duration = 1100;
 
@@ -404,6 +421,10 @@ if (
 
             function animate(now) {
 
+              if (tharaReducedMotion()) {
+                element.textContent = target;
+                return;
+              }
               const progress =
                 Math.min(
                   (
@@ -454,15 +475,17 @@ if (
       {
         threshold: .6
       }
-    );
+    ) : null;
 
 
   counters.forEach(
     (counter) => {
 
-      counterObserver.observe(
-        counter
-      );
+      if (counterObserver) {
+        counterObserver.observe(counter);
+      } else {
+        counter.textContent = Number(counter.dataset.count);
+      }
 
     }
   );
@@ -484,6 +507,11 @@ if (
 
   function updateParallax() {
 
+    if (tharaReducedMotion()) {
+      parallaxImages.forEach(image => image.style.removeProperty("--parallax-y"));
+      parallaxTicking = false;
+      return;
+    }
     parallaxImages.forEach(
       (image) => {
 
@@ -570,6 +598,9 @@ if (
 
 
   updateParallax();
+
+  document.addEventListener("thara:motionchange", updateParallax);
+  tharaSystemMotion?.addEventListener("change", updateParallax);
 
 
 
@@ -699,7 +730,7 @@ ${fieldValue("homeInquiryNotes", "لا يوجد")}
 
         homeInquiryContacts
           .scrollIntoView({
-            behavior: "smooth",
+            behavior: tharaReducedMotion() ? "auto" : "smooth",
             block: "nearest"
           });
 

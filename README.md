@@ -41,6 +41,8 @@ Check home lighting/pause/angle controls, fallback image, reduced motion, mobile
 
 Current verification status is recorded in `docs/homepage-design-plan-v3.md`. Before release, check 320/390/768/1180px, no-script navigation, scene controls and reduced motion, gallery focus return, and generated inquiry links. Delete the temporary `design-preview.html` harness before merging a production release. The earlier deployment record is in `docs/design-development-plan.md`.
 
+`tests/home-flows.test.js` runs the actual home and owner-page scripts against local HTML in an offline jsdom environment. It checks validation, encoded WhatsApp choices, editing requests, reduced motion, missing observer APIs, menu dismissal, gallery focus return, and the portal/THARA control handlers. External resources are disabled and `window.open` is intercepted. Synthetic scene geometry tests event behavior, not CSS layout; these tests do not replace the browser release checks. `owners.js` uses the motion preference helper from `script.js`, which loads first on the owner page.
+
 ## Rollback
 
 The pre-redesign main commit is `3011cbf5653f6f3d21b4a41a3229007730826848`. Revert the design commit normally if needed; do not force-push `main`.
