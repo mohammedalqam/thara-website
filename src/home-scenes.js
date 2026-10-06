@@ -14,7 +14,7 @@ export function mountPortalScene(host) {
   function draw() {
     const rect = camera.getBoundingClientRect();
     world.style.setProperty('--portal-scale',portalScale(rect.width,rect.height).toFixed(4));
-    const pose = portalPose(angle,pointerX,pointerY,preference.matches || paused);
+    const pose = portalPose(angle,pointerX,pointerY,preference.matches);
     orbit.style.setProperty('--portal-x',`${pose.x.toFixed(2)}deg`);
     orbit.style.setProperty('--portal-y',`${pose.y.toFixed(2)}deg`);
     pause.disabled = preference.matches;

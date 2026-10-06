@@ -13,6 +13,7 @@
 }
 .thara-home-v3 .site-header, .thara-home-v3 .site-header.scrolled {
   top: 16px; left: 3vw; right: 3vw; padding: 12px 23px;
+  width: auto; max-width: none; transform: none; margin: 0;
   min-height: 72px; border: 1px solid #ddd7c9; border-radius: 6px;
   background: rgba(248,245,237,.97); box-shadow: 0 8px 24px #473c2610;
   color: var(--home-ink); backdrop-filter: blur(16px);
@@ -130,13 +131,18 @@
   .thara-home-v3 .hero-location { margin: 22px 0 5px; font-size: .7rem; }
   .thara-home-v3 .portal-stage { height: clamp(365px,85vw,510px); margin-top: 18px; }
   .portal-camera { inset: 58px 0 46px; perspective: 900px; }
+  .portal-world { --portal-scale: .7; }
   .portal-halo { inset: 11% 6% 8%; }
   .thara-home-v3 .portal-stage .scene-controls { left: 0; }
   .thara-home-v3 .portal-stage .scene-coordinate { display: none; }
   .thara-home-v3 .portal-stage figcaption { gap: 6px; font-size: .66rem; }
   .thara-home-v3 .hero-footnote { font-size: .52rem; letter-spacing: .4px; margin-top: 20px; }
 }
+@media (max-width:600px) { .portal-world { --portal-scale: .6; } }
+@media (max-width:500px) { .portal-world { --portal-scale: .5; } }
+@media (max-width:420px) { .portal-world { --portal-scale: .45; } }
 @media (max-width:370px) {
+  .portal-world { --portal-scale: .39; }
   .thara-home-v3 .hero.immersive-hero { padding-inline: 16px; }
   .thara-home-v3 .hero-content h1 { font-size: 2.32rem; }
   .thara-home-v3 .hero-description { font-size: .82rem; }
