@@ -298,6 +298,13 @@ export function mountVillaScene(host) {
     sun.intensity = 3.4 - n * 1.5;
     rim.intensity = 1.2 + n * 1.4;
     roomLight.intensity = 2 + n * 16;
+    // SVG uses a simpler lighting model without physical light attenuation.
+    if (rendererKind === 'svg') {
+      ambient.intensity = .55 - n * .12;
+      sun.intensity = .70 - n * .30;
+      rim.intensity = .20 + n * .15;
+      roomLight.intensity = .05 + n * .18;
+    }
     glow.emissiveIntensity = .08 + n * 1.7;
     interior.emissiveIntensity = .05 + n * .70;
     glass.color.copy(dayGlass).lerp(nightGlass, n);

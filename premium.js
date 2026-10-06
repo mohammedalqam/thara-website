@@ -3,7 +3,7 @@
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   const progress = document.querySelector('.reading-progress');
   const deck = document.querySelector('.discovery-deck');
-  const header = document.getElementById('siteHeader');
+  const header = document.getElementById('siteHeader') || document.querySelector('.site-header');
   const menu = document.getElementById('mainNav');
   const menuButton = document.getElementById('menuButton');
   let frame = 0;
@@ -53,7 +53,7 @@
       if (event.key === 'Escape' && menu.classList.contains('active')) closeMenu(true);
     });
     document.addEventListener('click', event => {
-      if (menu.classList.contains('active') && !header.contains(event.target)) closeMenu();
+      if (menu.classList.contains('active') && !header?.contains(event.target)) closeMenu();
     });
   }
 

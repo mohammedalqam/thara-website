@@ -369,4 +369,9 @@ html { scroll-padding-top: 112px; }
 }
 @media (scripting: none) {
   .thara-premium .reveal, .thara-premium .page-reveal { opacity: 1; transform: none; }
+  .thara-premium .villa-catalog-card { opacity: 1; transform: none; }
+  .thara-premium .main-nav { display: flex; position: static; width: auto; opacity: 1; }
+  .thara-premium .site-header { position: relative; inset: auto; margin: 16px; flex-wrap: wrap; }
+  .thara-premium .menu-button { display: none; }
+  .thara-premium .home-lightbox { display: none; }
 }
