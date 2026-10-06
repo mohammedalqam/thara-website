@@ -23,14 +23,15 @@
       rel="stylesheet"
     />
 
-    <link rel="preload" as="image" href="assets/IMG_4596.webp" />
+    <link rel="preload" as="image" href="assets/IMG_4601.webp" />
 
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="owners.css" />
-      <link rel="stylesheet" href="premium.css?v=20261007" />
+    <link rel="stylesheet" href="premium.css?v=20261007" />
+    <link rel="stylesheet" href="home-design.css?v=3.0" />
   </head>
 
-  <body class="home-page thara-premium">
+  <body class="home-page thara-premium thara-home-v3">
     <a class="skip-link" href="#mainContent">انتقل إلى المحتوى</a>
     <div class="reading-progress" aria-hidden="true"></div>
     <div class="page-glow glow-one"></div>
@@ -94,7 +95,7 @@
 <section class="hero immersive-hero" id="home" aria-labelledby="heroTitle">
         <div class="hero-architectural-grid" aria-hidden="true"></div>
         <div class="hero-layout">
-          <div class="hero-content hero-copy-animate" id="heroContent">
+          <div class="hero-content" id="heroContent">
             <p class="hero-eyebrow"><span class="hero-eyebrow-line" aria-hidden="true"></span><span dir="ltr">THARA · PRIVATE ESCAPES</span></p>
             <h1 id="heroTitle">وقتٌ إلك.<span>ومكان يليق فيك.</span></h1>
             <p class="hero-description">فلل منتقاة في أريحا، مسبح خاص ومساحة تجمعك بالناس اللي بتحبهم. اختر المكان، واترك التفاصيل إلنا.</p>
@@ -104,17 +105,48 @@
             </div>
             <p class="hero-location"><span class="location-dot" aria-hidden="true"></span>أريحا، فلسطين <span aria-hidden="true">—</span> خصوصيتك، أولًا.</p>
           </div>
-          <figure class="scene-stage" data-villa-scene data-scene-state="loading" data-scene-theme="night" aria-label="تصوّر معماري لفيلا مع مسبح وحديقة">
-            <img class="scene-fallback" src="assets/IMG_4596.webp" alt="مسبح إحدى فلل ثرى في أريحا" width="1200" height="900" fetchpriority="high" />
-            <div class="scene-viewport" data-scene-viewport><canvas aria-hidden="true" width="960" height="800"></canvas></div>
+          <figure class="scene-stage portal-stage" data-portal-scene data-scene-state="static" data-scene-theme="day" aria-label="صور فلل ثرى في مشهد معماري ثلاثي الأبعاد">
+            <div class="portal-halo" aria-hidden="true"></div>
+            <div class="portal-camera" data-portal-camera>
+              <div class="portal-world" data-portal-world>
+                <div class="portal-orbit" data-portal-orbit>
+                  <div class="portal-float">
+                    <div class="portal-ground" aria-hidden="true"></div>
+                    <div class="portal-water" aria-hidden="true"></div>
+                    <div class="portal-back-line" aria-hidden="true"></div>
+                    <div class="portal-building">
+                      <div class="portal-wall-face" aria-hidden="true"></div>
+                      <div class="portal-wall-side" aria-hidden="true"></div>
+                      <div class="portal-wall-top" aria-hidden="true"></div>
+                      <div class="portal-inlay" aria-hidden="true"></div>
+                      <div class="portal-main-photo">
+                        <img src="assets/IMG_4601.webp" alt="المسبح الخاص في إحدى فلل ثرى بأريحا" width="1200" height="900" fetchpriority="high" />
+                        <span class="portal-photo-label" dir="ltr">PRIVATE ESCAPES / JERICHO</span>
+                      </div>
+                      <div class="portal-wall-plaque" dir="ltr" aria-hidden="true">THARA</div>
+                    </div>
+                    <div class="portal-photo portal-photo-back">
+                      <img src="assets/IMG_6875.webp" alt="تفاصيل الضيافة من داخل فلل ثرى" width="900" height="1200" />
+                      <span>التفاصيل الصغيرة.</span>
+                    </div>
+                    <div class="portal-photo portal-photo-front">
+                      <img src="assets/IMG_4623.webp" alt="مساحة داخلية من إحدى فلل ثرى" width="900" height="1200" />
+                      <span>مساحة إلك.</span>
+                    </div>
+                    <div class="portal-plinth" aria-hidden="true"><span class="portal-plinth-face"></span><span class="portal-plinth-side"></span><span class="portal-plinth-top"></span></div>
+                    <span class="portal-vertical-note" dir="ltr" aria-hidden="true">A PLACE TO SLOW DOWN</span>
+                  </div>
+                </div>
+              </div>
+            </div>
             <div class="scene-controls" role="group" aria-label="إضاءة وحركة المشهد">
-              <button type="button" data-scene-theme="day" aria-pressed="false">نهار</button>
-              <button type="button" data-scene-theme="night" aria-pressed="true">مساء</button>
+              <button type="button" data-scene-theme="day" aria-pressed="true">نهار</button>
+              <button type="button" data-scene-theme="night" aria-pressed="false">مساء</button>
               <button type="button" class="scene-pause" data-scene-pause aria-pressed="false" aria-label="إيقاف حركة المشهد">إيقاف الحركة</button>
             </div>
             <span class="scene-coordinate" aria-hidden="true">JERICHO / 01</span>
-            <button type="button" class="scene-turn" data-scene-turn aria-label="تغيير زاوية عرض الفيلا">↻</button>
-            <figcaption>تصوّر معماري للتجربة. اكتشف صور فللنا الحقيقية بالأسفل.</figcaption>
+            <button type="button" class="scene-turn" data-scene-turn aria-label="تغيير زاوية عرض المشهد">↻</button>
+            <figcaption><span class="scene-caption-dot" aria-hidden="true"></span>صور حقيقية. منظور جديد. <span>غيّر الزاوية واكتشف التفاصيل.</span></figcaption>
           </figure>
         </div>
         <div class="hero-footnote">

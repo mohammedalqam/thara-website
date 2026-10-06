@@ -115,12 +115,17 @@
   if (!('IntersectionObserver' in window) || !('ResizeObserver' in window)) return;
   let sceneModule;
   const loadModule = () => sceneModule ||= import('./assets/villa-scene.js?v=20261007');
-  document.querySelectorAll('[data-villa-scene], [data-brand-scene]').forEach(host => {
+  let homeModule;
+  const loadHomeModule = () => homeModule ||= import('./assets/home-scenes.js?v=3.0');
+  document.querySelectorAll('[data-villa-scene], [data-brand-scene], [data-portal-scene], [data-scroll-sculpture]').forEach(host => {
     const sceneObserver = new IntersectionObserver(entries => {
       if (!entries.some(entry => entry.isIntersecting)) return;
       sceneObserver.disconnect();
-      const start = () => loadModule().then(module => {
-        if (host.hasAttribute('data-brand-scene')) module.mountBrandScene(host);
+      const homeScene = host.hasAttribute('data-portal-scene') || host.hasAttribute('data-scroll-sculpture');
+      const start = () => (homeScene ? loadHomeModule() : loadModule()).then(module => {
+        if (host.hasAttribute('data-portal-scene')) module.mountPortalScene(host);
+        else if (host.hasAttribute('data-scroll-sculpture')) module.mountScrollSculpture(host);
+        else if (host.hasAttribute('data-brand-scene')) module.mountBrandScene(host);
         else module.mountVillaScene(host);
       }).catch(() => { host.dataset.sceneState = 'fallback'; });
       // Let text and real photographs paint before parsing the shared local bundle.

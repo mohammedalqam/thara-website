@@ -4,9 +4,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "esbuild src/villa-scene.js --bundle --minify --format=esm --target=es2020 --legal-comments=linked --outfile=assets/villa-scene.js",
-    "check": "node --check premium.js && node --check script.js && node --check owners.js && node --check pages.js && node --check villas.js && node --check src/villa-scene.js && node --check src/brand-scene.js && node --check src/scene-runtime.js && node --check src/motion-preference.js",
-    "test": "node --test tests/scene.test.js"
+    "build": "esbuild src/villa-scene.js --bundle --minify --format=esm --target=es2020 --legal-comments=linked --outfile=assets/villa-scene.js && esbuild src/home-scenes.js --bundle --minify --format=esm --target=es2020 --outfile=assets/home-scenes.js",
+    "check": "node --check premium.js && node --check script.js && node --check owners.js && node --check pages.js && node --check villas.js && node --check src/villa-scene.js && node --check src/brand-scene.js && node --check src/scene-runtime.js && node --check src/motion-preference.js && node --check src/home-scenes.js && node --check src/home-motion.js",
+    "test": "node --test tests/*.test.js"
   },
   "devDependencies": {
     "esbuild": "0.25.10",

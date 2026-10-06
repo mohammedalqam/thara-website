@@ -1,0 +1,151 @@
+/* THARA / stone, water and light. All rules are scoped to the homepage. */
+.thara-home-v3 {
+  --home-paper: #f3efe6;
+  --home-ink: #173b35;
+  --home-bronze: #9d794a;
+  --home-muted: #666f65;
+  --home-line: #dcd6c8;
+  background: var(--home-paper);
+  color: var(--home-ink);
+}
+.thara-home-v3 .reveal, .thara-home-v3 .reveal.visible {
+  opacity: 1; transform: none; filter: none;
+}
+.thara-home-v3 .site-header, .thara-home-v3 .site-header.scrolled {
+  top: 16px; left: 3vw; right: 3vw; padding: 12px 23px;
+  min-height: 72px; border: 1px solid #ddd7c9; border-radius: 6px;
+  background: rgba(248,245,237,.97); box-shadow: 0 8px 24px #473c2610;
+  color: var(--home-ink); backdrop-filter: blur(16px);
+}
+.thara-home-v3 .site-header.scrolled { top: 10px; }
+.thara-home-v3 .brand-main, .thara-home-v3 .site-header.scrolled .brand-main { color: #86653d; font-size: 1.45rem; letter-spacing: 5px; }
+.thara-home-v3 .brand-small, .thara-home-v3 .site-header.scrolled .brand-small { color: #70776b; }
+.thara-home-v3 .main-nav { gap: 3px; }
+.thara-home-v3 .main-nav a { color: #385048; padding: 10px 11px; font-weight: 600; font-size: .75rem; min-height: 44px; display: flex; align-items: center; }
+.thara-home-v3 .main-nav a:hover, .thara-home-v3 .main-nav a[aria-current='page'] { background: #e8e3d7; color: #203c31; }
+.thara-home-v3 .main-nav a[href='villas.html'] { background: #173b35; color: #f4ecd9; padding-inline: 18px; }
+.thara-home-v3 .main-nav .nav-highlight { color: #86653d; }
+.thara-home-v3 .menu-button, .thara-home-v3 .site-header.scrolled .menu-button { background: transparent; border-color: #cbc3b2; width: 44px; height: 44px; }
+.thara-home-v3 .menu-button span { background: #173b35; }
+.thara-home-v3 .button { border-radius: 4px; min-height: 52px; font-size: .82rem; padding-inline: 24px; }
+.thara-home-v3 .button-gold { background: #173b35; border-color: #173b35; color: #faf4e5; box-shadow: 0 10px 20px #173b3512; }
+.thara-home-v3 .button-gold:hover { background: #265349; border-color: #265349; }
+.thara-home-v3 .button-glass { color: #173b35; border-color: #b4b7a6; background: transparent; }
+.thara-home-v3 .button-glass:hover { color: #173b35; background: #e5e3d8; }
+.thara-home-v3 .button-light { background: transparent; color: #173b35; border-color: #a8b4a4; }
+.thara-home-v3 .eyebrow { color: #82653e; font-size: .72rem; letter-spacing: .2px; }
+.thara-home-v3 .text-link { color: #173b35; font-size: .84rem; min-height: 44px; display: inline-flex; gap: 20px; align-items: center; }
+.thara-home-v3 .hero.immersive-hero {
+  min-height: min(940px,100svh); height: auto; padding: 155px 5.7vw 35px;
+  background: #f3efe6; color: #173b35; overflow: hidden;
+}
+.thara-home-v3 .immersive-hero::before { background: radial-gradient(ellipse at 20% 50%,#dedacc80,transparent 55%),linear-gradient(100deg,#f5f2e8,transparent 75%); }
+.thara-home-v3 .hero-architectural-grid { opacity: .2; background-size: 100px 100px; mask-image: linear-gradient(90deg,#000,transparent 63%); }
+.thara-home-v3 .hero-layout { max-width: 1320px; grid-template-columns: minmax(0,.94fr) minmax(0,1.06fr); gap: 12px; }
+.thara-home-v3 .hero-content { padding-block: 22px; }
+.thara-home-v3 .hero-content h1 { color: #173b35; font-size: clamp(3.2rem,4.8vw,4.8rem); line-height: 1.5; letter-spacing: -2px; margin: 0 0 20px; }
+.thara-home-v3 .hero-content h1 span { color: #896c42; }
+.thara-home-v3 .hero-eyebrow { color: #86683e; letter-spacing: 2px; font-size: .62rem; margin-bottom: 22px; }
+.thara-home-v3 .hero-description { color: #627168; max-width: 410px; font-size: .95rem; line-height: 2.1; }
+.thara-home-v3 .hero-actions { margin-top: 30px; gap: 12px; }
+.thara-home-v3 .hero-location { color: #627168; font-size: .73rem; margin-top: 28px; }
+.thara-home-v3 .location-dot { background: #6a988a; }
+.thara-home-v3 .hero-footnote { border-color: #d3d0bf; color: #788073; max-width: 1320px; margin-top: 24px; font-size: .61rem; padding-top: 20px; }
+.thara-home-v3 .hero-footnote a { color: #173b35; min-height: 44px; }
+
+/* Physical depth comes from separate planes, with no GPU/engine dependency. */
+.thara-home-v3 .portal-stage { height: clamp(470px,43vw,620px); margin: 0; min-width: 0; direction: ltr; isolation: isolate; }
+.portal-halo { position: absolute; inset: 11% 4% 6%; border: 1px solid #d2cdba; border-radius: 50% 50% 0 0; background: radial-gradient(ellipse at 45% 70%,#dad8caaa,transparent 64%); pointer-events: none; }
+.portal-halo::before { content:''; position: absolute; inset: 12px; border: 1px solid #ded9cb; border-radius: inherit; }
+.portal-camera { position: absolute; inset: 66px 0 45px; perspective: 1200px; perspective-origin: 50% 45%; }
+.portal-world { position: absolute; width: 610px; height: 520px; left: 50%; top: 50%; transform: translate(-50%,-50%) scale(var(--portal-scale,.86)); transform-style: preserve-3d; }
+.portal-orbit { width: 100%; height: 100%; transform-style: preserve-3d; transform: rotateX(var(--portal-x,-7deg)) rotateY(var(--portal-y,-16deg)); transition: transform .7s cubic-bezier(.22,.7,.2,1); }
+.portal-float { width: 100%; height: 100%; transform-style: preserve-3d; }
+.portal-stage[data-scene-state='ready'] .portal-float { animation: portal-drift 8s ease-in-out infinite; animation-play-state: paused; }
+.portal-stage[data-motion-active='true']:not([data-scene-paused='true']) .portal-float { animation-play-state: running; }
+@keyframes portal-drift { 0%,100% { transform: translateY(0) rotateZ(-.5deg); } 50% { transform: translateY(-9px) rotateZ(.5deg); } }
+.portal-building { position: absolute; width: 360px; height: 410px; left: 135px; top: 26px; transform-style: preserve-3d; transform: translateZ(2px); }
+.portal-wall-face { position: absolute; inset: 0; border-radius: 180px 180px 5px 5px; background: repeating-linear-gradient(0deg,#b5ad9420 0 1px,transparent 1px 31px),linear-gradient(125deg,#f3e9d4 0%,#d9ccb0 49%,#bdb196 100%); border: 1px solid #eadfc4; box-shadow: inset 6px 2px 9px #fff5df,inset -6px -5px 8px #8c805630; transform: translateZ(36px); }
+.portal-wall-side { position: absolute; width: 38px; height: 258px; top: 152px; right: 0; transform: rotateY(90deg); transform-origin: right center; background: linear-gradient(90deg,#8d7956,#bba67d); }
+.portal-wall-top { position: absolute; width: 175px; height: 38px; left: 91px; top: 1px; transform: rotateX(90deg); transform-origin: center top; background: #ded0b3; border-radius: 50%; }
+.portal-inlay { position: absolute; inset: 18px 19px 47px; border: 2px solid #9c7a40; border-radius: 163px 163px 2px 2px; box-shadow: 1px 2px 3px #f7e8bd,inset 3px 5px 12px #49331666; transform: translateZ(39px); }
+.portal-main-photo { position: absolute; inset: 27px 29px 56px; border-radius: 158px 158px 1px 1px; overflow: hidden; transform: translateZ(41px); background: #1e4038; }
+.portal-main-photo img { width: 100%; height: 100%; object-fit: cover; object-position: 48% 50%; }
+.portal-main-photo::after { content:''; position: absolute; inset: 0; border: 1px solid #f1dccb44; border-radius: inherit; background: linear-gradient(135deg,#fff2cb14,transparent 40%,#14392b15); pointer-events: none; }
+.portal-photo-label { position: absolute; left: 14px; right: 14px; bottom: 17px; color: #f4e4c5; font: 8px/1.5 monospace; letter-spacing: 1.7px; text-shadow: 0 1px 6px #000; }
+.portal-wall-plaque { position: absolute; bottom: 14px; left: 0; right: 0; text-align: center; color: #8a6a3e; font: 22px/1 Georgia,serif; letter-spacing: 8px; transform: translateZ(40px); text-shadow: 1px 1px #fbf0d5; }
+.portal-photo { position: absolute; padding: 9px 9px 36px; background: #f6f1e5; border: 1px solid #ded3bb; box-shadow: 0 16px 25px #3d352532; }
+.portal-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.portal-photo span { position: absolute; bottom: 9px; right: 12px; color: #56705f; font: 600 11px/1.4 'Cairo',sans-serif; }
+.portal-photo-back { left: 15px; top: 141px; width: 164px; height: 225px; transform: translateZ(98px) rotateY(13deg) rotateZ(-7deg); }
+.portal-photo-front { left: 438px; top: 289px; width: 153px; height: 161px; transform: translateZ(128px) rotateY(-12deg) rotateZ(8deg); }
+.portal-plinth { position: absolute; left: 85px; top: 447px; width: 455px; height: 28px; transform-style: preserve-3d; transform: translateZ(32px); }
+.portal-plinth-face { position: absolute; inset: 0; background: linear-gradient(#bb9a66,#81643c); border: 1px solid #c6ad7b; transform: translateZ(28px); }
+.portal-plinth-side { position: absolute; right: 0; width: 28px; height: 28px; background: #745a37; transform: rotateY(90deg); transform-origin: right; }
+.portal-plinth-top { position: absolute; inset: 0; height: 28px; background: linear-gradient(90deg,#e4d7bb,#ba9f75); transform: rotateX(90deg); transform-origin: top; }
+.portal-ground { position: absolute; left: 39px; top: 428px; width: 535px; height: 116px; border-radius: 50%; background: radial-gradient(ellipse,#3b443c4a,transparent 65%); transform: translateZ(-60px) rotateX(64deg); }
+.portal-water { position: absolute; left: 40px; top: 355px; width: 520px; height: 155px; border-radius: 50%; border: 1px solid #9ebeb1; background: repeating-radial-gradient(ellipse at 50% 50%,transparent 0 17px,#c9e3d270 18px 19px,transparent 20px 32px),linear-gradient(135deg,#76a89d20,#77a8a76b); transform: translateZ(-35px) rotateX(67deg); }
+.portal-back-line { position: absolute; left: 45px; top: 1px; width: 480px; height: 439px; border: 1px solid #a4ae957a; border-radius: 240px 240px 0 0; transform: translateZ(-100px); }
+.portal-vertical-note { position: absolute; left: 571px; top: 175px; writing-mode: vertical-rl; color: #8b8e78; font: 8px/1 monospace; letter-spacing: 2px; transform: translateZ(8px); }
+.thara-home-v3 .portal-stage .scene-controls { top: 0; left: 8px; border: 1px solid #cdc9b6; padding: 3px; background: #f8f5ecd9; border-radius: 4px; }
+.thara-home-v3 .portal-stage .scene-controls button { color: #547160; border-radius: 2px; padding-inline: 12px; font-size: .7rem; }
+.thara-home-v3 .portal-stage .scene-controls button[aria-pressed='true'] { background: #254b40; color: #fff1d4; }
+.thara-home-v3 .portal-stage .scene-controls .scene-pause { border-color: #cfcab9; background: transparent; color: #547160; }
+.thara-home-v3 .portal-stage .scene-turn { left: 0; bottom: 52px; color: #173b35; background: #f6f2e6; border-color: #b6b9a3; }
+.thara-home-v3 .portal-stage .scene-coordinate { top: 20px; right: 5px; color: #7f8876; }
+.thara-home-v3 .portal-stage figcaption { display: flex; justify-content: center; align-items: center; gap: 9px; color: #365b4e; font-size: .71rem; bottom: 0; }
+.portal-stage figcaption > span:last-child { color: #808575; }
+.scene-caption-dot { width: 5px; height: 5px; border-radius: 50%; background: #69947f; flex: 0 0 auto; }
+.portal-stage[data-scene-theme='night'] .portal-wall-face { background: repeating-linear-gradient(0deg,#b5ad9420 0 1px,transparent 1px 31px),linear-gradient(125deg,#cac6ae,#aa9d7b 60%,#796e55); border-color: #d2c69e; box-shadow: inset 8px 0 20px #edce9620,inset -6px -5px 8px #433c3055; }
+.portal-stage[data-scene-theme='night'] .portal-inlay { border-color: #e2b879; box-shadow: 0 0 14px #ffc67766,inset 0 0 8px #ffd28866; }
+.portal-stage[data-scene-theme='night'] .portal-halo { background: radial-gradient(ellipse at 48% 55%,#67887840,#b2b6a51a 58%,transparent); }
+.portal-stage[data-scene-theme='night'] .portal-main-photo::after { background: linear-gradient(125deg,#eab07b22,transparent 42%,#183e362e); }
+.portal-stage[data-scene-theme='night'] .portal-water { border-color: #699e8d; background-color: #356f6930; }
+.portal-wall-face,.portal-inlay,.portal-halo,.portal-water { transition: background .6s,box-shadow .6s,border-color .6s; }
+.portal-stage[data-motion-reduced='true'] .portal-float { animation: none !important; }
+
+@media (max-width:1100px) {
+  .thara-home-v3 .main-nav a { padding-inline: 8px; font-size: .69rem; }
+  .thara-home-v3 .hero-content h1 { font-size: clamp(2.8rem,4.9vw,4rem); }
+  .thara-home-v3 .hero-description { font-size: .87rem; }
+  .thara-home-v3 .portal-stage { height: 480px; }
+}
+@media (max-width:979px) {
+  .thara-home-v3 .main-nav { background: #f8f5eb; border-color: #d4cbb7; box-shadow: 0 15px 30px #33402d19; padding: 12px; }
+  .thara-home-v3 .main-nav a { color: #385048; min-height: 48px; font-size: .84rem; padding-inline: 18px; }
+  .thara-home-v3 .main-nav a:hover { background: #e5e1d5; color: #173b35; }
+  .thara-home-v3 .hero-layout { grid-template-columns: minmax(0,.95fr) minmax(0,1.05fr); }
+  .thara-home-v3 .hero-content h1 { font-size: clamp(2.7rem,5.2vw,4rem); }
+}
+@media (max-width:760px) {
+  .thara-home-v3 .site-header,.thara-home-v3 .site-header.scrolled { left: 16px; right: 16px; padding: 10px 16px; min-height: 66px; }
+  .thara-home-v3 .hero.immersive-hero { padding: 116px 22px 26px; min-height: 0; }
+  .thara-home-v3 .hero-layout { grid-template-columns: 1fr; gap: 10px; }
+  .thara-home-v3 .hero-content { padding: 0; }
+  .thara-home-v3 .hero-content h1 { font-size: clamp(2.65rem,8.7vw,4.2rem); line-height: 1.4; letter-spacing: -1.2px; margin-bottom: 20px; }
+  .thara-home-v3 .hero-eyebrow { font-size: .56rem; margin-bottom: 18px; letter-spacing: 1.5px; }
+  .thara-home-v3 .hero-description { font-size: .88rem; max-width: 550px; }
+  .thara-home-v3 .hero-actions { gap: 10px; margin-top: 24px; }
+  .thara-home-v3 .hero-actions .button { min-height: 49px; padding-inline: 18px; font-size: .78rem; }
+  .thara-home-v3 .hero-location { margin: 22px 0 5px; font-size: .7rem; }
+  .thara-home-v3 .portal-stage { height: clamp(365px,85vw,510px); margin-top: 18px; }
+  .portal-camera { inset: 58px 0 46px; perspective: 900px; }
+  .portal-halo { inset: 11% 6% 8%; }
+  .thara-home-v3 .portal-stage .scene-controls { left: 0; }
+  .thara-home-v3 .portal-stage .scene-coordinate { display: none; }
+  .thara-home-v3 .portal-stage figcaption { gap: 6px; font-size: .66rem; }
+  .thara-home-v3 .hero-footnote { font-size: .52rem; letter-spacing: .4px; margin-top: 20px; }
+}
+@media (max-width:370px) {
+  .thara-home-v3 .hero.immersive-hero { padding-inline: 16px; }
+  .thara-home-v3 .hero-content h1 { font-size: 2.32rem; }
+  .thara-home-v3 .hero-description { font-size: .82rem; }
+  .thara-home-v3 .hero-actions .button { font-size: .7rem; padding-inline: 14px; }
+  .thara-home-v3 .portal-stage { height: 338px; }
+  .thara-home-v3 .portal-stage figcaption > span:last-child { display: none; }
+}
+@media (prefers-reduced-motion:reduce) {
+  .thara-home-v3 .portal-float { animation: none !important; }
+  .thara-home-v3 .portal-orbit { transition: none; }
+}
+html[data-motion='reduced'] .thara-home-v3 .portal-orbit { transition: none; }
