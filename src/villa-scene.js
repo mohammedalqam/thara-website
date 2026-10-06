@@ -7,6 +7,7 @@ import {
   ACESFilmicToneMapping, SRGBColorSpace, PCFSoftShadowMap, DoubleSide
 } from 'three';
 import { SVGRenderer } from 'three/addons/renderers/SVGRenderer.js';
+export { mountBrandScene } from './brand-scene.js';
 
 // A small, locally bundled architectural scene. No remote models or textures.
 export function mountVillaScene(host) {

@@ -90,21 +90,21 @@
     }).observe(button.closest('.faq-item'), { attributes: true, attributeFilter: ['class'] });
   });
 
-  const host = document.querySelector('[data-villa-scene]');
-  if (!host || !('IntersectionObserver' in window) || !('ResizeObserver' in window)) return;
-  let requested = false;
-  const sceneObserver = new IntersectionObserver(entries => {
-    if (requested || !entries.some(entry => entry.isIntersecting)) return;
-    requested = true;
-    sceneObserver.disconnect();
-    const start = () => {
-      import('./assets/villa-scene.js').then(module => module.mountVillaScene(host)).catch(() => {
-        host.dataset.sceneState = 'fallback';
-      });
-    };
-    // Let the heading, CTA and real image paint before the 3D bundle is parsed.
-    if ('requestIdleCallback' in window) requestIdleCallback(start, { timeout: 1200 });
-    else setTimeout(start, 120);
-  }, { rootMargin: '120px' });
-  sceneObserver.observe(host);
+  if (!('IntersectionObserver' in window) || !('ResizeObserver' in window)) return;
+  let sceneModule;
+  const loadModule = () => sceneModule ||= import('./assets/villa-scene.js?v=20261007');
+  document.querySelectorAll('[data-villa-scene], [data-brand-scene]').forEach(host => {
+    const sceneObserver = new IntersectionObserver(entries => {
+      if (!entries.some(entry => entry.isIntersecting)) return;
+      sceneObserver.disconnect();
+      const start = () => loadModule().then(module => {
+        if (host.hasAttribute('data-brand-scene')) module.mountBrandScene(host);
+        else module.mountVillaScene(host);
+      }).catch(() => { host.dataset.sceneState = 'fallback'; });
+      // Let text and real photographs paint before parsing the shared local bundle.
+      if ('requestIdleCallback' in window) requestIdleCallback(start, { timeout: 1200 });
+      else setTimeout(start, 120);
+    }, { rootMargin: '160px' });
+    sceneObserver.observe(host);
+  });
 })();

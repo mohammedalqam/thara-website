@@ -9,6 +9,7 @@
 }
 html { scroll-padding-top: 112px; }
 .thara-premium {
+  overflow-x: clip;
   background: var(--paper);
   color: var(--ink);
   --accent-gold: #a48750;
@@ -114,10 +115,6 @@ html { scroll-padding-top: 112px; }
   position: relative; min-width: 0; margin: 0; height: clamp(420px, 46vw, 660px);
   width: 100%; direction: ltr; isolation: isolate;
 }
-.scene-wordmark {
-  position: absolute; left: 4%; top: 6%; color: rgba(208, 188, 146, .075);
-  font: normal clamp(65px, 9vw, 150px)/1 Georgia, serif; letter-spacing: .12em; pointer-events: none;
-}
 .scene-stage canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
 .scene-stage .scene-svg { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; background: transparent !important; }
 .scene-fallback {
@@ -154,6 +151,49 @@ html { scroll-padding-top: 112px; }
 .scene-coordinate {
   position: absolute; right: 0; top: 8px; color: #87938c; font: .58rem monospace; letter-spacing: 1.8px;
 }
+
+/* The brand follows native scrolling only within its own story. */
+.brand-story {
+  position: relative; background: #eae6da; border-bottom: 1px solid var(--premium-border);
+  isolation: isolate; scroll-margin-top: 0;
+}
+.brand-story::before {
+  content: ''; position: absolute; inset: 0; pointer-events: none; z-index: -1;
+  background: radial-gradient(ellipse at 50% 30%, #faf7ef, transparent 62%);
+}
+.motion-ready .brand-story { height: calc(100svh + 520px); }
+.brand-story-stage {
+  position: relative; padding: 65px 6vw 45px; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; text-align: center; min-height: 570px;
+}
+.motion-ready .brand-story-stage {
+  position: sticky; top: 96px; height: calc(100svh - 112px); min-height: 570px;
+}
+.brand-story-heading .eyebrow { margin: 0 0 16px; color: #78623b; }
+.brand-story-heading h2 { font-size: clamp(2.3rem,4.2vw,4rem); line-height: 1.35; letter-spacing: -1px; margin: 0; }
+.brand-story-heading h2 span { color: #7b735f; }
+.brand-sculpture {
+  position: relative; width: min(100%,1180px); height: clamp(185px,22vw,320px);
+  direction: ltr; flex-shrink: 0; margin-block: 12px 5px;
+}
+.brand-static {
+  position: absolute; inset: 0; display: grid; place-items: center;
+  color: #ac905c; font: clamp(50px,12vw,155px)/1 Georgia,serif; letter-spacing: .1em;
+  text-shadow: 1px 1px #715c37,2px 2px #715c37,3px 3px #715c37;
+}
+.brand-sculpture canvas, .brand-sculpture .scene-svg {
+  position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none;
+  background: transparent !important;
+}
+.brand-sculpture:not([data-scene-state='ready']) canvas,
+.brand-sculpture:not([data-scene-state='ready']) .scene-svg { visibility: hidden; }
+.brand-sculpture[data-scene-state='ready'] .brand-static { visibility: hidden; }
+.brand-story-footer { width: min(100%,860px); display: flex; justify-content: space-between; align-items: center; gap: 24px; text-align: right; }
+.brand-story-footer p { margin: 0; color: #686d62; font-size: .9rem; line-height: 1.9; }
+.brand-story-footer .text-link { min-height: 44px; display: inline-flex; align-items: center; gap: 12px; font-size: .85rem; }
+.brand-story-note { margin-top: 35px; color: #797d70; font: .6rem monospace; letter-spacing: 2px; }
+.brand-story:has([data-scene-state='fallback']) { height: auto; }
+.brand-story:has([data-scene-state='fallback']) .brand-story-stage { position: relative; height: auto; }
 
 /* A tactile, photographic bridge from the 3D concept to the real inventory. */
 .thara-premium .intro-strip {
@@ -307,6 +347,14 @@ html { scroll-padding-top: 112px; }
   .thara-premium .site-header.scrolled .menu-button { background: #233531; border-color: #45503e; }
 }
 @media (max-width: 760px) {
+  .motion-ready .brand-story { height: calc(100svh + 230px); }
+  .brand-story-stage, .motion-ready .brand-story-stage { padding: 40px 24px; min-height: 510px; }
+  .motion-ready .brand-story-stage { top: 92px; height: calc(100svh - 108px); }
+  .brand-story-heading h2 { font-size: clamp(2rem,7vw,3rem); }
+  .brand-sculpture { height: clamp(165px,32vw,225px); margin-block: 12px; }
+  .brand-story-footer { flex-direction: column; gap: 10px; text-align: center; }
+  .brand-story-footer p { font-size: .8rem; }
+  .brand-story-note { margin-top: 22px; font-size: .5rem; letter-spacing: 1px; }
   .home-page .hero.immersive-hero { padding: 131px 24px 30px; min-height: auto; }
   .hero-layout { grid-template-columns: 1fr; gap: 28px; }
   .immersive-hero .hero-content { max-width: 620px; }
@@ -316,7 +364,6 @@ html { scroll-padding-top: 112px; }
   .immersive-hero .hero-actions { margin-top: 25px; }
   .hero-location { margin-top: 21px; }
   .scene-stage { height: clamp(300px, 67vw, 455px); margin-top: 0; }
-  .scene-wordmark { top: 10%; left: 8%; font-size: 17vw; }
   .scene-controls { top: 0; left: 8px; }
   .scene-controls button { padding: 6px 11px; font-size: .61rem; }
   .scene-coordinate { font-size: .51rem; top: 10px; }
@@ -373,6 +420,10 @@ html { scroll-padding-top: 112px; }
   .thara-premium .parallax-image, .thara-premium .owners-hero-image { transform: none !important; }
   .thara-premium .reveal, .thara-premium .page-reveal { opacity: 1; transform: none; }
   .reading-progress { display: none; }
+  .motion-ready .brand-story { height: auto; }
+  .motion-ready .brand-story-stage { position: relative; height: auto; }
+  .hero-copy-animate .hero-eyebrow, .hero-copy-animate h1,
+  .hero-copy-animate .hero-description, .hero-copy-animate .hero-actions { animation: none; opacity: 1; transform: none; }
 }
 @media (scripting: none) {
   .thara-premium .reveal, .thara-premium .page-reveal { opacity: 1; transform: none; }
