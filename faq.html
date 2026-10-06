@@ -12,9 +12,12 @@
     />
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="pages.css" />
+      <link rel="stylesheet" href="premium.css?v=20261006" />
   </head>
 
-  <body class="inner-page">
+  <body class="inner-page thara-premium">
+    <a class="skip-link" href="#mainContent">انتقل إلى المحتوى</a>
+    <div class="reading-progress" aria-hidden="true"></div>
     <header class="site-header" id="siteHeader">
       <a href="index.html" class="brand">
         <img class="header-brand-logo" src="assets/logo.jpeg" alt="" width="30" height="30" aria-hidden="true" />
@@ -37,7 +40,7 @@
       </nav>
     </header>
 
-    <main class="inner-main">
+    <main class="inner-main" id="mainContent" tabindex="-1">
       <section class="inner-hero faq-hero-text-only">
         <div class="inner-hero-content">
           <p class="inner-eyebrow">FAQ</p>
@@ -384,5 +387,6 @@
 
     <script src="script.js"></script>
     <script src="pages.js"></script>
+      <script src="premium.js?v=20261006" defer></script>
   </body>
 </html>

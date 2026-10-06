@@ -1,0 +1,13 @@
+{
+  "name": "thara-website",
+  "version": "2.0.0",
+  "private": true,
+  "scripts": {
+    "build": "esbuild src/villa-scene.js --bundle --minify --format=esm --target=es2020 --legal-comments=linked --outfile=assets/villa-scene.js",
+    "check": "node --check premium.js && node --check script.js && node --check owners.js && node --check pages.js && node --check villas.js && node --check src/villa-scene.js"
+  },
+  "devDependencies": {
+    "esbuild": "0.25.10",
+    "three": "0.180.0"
+  }
+}

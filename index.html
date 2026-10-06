@@ -10,7 +10,7 @@
       content="THARA Real Estates - فلل مختارة للإيجار في أريحا"
     />
 
-    <meta name="theme-color" content="#f8f5ed" />
+    <meta name="theme-color" content="#142020" />
 
     <title>THARA Real Estates | فلل أريحا</title>
 
@@ -27,9 +27,12 @@
 
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="owners.css" />
+      <link rel="stylesheet" href="premium.css?v=20261006" />
   </head>
 
-  <body class="home-page">
+  <body class="home-page thara-premium">
+    <a class="skip-link" href="#mainContent">انتقل إلى المحتوى</a>
+    <div class="reading-progress" aria-hidden="true"></div>
     <div class="page-glow glow-one"></div>
     <div class="page-glow glow-two"></div>
 
@@ -83,111 +86,42 @@
       </nav>
     </header>
 
-    <main>
+    <main id="mainContent" tabindex="-1">
       <!-- =====================================================
          HERO
     ====================================================== -->
 
-      <section class="hero" id="home">
-        <div class="hero-slides">
-          <div class="hero-slide active">
-            <img
-              src="assets/IMG_4596.webp"
-              alt="إحدى فلل THARA"
-              fetchpriority="high"
-            />
-          </div>
-
-          <div class="hero-slide">
-            <img src="assets/IMG_4597.webp" alt="فيلا THARA" loading="lazy" />
-          </div>
-
-          <div class="hero-slide">
-            <img
-              src="assets/IMG_4596.webp"
-              alt="مسبح فيلا THARA"
-              loading="lazy"
-            />
-          </div>
-
-          <div class="hero-slide">
-            <img src="assets/IMG_4623.webp" alt="غرفة جلوس" loading="lazy" />
-          </div>
-
-          <div class="hero-slide">
-            <img src="assets/IMG_4614.webp" alt="غرفة نوم" loading="lazy" />
-          </div>
-        </div>
-
-        <div class="hero-overlay"></div>
-        <div class="hero-gold-light"></div>
-
-        <div class="hero-content hero-copy-animate" id="heroContent">
-          <p class="hero-eyebrow">THARA REAL ESTATES</p>
-
-          <h1>
-            أكثر من مكان للإقامة.
-            <span> تجربة تستحق أن تُعاش. </span>
-          </h1>
-
-          <p class="hero-description">
-            فلل مختارة في أريحا، بتفاصيل مدروسة وخصوصية تمنح عطلتك المساحة التي
-            تستحقها.
-          </p>
-
-          <div class="hero-actions">
-            <a href="villas.html" class="button button-gold button-large">
-              استكشف الفلل
-              <span class="button-arrow">←</span>
-            </a>
-
-            <a href="#contact" class="button button-glass button-large">
-              تواصل معنا
-            </a>
-          </div>
-        </div>
-
-        <!-- HERO CONTROLS -->
-
-        <div class="hero-slider-controls">
-          <div class="hero-control-top">
-            <div class="hero-counter">
-              <span id="heroCurrent"> 01 </span>
-
-              <span class="hero-counter-line"></span>
-
-              <span> 05 </span>
+<section class="hero immersive-hero" id="home" aria-labelledby="heroTitle">
+        <div class="hero-architectural-grid" aria-hidden="true"></div>
+        <div class="hero-layout">
+          <div class="hero-content hero-copy-animate" id="heroContent">
+            <p class="hero-eyebrow"><span class="hero-eyebrow-line" aria-hidden="true"></span><span dir="ltr">THARA · PRIVATE ESCAPES</span></p>
+            <h1 id="heroTitle">وقتٌ إلك.<span>ومكان يليق فيك.</span></h1>
+            <p class="hero-description">فلل منتقاة في أريحا، مسبح خاص ومساحة تجمعك بالناس اللي بتحبهم. اختر المكان، واترك التفاصيل إلنا.</p>
+            <div class="hero-actions">
+              <a href="villas.html" class="button button-gold button-large">اكتشف فيلتك <span aria-hidden="true">↗</span></a>
+              <a href="#contact" class="button button-glass button-large">خطّط لعطلتك</a>
             </div>
-
-            <div class="hero-dots">
-              <button
-                class="hero-dot active"
-                data-slide="0"
-                type="button"
-              ></button>
-
-              <button class="hero-dot" data-slide="1" type="button"></button>
-
-              <button class="hero-dot" data-slide="2" type="button"></button>
-
-              <button class="hero-dot" data-slide="3" type="button"></button>
-
-              <button class="hero-dot" data-slide="4" type="button"></button>
+            <p class="hero-location"><span class="location-dot" aria-hidden="true"></span>أريحا، فلسطين <span aria-hidden="true">—</span> خصوصيتك، أولًا.</p>
+          </div>
+          <figure class="scene-stage" data-villa-scene data-scene-state="loading" data-scene-theme="night" aria-label="تصوّر معماري لفيلا مع مسبح وحديقة">
+            <span class="scene-wordmark" aria-hidden="true">THARA</span>
+            <img class="scene-fallback" src="assets/IMG_4596.webp" alt="مسبح إحدى فلل ثرى في أريحا" width="1200" height="900" fetchpriority="high" />
+            <canvas aria-hidden="true" width="960" height="800"></canvas>
+            <div class="scene-controls" role="group" aria-label="إضاءة وحركة المشهد">
+              <button type="button" data-scene-theme="day" aria-pressed="false">نهار</button>
+              <button type="button" data-scene-theme="night" aria-pressed="true">مساء</button>
+              <button type="button" class="scene-pause" data-scene-pause aria-pressed="false" aria-label="إيقاف حركة المشهد">إيقاف الحركة</button>
             </div>
-          </div>
-
-          <!-- PROGRESS LINE -->
-
-          <div class="hero-progress">
-            <span class="hero-progress-fill" id="heroProgress"></span>
-          </div>
+            <span class="scene-coordinate" aria-hidden="true">JERICHO / 01</span>
+            <button type="button" class="scene-turn" data-scene-turn aria-label="تغيير زاوية عرض الفيلا">↻</button>
+            <figcaption>تصوّر معماري للتجربة. اكتشف صور فللنا الحقيقية بالأسفل.</figcaption>
+          </figure>
         </div>
-
-        <a href="#intro" class="hero-scroll">
-          <span> اكتشف </span>
-
-          <i></i>
-        </a>
+        <div class="hero-footnote">
+          <span dir="ltr">CURATED VILLAS. UNHURRIED MOMENTS.</span>
+          <a href="#intro"><span>ابدأ الرحلة</span><span aria-hidden="true">↓</span></a>
+        </div>
       </section>
 
       <!-- =====================================================
@@ -222,41 +156,36 @@
          OWNER SERVICES SPOTLIGHT
     ====================================================== -->
 
-      <section class="owners-page owners-hero home-owners-hero" id="ownersSpotlight" aria-labelledby="homeOwnersTitle">
-        <img
-          class="owners-hero-image"
-          src="assets/IMG_4596.webp"
-          alt="فيلا فاخرة في أريحا من فلل THARA"
-          loading="lazy"
-        />
-        <div class="owners-hero-overlay"></div>
-        <div class="owners-hero-glow"></div>
 
-        <div class="owners-hero-content">
-          <p class="owners-eyebrow reveal">THARA FOR OWNERS</p>
-          <h2 id="homeOwnersTitle" class="reveal delay-1">
-            فيلا عندك؟
-            <span>خلّينا نطلع كامل إمكانياتها.</span>
-          </h2>
-          <p class="owners-hero-copy reveal delay-2">
-            من التصوير والتسويق إلى إدارة الحجوزات والعملاء، تساعد THARA أصحاب
-            الفلل على تقديم عقاراتهم بصورة أقوى والوصول إلى عملاء أكثر.
-          </p>
-          <div class="owners-hero-actions reveal delay-2">
-            <a class="button button-gold button-large" href="contact.html#owners-form">ابدأ معنا</a>
-            <a class="button button-glass button-large" href="contact.html#owners-services">اكتشف خدماتنا</a>
-          </div>
-        </div>
-
-        <a class="owners-scroll-cue" href="contact.html#owners-numbers" aria-label="اكتشف نتائج THARA لأصحاب الفلل">
-          <span>اكتشف</span><i></i>
-        </a>
-      </section>
 
 
       <!-- =====================================================
          FEATURED VILLA
     ====================================================== -->
+
+      <section class="escape-discovery" aria-labelledby="discoveryTitle">
+        <div class="discovery-header reveal">
+          <div><p class="eyebrow">من مجرّد عطلة، إلى تجربة</p><h2 id="discoveryTitle">كل تفصيل، <span>إله إحساس.</span></h2></div>
+          <a class="text-link" href="villas.html">استكشف الفلل المتاحة <span aria-hidden="true">←</span></a>
+        </div>
+        <div class="discovery-deck">
+          <a class="discovery-card" href="villas.html">
+            <span class="discovery-index" aria-hidden="true">01 / WATER</span>
+            <img src="assets/IMG_4601.webp" alt="المسبح الخاص في إحدى فلل ثرى" loading="lazy" width="1200" height="900" />
+            <div class="discovery-card-copy"><span dir="ltr">YOUR OWN LITTLE WORLD</span><strong>المسبح إلك، والوقت إلك.</strong></div>
+          </a>
+          <a class="discovery-card" href="#gallery">
+            <span class="discovery-index" aria-hidden="true">02 / SPACE</span>
+            <img src="assets/IMG_6875.webp" alt="جلسة خارجية بإضاءة دافئة" loading="lazy" width="900" height="1200" />
+            <div class="discovery-card-copy"><span dir="ltr">ROOM TO SLOW DOWN</span><strong>مساحة لتروق.</strong></div>
+          </a>
+          <a class="discovery-card" href="#contact">
+            <span class="discovery-index" aria-hidden="true">03 / TOGETHER</span>
+            <img src="assets/IMG_6862.webp" alt="غرفة جلوس واسعة من فلل ثرى" loading="lazy" width="900" height="1200" />
+            <div class="discovery-card-copy"><span dir="ltr">MOMENTS THAT STAY</span><strong>لَمّة بتضل بالبال.</strong></div>
+          </a>
+        </div>
+      </section>
 
       <section class="featured-home section-space" id="featured">
         <div class="section-heading reveal">
@@ -350,13 +279,13 @@
 
             <div class="featured-specs">
               <div>
-                <strong class="count-up" data-count="3"> 0 </strong>
+                <strong class="count-up" data-count="3"> 3 </strong>
 
                 <span> غرف نوم </span>
               </div>
 
               <div>
-                <strong class="count-up" data-count="10"> 0 </strong>
+                <strong class="count-up" data-count="10"> 10 </strong>
 
                 <span> أشخاص </span>
               </div>
@@ -386,17 +315,50 @@
                 <span>←</span>
               </a>
 
-              <a
-                href="#"
-                class="button button-light whatsapp-link"
-                data-message="مرحباً، أريد الاستفسار عن فيلا الأناقة."
-              >
-                استفسر الآن
-              </a>
+              <div class="whatsapp-picker">
+                <button class="button button-light whatsapp-picker-toggle" type="button" aria-expanded="false" aria-controls="featuredWhatsappMenu">استفسر الآن</button>
+                <div class="whatsapp-picker-menu" id="featuredWhatsappMenu">
+                  <a href="#" class="whatsapp-link" data-whatsapp-number="972532121036" data-message="مرحباً محمد، أريد الاستفسار عن الفيلا المميزة على موقع ثرى."><strong>محمد</strong><span dir="ltr">+972 53-212-1036</span></a>
+                  <a href="#" class="whatsapp-link" data-whatsapp-number="972584003302" data-message="مرحباً نعيم، أريد الاستفسار عن الفيلا المميزة على موقع ثرى."><strong>نعيم</strong><span dir="ltr">+972 58-400-3302</span></a>
+                  <a href="#" class="whatsapp-link" data-whatsapp-number="972584429998" data-message="مرحباً مجد، أريد الاستفسار عن الفيلا المميزة على موقع ثرى."><strong>مجد</strong><span dir="ltr">+972 58-442-9998</span></a>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </section>
+
+      <section class="owners-page owners-hero home-owners-hero" id="ownersSpotlight" aria-labelledby="homeOwnersTitle">
+        <img
+          class="owners-hero-image"
+          src="assets/IMG_4596.webp"
+          alt="فيلا فاخرة في أريحا من فلل THARA"
+          loading="lazy"
+        />
+        <div class="owners-hero-overlay"></div>
+        <div class="owners-hero-glow"></div>
+
+        <div class="owners-hero-content">
+          <p class="owners-eyebrow reveal">THARA FOR OWNERS</p>
+          <h2 id="homeOwnersTitle" class="reveal delay-1">
+            فيلا عندك؟
+            <span>خلّينا نطلع كامل إمكانياتها.</span>
+          </h2>
+          <p class="owners-hero-copy reveal delay-2">
+            من التصوير والتسويق إلى إدارة الحجوزات والعملاء، تساعد THARA أصحاب
+            الفلل على تقديم عقاراتهم بصورة أقوى والوصول إلى عملاء أكثر.
+          </p>
+          <div class="owners-hero-actions reveal delay-2">
+            <a class="button button-gold button-large" href="contact.html#owners-form">ابدأ معنا</a>
+            <a class="button button-glass button-large" href="contact.html#owners-services">اكتشف خدماتنا</a>
+          </div>
+        </div>
+
+        <a class="owners-scroll-cue" href="contact.html#owners-numbers" aria-label="اكتشف نتائج THARA لأصحاب الفلل">
+          <span>اكتشف</span><i></i>
+        </a>
+      </section>
+
 
       <!-- =====================================================
          BRAND MOMENT
@@ -1081,10 +1043,10 @@
        ADVANCED LIGHTBOX
   ====================================================== -->
 
-    <div class="home-lightbox" id="homeLightbox" aria-hidden="true">
+    <div class="home-lightbox" id="homeLightbox" role="dialog" aria-modal="true" aria-label="معرض صور الفلل" aria-hidden="true">
       <div class="home-lightbox-overlay" id="homeLightboxOverlay"></div>
 
-      <button class="home-lightbox-close" id="homeLightboxClose" type="button">
+      <button class="home-lightbox-close" id="homeLightboxClose" type="button" aria-label="إغلاق معرض الصور">
         ×
       </button>
 
@@ -1092,6 +1054,7 @@
         class="lightbox-arrow lightbox-prev"
         id="lightboxPrev"
         type="button"
+        aria-label="الصورة السابقة"
       >
         ‹
       </button>
@@ -1112,6 +1075,7 @@
         class="lightbox-arrow lightbox-next"
         id="lightboxNext"
         type="button"
+        aria-label="الصورة التالية"
       >
         ›
       </button>
@@ -1120,5 +1084,6 @@
     <div class="site-toast" id="siteToast">هذه الصفحة قريباً</div>
 
     <script src="script.js"></script>
+      <script src="premium.js?v=20261006" defer></script>
   </body>
 </html>
