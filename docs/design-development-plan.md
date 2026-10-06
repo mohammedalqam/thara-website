@@ -35,7 +35,7 @@ Review a branch preview before merging. Confirm that the published GitHub Pages 
 - [x] Stage 3: refined stone slabs, glazing, timber facade and pool; shared demand-driven renderer, elapsed-time motion and continuous bounds-based camera fitting.
 - [x] Stage 4: responsive integration; reviewed 320, 390, 768 and 1180 px layouts, phone menu and scene controls.
 - [x] Stage 5: reliability and browser verification; five automated tests, build/syntax checks, seven-page asset/anchor/ID validation and browser flow checks pass.
-- [ ] Stage 6: published result verified.
+- [x] Stage 6: published result verified. PR #4 merged as `f931968de1d2075ce818ad9c7133fe5bd1b78267`; GitHub Pages run `37539818717` completed successfully. The live site serves the new assets, both scenes initialize, THARA geometry changes with scrolling and the brand stage stays pinned at 96 px before releasing.
 
 Automated geometry and motion checks pass: 12/30/60 fps transition equivalence, bounded scroll progress, full camera containment over eight aspect ratios and five angles, finite original THARA geometry with shared A outlines. Scene controls are at least 44 px; a persistent reduce-motion button uses the same scene behavior as the system preference.
 
