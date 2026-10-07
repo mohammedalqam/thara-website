@@ -88,6 +88,8 @@ Initial engineering budgets to validate (targets, not measured results): initial
 
 - Repository audit and isolated branch: done.
 - Content snapshot: captured before page edits.
-- Baseline browser evidence: pending runtime/browser startup.
+- Baseline browser evidence: live desktop screenshot captured; mobile baseline pending preview access.
+- First connected architectural GLB and isolated shot-inspection page: implemented, not visually accepted.
+- Current evidence, measurements and preview access blockers: see `checkpoint-2026-10-07.md`.
 - Architectural scene, final design, performance and functional acceptance: not complete.
 - Production changes: none.
