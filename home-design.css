@@ -350,7 +350,7 @@ html[data-motion='reduced'] .thara-home-v3 .brand-story-stage { position: relati
 .thara-home-v3 .final-actions { margin-top: 32px; }
 .thara-home-v3 .site-footer { background: #112d27; padding: 60px 5.7vw 26px; }
 .thara-home-v3 .footer-main { max-width: 1280px; margin-inline: auto; gap: 50px; }
-.thara-home-v3 .footer-logo { filter: brightness(0) invert(1) sepia(.35); opacity: .85; }
+.thara-home-v3 .footer-logo { filter: grayscale(1) invert(1); mix-blend-mode: screen; opacity: .85; }
 .thara-home-v3 .footer-column h3 { color: #cebd8c; font-size: .85rem; }
 .thara-home-v3 .footer-column a,.thara-home-v3 .footer-brand p,.thara-home-v3 .footer-location { color: #aebfa9; font-size: .76rem; }
 .thara-home-v3 .footer-wordmark { max-width: 1280px; margin: 45px auto 20px; font: clamp(60px,14.5vw,190px)/1 Georgia,serif; letter-spacing: .12em; text-align: center; color: #b9ae7840; border-top: 1px solid #81957529; padding-top: 32px; overflow: hidden; }
@@ -360,6 +360,9 @@ html[data-motion='reduced'] .thara-home-v3 .brand-story-stage { position: relati
 .thara-home-v3 .whatsapp-picker-menu { background: #f9f6eb; border: 1px solid #d4d6bf; border-radius: 4px; color: #173b35; }
 .thara-home-v3 .whatsapp-picker-menu a { color: #173b35; border-radius: 2px; }
 .thara-home-v3 .whatsapp-picker-menu a:hover { background: #e8eddf; }
+@media(min-width:761px) {
+  .thara-home-v3 .footer-contact-column .whatsapp-picker-menu { right: auto; left: 0; }
+}
 
 @media(max-width:1100px) {
   .thara-home-v3 .featured-showcase { gap: 34px; grid-template-columns: 1.15fr 1fr; }
@@ -374,6 +377,9 @@ html[data-motion='reduced'] .thara-home-v3 .brand-story-stage { position: relati
   .thara-home-v3 .featured-showcase { grid-template-columns: 1.15fr 1fr; gap: 25px; }
   .thara-home-v3 .featured-gallery-main { height: 450px; }
   .thara-home-v3 .featured-actions .button { padding-inline: 17px; font-size: .74rem; }
+  .thara-home-v3 .featured-actions { position: relative; }
+  .thara-home-v3 .featured-actions .whatsapp-picker { position: static; }
+  .thara-home-v3 .featured-actions .whatsapp-picker-menu { left: 0; right: auto; max-width: 100%; }
   .thara-home-v3 .home-owners-hero { min-height: 570px; }
   .thara-home-v3 .home-owners-hero .owners-hero-content { padding: 65px 30px; }
   .thara-home-v3 .why-card { padding-inline: 23px; }
@@ -452,7 +458,7 @@ html[data-motion='reduced'] .thara-home-v3 .brand-story-stage { position: relati
   .thara-home-v3 .home-inquiry-heading h2 { font-size: 1.9rem; }
   .thara-home-v3 .home-inquiry-heading p:last-child { margin-top: 14px; max-width: none; font-size: .8rem; }
   .thara-home-v3 .home-inquiry-row { gap: 10px; }
-  .thara-home-v3 .home-inquiry-panel input,.thara-home-v3 .home-inquiry-panel select,.thara-home-v3 .home-inquiry-panel textarea { font-size: .78rem; min-width: 0; }
+  .thara-home-v3 .home-inquiry-panel input,.thara-home-v3 .home-inquiry-panel select,.thara-home-v3 .home-inquiry-panel textarea { font-size: 1rem; min-width: 0; }
   .thara-home-v3 .final-cta { padding: 0; }
   .thara-home-v3 .final-cta-box { padding: 64px 22px; }
   .thara-home-v3 .final-cta-box h2 { font-size: 2rem; }
