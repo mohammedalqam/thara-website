@@ -23,14 +23,15 @@
       rel="stylesheet"
     />
 
-    <link rel="preload" as="image" href="assets/IMG_4596.webp" />
+    <link rel="preload" as="image" href="assets/IMG_4601.webp" />
 
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="owners.css" />
-      <link rel="stylesheet" href="premium.css?v=20261007" />
+    <link rel="stylesheet" href="premium.css?v=20261007" />
+    <link rel="stylesheet" href="home-design.css?v=3.3" />
   </head>
 
-  <body class="home-page thara-premium">
+  <body class="home-page thara-premium thara-home-v3">
     <a class="skip-link" href="#mainContent">انتقل إلى المحتوى</a>
     <div class="reading-progress" aria-hidden="true"></div>
     <div class="page-glow glow-one"></div>
@@ -94,7 +95,7 @@
 <section class="hero immersive-hero" id="home" aria-labelledby="heroTitle">
         <div class="hero-architectural-grid" aria-hidden="true"></div>
         <div class="hero-layout">
-          <div class="hero-content hero-copy-animate" id="heroContent">
+          <div class="hero-content" id="heroContent">
             <p class="hero-eyebrow"><span class="hero-eyebrow-line" aria-hidden="true"></span><span dir="ltr">THARA · PRIVATE ESCAPES</span></p>
             <h1 id="heroTitle">وقتٌ إلك.<span>ومكان يليق فيك.</span></h1>
             <p class="hero-description">فلل منتقاة في أريحا، مسبح خاص ومساحة تجمعك بالناس اللي بتحبهم. اختر المكان، واترك التفاصيل إلنا.</p>
@@ -104,17 +105,48 @@
             </div>
             <p class="hero-location"><span class="location-dot" aria-hidden="true"></span>أريحا، فلسطين <span aria-hidden="true">—</span> خصوصيتك، أولًا.</p>
           </div>
-          <figure class="scene-stage" data-villa-scene data-scene-state="loading" data-scene-theme="night" aria-label="تصوّر معماري لفيلا مع مسبح وحديقة">
-            <img class="scene-fallback" src="assets/IMG_4596.webp" alt="مسبح إحدى فلل ثرى في أريحا" width="1200" height="900" fetchpriority="high" />
-            <div class="scene-viewport" data-scene-viewport><canvas aria-hidden="true" width="960" height="800"></canvas></div>
+          <figure class="scene-stage portal-stage" data-portal-scene data-scene-state="static" data-scene-theme="day" aria-label="صور فلل ثرى في مشهد معماري ثلاثي الأبعاد">
+            <div class="portal-halo" aria-hidden="true"></div>
+            <div class="portal-camera" data-portal-camera>
+              <div class="portal-world" data-portal-world>
+                <div class="portal-orbit" data-portal-orbit>
+                  <div class="portal-float">
+                    <div class="portal-ground" aria-hidden="true"></div>
+                    <div class="portal-water" aria-hidden="true"></div>
+                    <div class="portal-back-line" aria-hidden="true"></div>
+                    <div class="portal-building">
+                      <div class="portal-wall-face" aria-hidden="true"></div>
+                      <div class="portal-wall-side" aria-hidden="true"></div>
+                      <div class="portal-wall-top" aria-hidden="true"></div>
+                      <div class="portal-inlay" aria-hidden="true"></div>
+                      <div class="portal-main-photo">
+                        <img src="assets/IMG_4601.webp" alt="المسبح الخاص في إحدى فلل ثرى بأريحا" width="1200" height="900" fetchpriority="high" />
+                        <span class="portal-photo-label" dir="ltr">PRIVATE ESCAPES / JERICHO</span>
+                      </div>
+                      <div class="portal-wall-plaque" dir="ltr" aria-hidden="true">THARA</div>
+                    </div>
+                    <div class="portal-photo portal-photo-back">
+                      <img src="assets/IMG_6875.webp" alt="تفاصيل الضيافة من داخل فلل ثرى" width="900" height="1200" />
+                      <span>التفاصيل الصغيرة.</span>
+                    </div>
+                    <div class="portal-photo portal-photo-front">
+                      <img src="assets/IMG_4623.webp" alt="مساحة داخلية من إحدى فلل ثرى" width="900" height="1200" />
+                      <span>مساحة إلك.</span>
+                    </div>
+                    <div class="portal-plinth" aria-hidden="true"><span class="portal-plinth-face"></span><span class="portal-plinth-side"></span><span class="portal-plinth-top"></span></div>
+                    <span class="portal-vertical-note" dir="ltr" aria-hidden="true">A PLACE TO SLOW DOWN</span>
+                  </div>
+                </div>
+              </div>
+            </div>
             <div class="scene-controls" role="group" aria-label="إضاءة وحركة المشهد">
-              <button type="button" data-scene-theme="day" aria-pressed="false">نهار</button>
-              <button type="button" data-scene-theme="night" aria-pressed="true">مساء</button>
+              <button type="button" data-scene-theme="day" aria-pressed="true">نهار</button>
+              <button type="button" data-scene-theme="night" aria-pressed="false">مساء</button>
               <button type="button" class="scene-pause" data-scene-pause aria-pressed="false" aria-label="إيقاف حركة المشهد">إيقاف الحركة</button>
             </div>
             <span class="scene-coordinate" aria-hidden="true">JERICHO / 01</span>
-            <button type="button" class="scene-turn" data-scene-turn aria-label="تغيير زاوية عرض الفيلا">↻</button>
-            <figcaption>تصوّر معماري للتجربة. اكتشف صور فللنا الحقيقية بالأسفل.</figcaption>
+            <button type="button" class="scene-turn" data-scene-turn aria-label="تغيير زاوية عرض المشهد">↻</button>
+            <figcaption><span class="scene-caption-dot" aria-hidden="true"></span>صور حقيقية. منظور جديد. <span>غيّر الزاوية واكتشف التفاصيل.</span></figcaption>
           </figure>
         </div>
         <div class="hero-footnote">
@@ -133,9 +165,14 @@
             <p class="eyebrow">ثرى. مساحة إلَك.</p>
             <h2 id="brandStoryTitle">خذ وقتك.<br /><span>هذا المكان إلك.</span></h2>
           </div>
-          <div class="brand-sculpture" data-brand-scene data-scene-state="loading" aria-hidden="true">
-            <span class="brand-static" dir="ltr">THARA</span>
-            <canvas width="1440" height="480"></canvas>
+          <div class="brand-sculpture brand-perspective" data-scroll-sculpture data-scene-state="static" aria-hidden="true">
+            <div class="brand-orbit" data-brand-orbit>
+              <div class="story-photo story-photo-left"><img src="assets/IMG_6875.webp" alt="" loading="lazy" width="900" height="1200" /><span dir="ltr">ROOM TO BREATHE</span></div>
+              <div class="story-photo story-photo-right"><img src="assets/IMG_4601.webp" alt="" loading="lazy" width="1200" height="900" /><span dir="ltr">TIME FOR YOU</span></div>
+              <div class="brand-letters" data-brand-letters dir="ltr"><span class="brand-metal-face">THARA</span></div>
+              <div class="brand-reflection"></div>
+              <div class="brand-floor" aria-hidden="true"></div>
+            </div>
           </div>
           <div class="brand-story-footer">
             <p>من أول تواصل، لآخر لحظة بالعطلة.<br />تفاصيل بنهتم فيها، عشان إنت تروق.</p>
@@ -145,6 +182,7 @@
             </div>
           </div>
           <span class="brand-story-note" dir="ltr" aria-hidden="true">THARA REAL ESTATES · JERICHO, PALESTINE</span>
+          <div class="brand-story-track" aria-hidden="true"><span></span><span></span><span></span></div>
         </div>
       </section>
 
@@ -196,12 +234,12 @@
           </a>
           <a class="discovery-card" href="#gallery">
             <span class="discovery-index" aria-hidden="true">02 / SPACE</span>
-            <img src="assets/IMG_6875.webp" alt="جلسة خارجية بإضاءة دافئة" loading="lazy" width="900" height="1200" />
+            <img src="assets/IMG_6875.webp" alt="غرفة نوم مطلة على المسبح مع تفاصيل الضيافة" loading="lazy" width="900" height="1200" />
             <div class="discovery-card-copy"><span dir="ltr">ROOM TO SLOW DOWN</span><strong>مساحة لتروق.</strong></div>
           </a>
           <a class="discovery-card" href="#contact">
             <span class="discovery-index" aria-hidden="true">03 / TOGETHER</span>
-            <img src="assets/IMG_6862.webp" alt="غرفة جلوس واسعة من فلل ثرى" loading="lazy" width="900" height="1200" />
+            <img src="assets/IMG_4623.webp" alt="غرفة جلوس واسعة من فلل ثرى" loading="lazy" width="900" height="1200" />
             <div class="discovery-card-copy"><span dir="ltr">MOMENTS THAT STAY</span><strong>لَمّة بتضل بالبال.</strong></div>
           </a>
         </div>
@@ -235,7 +273,7 @@
             >
               <img
                 src="assets/IMG_4601.webp"
-                alt="فيلا الأناقة"
+                alt="المسبح المغطى في الفيلا المميزة"
                 class="parallax-image"
               />
 
@@ -338,9 +376,9 @@
               <div class="whatsapp-picker">
                 <button class="button button-light whatsapp-picker-toggle" type="button" aria-expanded="false" aria-controls="featuredWhatsappMenu">استفسر الآن</button>
                 <div class="whatsapp-picker-menu" id="featuredWhatsappMenu">
-                  <a href="#" class="whatsapp-link" data-whatsapp-number="972532121036" data-message="مرحباً محمد، أريد الاستفسار عن الفيلا المميزة على موقع ثرى."><strong>محمد</strong><span dir="ltr">+972 53-212-1036</span></a>
-                  <a href="#" class="whatsapp-link" data-whatsapp-number="972584003302" data-message="مرحباً نعيم، أريد الاستفسار عن الفيلا المميزة على موقع ثرى."><strong>نعيم</strong><span dir="ltr">+972 58-400-3302</span></a>
-                  <a href="#" class="whatsapp-link" data-whatsapp-number="972584429998" data-message="مرحباً مجد، أريد الاستفسار عن الفيلا المميزة على موقع ثرى."><strong>مجد</strong><span dir="ltr">+972 58-442-9998</span></a>
+                  <a href="https://wa.me/972532121036?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%20%D9%85%D8%AD%D9%85%D8%AF%D8%8C%20%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D9%81%D8%B3%D8%A7%D8%B1%20%D8%B9%D9%86%20%D8%A7%D9%84%D9%81%D9%8A%D9%84%D8%A7%20%D8%A7%D9%84%D9%85%D9%85%D9%8A%D8%B2%D8%A9%20%D8%B9%D9%84%D9%89%20%D9%85%D9%88%D9%82%D8%B9%20%D8%AB%D8%B1%D9%89." class="whatsapp-link" data-whatsapp-number="972532121036" data-message="مرحباً محمد، أريد الاستفسار عن الفيلا المميزة على موقع ثرى."><strong>محمد</strong><span dir="ltr">+972 53-212-1036</span></a>
+                  <a href="https://wa.me/972584003302?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%20%D9%86%D8%B9%D9%8A%D9%85%D8%8C%20%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D9%81%D8%B3%D8%A7%D8%B1%20%D8%B9%D9%86%20%D8%A7%D9%84%D9%81%D9%8A%D9%84%D8%A7%20%D8%A7%D9%84%D9%85%D9%85%D9%8A%D8%B2%D8%A9%20%D8%B9%D9%84%D9%89%20%D9%85%D9%88%D9%82%D8%B9%20%D8%AB%D8%B1%D9%89." class="whatsapp-link" data-whatsapp-number="972584003302" data-message="مرحباً نعيم، أريد الاستفسار عن الفيلا المميزة على موقع ثرى."><strong>نعيم</strong><span dir="ltr">+972 58-400-3302</span></a>
+                  <a href="https://wa.me/972584429998?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%20%D9%85%D8%AC%D8%AF%D8%8C%20%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D9%81%D8%B3%D8%A7%D8%B1%20%D8%B9%D9%86%20%D8%A7%D9%84%D9%81%D9%8A%D9%84%D8%A7%20%D8%A7%D9%84%D9%85%D9%85%D9%8A%D8%B2%D8%A9%20%D8%B9%D9%84%D9%89%20%D9%85%D9%88%D9%82%D8%B9%20%D8%AB%D8%B1%D9%89." class="whatsapp-link" data-whatsapp-number="972584429998" data-message="مرحباً مجد، أريد الاستفسار عن الفيلا المميزة على موقع ثرى."><strong>مجد</strong><span dir="ltr">+972 58-442-9998</span></a>
                 </div>
               </div>
             </div>
@@ -432,7 +470,7 @@
             type="button"
             data-full="assets/IMG_6875.webp"
           >
-            <img src="assets/IMG_6875.webp" alt="جلسة خارجية" loading="lazy" />
+            <img src="assets/IMG_6875.webp" alt="غرفة نوم مطلة على المسبح" loading="lazy" />
 
             <span class="gallery-hover-icon"> ↗ </span>
           </button>
@@ -442,7 +480,7 @@
             type="button"
             data-full="assets/IMG_6859.webp"
           >
-            <img src="assets/IMG_6859.webp" alt="بلياردو" loading="lazy" />
+            <img src="assets/IMG_6859.webp" alt="مستلزمات الضيافة والعناية" loading="lazy" />
 
             <span class="gallery-hover-icon"> ↗ </span>
           </button>
@@ -452,7 +490,7 @@
             type="button"
             data-full="assets/IMG_6862.webp"
           >
-            <img src="assets/IMG_6862.webp" alt="غرفة جلوس" loading="lazy" />
+            <img src="assets/IMG_6862.webp" alt="مناشف ثرى وتفاصيل غرفة النوم" loading="lazy" />
 
             <span class="gallery-hover-icon"> ↗ </span>
           </button>
@@ -462,7 +500,7 @@
             type="button"
             data-full="assets/IMG_6879.webp"
           >
-            <img src="assets/IMG_6879.webp" alt="غرفة نوم" loading="lazy" />
+            <img src="assets/IMG_6879.webp" alt="غرفة نوم مع حمام داخلي" loading="lazy" />
 
             <span class="gallery-hover-icon"> ↗ </span>
           </button>
@@ -474,7 +512,7 @@
           >
             <img
               src="assets/IMG_4621.webp"
-              alt="تفاصيل الفيلا"
+              alt="درج داخلي بإضاءة دافئة"
               loading="lazy"
             />
 
@@ -653,10 +691,10 @@
         <div class="team-grid">
           <article class="team-card reveal">
             <div class="team-image">
-              <img src="assets/naeem.webp" alt="عضو فريق THARA" />
+              <img src="assets/naeem.webp" alt="نعيم من فريق ثرى" loading="lazy" />
 
               <a
-                href="#"
+                href="https://wa.me/972584003302?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%20%D9%86%D8%B9%D9%8A%D9%85%D8%8C%20%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D9%81%D8%B3%D8%A7%D8%B1%20%D8%B9%D9%86%20%D9%81%D9%84%D9%84%20THARA."
                 class="team-hover whatsapp-link"
                 data-whatsapp-number="972584003302"
                 data-message="مرحباً نعيم، أريد الاستفسار عن فلل THARA."
@@ -680,10 +718,10 @@
 
           <article class="team-card reveal delay-1">
             <div class="team-image">
-              <img src="assets/mohammad.webp" alt="عضو فريق THARA" />
+              <img src="assets/mohammad.webp" alt="محمد من فريق ثرى" loading="lazy" />
 
               <a
-                href="#"
+                href="https://wa.me/972532121036?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%20%D9%85%D8%AD%D9%85%D8%AF%D8%8C%20%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D9%81%D8%B3%D8%A7%D8%B1%20%D8%B9%D9%86%20%D9%81%D9%84%D9%84%20THARA."
                 class="team-hover whatsapp-link"
                 data-whatsapp-number="972532121036"
                 data-message="مرحباً محمد، أريد الاستفسار عن فلل THARA."
@@ -707,10 +745,10 @@
 
           <article class="team-card reveal delay-2">
             <div class="team-image">
-              <img src="assets/majd.webp" alt="عضو فريق THARA" />
+              <img src="assets/majd.webp" alt="مجد من فريق ثرى" loading="lazy" />
 
               <a
-                href="#"
+                href="https://wa.me/972584429998?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%20%D9%85%D8%AC%D8%AF%D8%8C%20%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D9%81%D8%B3%D8%A7%D8%B1%20%D8%B9%D9%86%20%D9%81%D9%84%D9%84%20THARA."
                 class="team-hover whatsapp-link"
                 data-whatsapp-number="972584429998"
                 data-message="مرحباً مجد، أريد الاستفسار عن فلل THARA."
@@ -843,6 +881,7 @@
               </div>
             </div>
           </form>
+          <noscript><p class="inquiry-static-note">للاستفسار عن التوفر، تواصل مباشرة مع <a href="#contact">أحد أعضاء الفريق</a>.</p></noscript>
         </div>
       </section>
 
@@ -877,7 +916,7 @@
 
               <div class="whatsapp-picker-menu" id="finalWhatsappMenu">
                 <a
-                  href="#"
+                  href="https://wa.me/972532121036?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%20%D9%85%D8%AD%D9%85%D8%AF%D8%8C%20%D8%A3%D8%A8%D8%AD%D8%AB%20%D8%B9%D9%86%20%D9%81%D9%8A%D9%84%D8%A7%20%D9%81%D9%8A%20%D8%A3%D8%B1%D9%8A%D8%AD%D8%A7.%20%D8%A7%D9%84%D8%AA%D8%A7%D8%B1%D9%8A%D8%AE%3A%20...%20%D8%B9%D8%AF%D8%AF%20%D8%A7%D9%84%D8%A3%D8%B4%D8%AE%D8%A7%D8%B5%3A%20..."
                   class="whatsapp-link"
                   data-whatsapp-number="972532121036"
                   data-message="مرحباً محمد، أبحث عن فيلا في أريحا. التاريخ: ... عدد الأشخاص: ..."
@@ -886,7 +925,7 @@
                   <span dir="ltr">+972 53-212-1036</span>
                 </a>
                 <a
-                  href="#"
+                  href="https://wa.me/972584003302?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%20%D9%86%D8%B9%D9%8A%D9%85%D8%8C%20%D8%A3%D8%A8%D8%AD%D8%AB%20%D8%B9%D9%86%20%D9%81%D9%8A%D9%84%D8%A7%20%D9%81%D9%8A%20%D8%A3%D8%B1%D9%8A%D8%AD%D8%A7.%20%D8%A7%D9%84%D8%AA%D8%A7%D8%B1%D9%8A%D8%AE%3A%20...%20%D8%B9%D8%AF%D8%AF%20%D8%A7%D9%84%D8%A3%D8%B4%D8%AE%D8%A7%D8%B5%3A%20..."
                   class="whatsapp-link"
                   data-whatsapp-number="972584003302"
                   data-message="مرحباً نعيم، أبحث عن فيلا في أريحا. التاريخ: ... عدد الأشخاص: ..."
@@ -895,7 +934,7 @@
                   <span dir="ltr">+972 58-400-3302</span>
                 </a>
                 <a
-                  href="#"
+                  href="https://wa.me/972584429998?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%20%D9%85%D8%AC%D8%AF%D8%8C%20%D8%A3%D8%A8%D8%AD%D8%AB%20%D8%B9%D9%86%20%D9%81%D9%8A%D9%84%D8%A7%20%D9%81%D9%8A%20%D8%A3%D8%B1%D9%8A%D8%AD%D8%A7.%20%D8%A7%D9%84%D8%AA%D8%A7%D8%B1%D9%8A%D8%AE%3A%20...%20%D8%B9%D8%AF%D8%AF%20%D8%A7%D9%84%D8%A3%D8%B4%D8%AE%D8%A7%D8%B5%3A%20..."
                   class="whatsapp-link"
                   data-whatsapp-number="972584429998"
                   data-message="مرحباً مجد، أبحث عن فيلا في أريحا. التاريخ: ... عدد الأشخاص: ..."
@@ -970,15 +1009,15 @@
               </button>
 
               <div class="whatsapp-picker-menu" id="footerWhatsappMenu">
-                <a href="#" class="whatsapp-link" data-whatsapp-number="972532121036" data-message="مرحباً محمد، أريد الاستفسار عن فلل THARA.">
+                <a href="https://wa.me/972532121036?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%20%D9%85%D8%AD%D9%85%D8%AF%D8%8C%20%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D9%81%D8%B3%D8%A7%D8%B1%20%D8%B9%D9%86%20%D9%81%D9%84%D9%84%20THARA." class="whatsapp-link" data-whatsapp-number="972532121036" data-message="مرحباً محمد، أريد الاستفسار عن فلل THARA.">
                   <strong>محمد</strong>
                   <span dir="ltr">+972 53-212-1036</span>
                 </a>
-                <a href="#" class="whatsapp-link" data-whatsapp-number="972584003302" data-message="مرحباً نعيم، أريد الاستفسار عن فلل THARA.">
+                <a href="https://wa.me/972584003302?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%20%D9%86%D8%B9%D9%8A%D9%85%D8%8C%20%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D9%81%D8%B3%D8%A7%D8%B1%20%D8%B9%D9%86%20%D9%81%D9%84%D9%84%20THARA." class="whatsapp-link" data-whatsapp-number="972584003302" data-message="مرحباً نعيم، أريد الاستفسار عن فلل THARA.">
                   <strong>نعيم</strong>
                   <span dir="ltr">+972 58-400-3302</span>
                 </a>
-                <a href="#" class="whatsapp-link" data-whatsapp-number="972584429998" data-message="مرحباً مجد، أريد الاستفسار عن فلل THARA.">
+                <a href="https://wa.me/972584429998?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%20%D9%85%D8%AC%D8%AF%D8%8C%20%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D9%81%D8%B3%D8%A7%D8%B1%20%D8%B9%D9%86%20%D9%81%D9%84%D9%84%20THARA." class="whatsapp-link" data-whatsapp-number="972584429998" data-message="مرحباً مجد، أريد الاستفسار عن فلل THARA.">
                   <strong>مجد</strong>
                   <span dir="ltr">+972 58-442-9998</span>
                 </a>
@@ -1017,6 +1056,7 @@
         </div>
       </div>
 
+      <div class="footer-wordmark" dir="ltr" aria-hidden="true">THARA</div>
       <div class="footer-bottom">
         <span>
           © <span id="currentYear"></span>
@@ -1044,15 +1084,15 @@
       </button>
 
       <div class="whatsapp-picker-menu" id="floatingWhatsappMenu">
-        <a href="#" class="whatsapp-link" data-whatsapp-number="972532121036" data-message="مرحباً محمد، أريد الاستفسار عن فلل THARA.">
+        <a href="https://wa.me/972532121036?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%20%D9%85%D8%AD%D9%85%D8%AF%D8%8C%20%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D9%81%D8%B3%D8%A7%D8%B1%20%D8%B9%D9%86%20%D9%81%D9%84%D9%84%20THARA." class="whatsapp-link" data-whatsapp-number="972532121036" data-message="مرحباً محمد، أريد الاستفسار عن فلل THARA.">
           <strong>محمد</strong>
           <span dir="ltr">+972 53-212-1036</span>
         </a>
-        <a href="#" class="whatsapp-link" data-whatsapp-number="972584003302" data-message="مرحباً نعيم، أريد الاستفسار عن فلل THARA.">
+        <a href="https://wa.me/972584003302?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%20%D9%86%D8%B9%D9%8A%D9%85%D8%8C%20%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D9%81%D8%B3%D8%A7%D8%B1%20%D8%B9%D9%86%20%D9%81%D9%84%D9%84%20THARA." class="whatsapp-link" data-whatsapp-number="972584003302" data-message="مرحباً نعيم، أريد الاستفسار عن فلل THARA.">
           <strong>نعيم</strong>
           <span dir="ltr">+972 58-400-3302</span>
         </a>
-        <a href="#" class="whatsapp-link" data-whatsapp-number="972584429998" data-message="مرحباً مجد، أريد الاستفسار عن فلل THARA.">
+        <a href="https://wa.me/972584429998?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%20%D9%85%D8%AC%D8%AF%D8%8C%20%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D9%81%D8%B3%D8%A7%D8%B1%20%D8%B9%D9%86%20%D9%81%D9%84%D9%84%20THARA." class="whatsapp-link" data-whatsapp-number="972584429998" data-message="مرحباً مجد، أريد الاستفسار عن فلل THARA.">
           <strong>مجد</strong>
           <span dir="ltr">+972 58-442-9998</span>
         </a>
@@ -1082,7 +1122,7 @@
       <div class="lightbox-image-wrap">
         <img src="" alt="صورة مكبرة" id="homeLightboxImage" />
 
-        <div class="lightbox-counter">
+        <div class="lightbox-counter" dir="ltr">
           <span id="lightboxCurrent"> 1 </span>
 
           <span> / </span>
@@ -1103,7 +1143,7 @@
 
     <div class="site-toast" id="siteToast">هذه الصفحة قريباً</div>
 
-    <script src="script.js"></script>
-      <script src="premium.js?v=20261007" defer></script>
+    <script src="script.js?v=3.2"></script>
+    <script src="premium.js?v=3.0" defer></script>
   </body>
 </html>

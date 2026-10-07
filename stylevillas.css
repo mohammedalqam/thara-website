@@ -1432,6 +1432,7 @@
   ========================================================= */
   
   .modal-image-counter {
+    direction: ltr;
     position: absolute;
   
     z-index: 4;
@@ -2303,6 +2304,8 @@
   }
 
   .villa-whatsapp-chooser.anchored .villa-whatsapp-chooser-box {
+    left: 12px !important;
+    width: calc(100% - 24px) !important;
     border-radius: 20px;
     padding: 24px 16px 16px;
   }
