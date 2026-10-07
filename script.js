@@ -949,6 +949,8 @@ ${fieldValue("homeInquiryNotes", "لا يوجد")}
             lightboxIndex
           ];
 
+        lightboxImage.alt = galleryItems[lightboxIndex].querySelector("img")?.alt || "صورة من فلل ثرى";
+
 
         lightboxCurrent.textContent =
           lightboxIndex + 1;
@@ -982,6 +984,8 @@ ${fieldValue("homeInquiryNotes", "لا يوجد")}
 
     lightboxImage.src =
       galleryImages[index];
+
+    lightboxImage.alt = galleryItems[index].querySelector("img")?.alt || "صورة من فلل ثرى";
 
 
     lightboxCurrent.textContent =
