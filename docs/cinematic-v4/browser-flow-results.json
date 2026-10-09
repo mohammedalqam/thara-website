@@ -1,0 +1,183 @@
+{
+  "date": "2026-10-09",
+  "source": "c5a2c7fa9ef6e7304e98cb01cb5dfd45eb97ee22",
+  "preview": "https://thara-cinematic-preview-1hrrw9w04-tahsil1.vercel.app/",
+  "navigation": [
+    {
+      "case": "direct #featured",
+      "hash": "#featured",
+      "scrollY": 3156,
+      "targetTop": 128.09375,
+      "expectedTop": 128
+    },
+    {
+      "case": "reload after manual scroll",
+      "before": {
+        "hash": "#featured",
+        "y": 3624
+      },
+      "after": {
+        "featuredTop": -339.90625,
+        "hash": "#featured",
+        "restored": "true",
+        "y": 3624
+      }
+    },
+    {
+      "case": "explicit #contact",
+      "result": {
+        "hash": "#contact",
+        "targetTop": 128.03125,
+        "y": 7903
+      }
+    },
+    {
+      "case": "back preserves manual position",
+      "result": {
+        "hash": "#featured",
+        "y": 3624
+      }
+    },
+    {
+      "case": "forward restores contact",
+      "result": {
+        "hash": "#contact",
+        "targetTop": 128.03125,
+        "y": 7903
+      }
+    }
+  ],
+  "form": {
+    "requiredNameBlocked": true,
+    "hidden": false,
+    "links": [
+      {
+        "name": "محمد\n                  +972 53-212-1036",
+        "url": "https://wa.me/972532121036?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%20THARA%D8%8C%0A%0A%D8%A7%D9%84%D8%A7%D8%B3%D9%85%3A%20%D9%81%D8%AD%D8%B5%20%D8%A7%D9%84%D9%85%D8%B9%D8%A7%D9%8A%D9%86%D8%A9%0A%D8%A7%D9%84%D8%AA%D8%A7%D8%B1%D9%8A%D8%AE%3A%202026-10-20%0A%D8%B9%D8%AF%D8%AF%20%D8%A7%D9%84%D8%A3%D8%B4%D8%AE%D8%A7%D8%B5%3A%208%0A%D8%B9%D8%AF%D8%AF%20%D8%A7%D9%84%D8%BA%D8%B1%D9%81%3A%204%20%D8%BA%D8%B1%D9%81%0A%0A%D9%85%D9%84%D8%A7%D8%AD%D8%B8%D8%A7%D8%AA%3A%0A%D9%81%D8%AD%D8%B5%20%D9%85%D8%AD%D9%84%D9%8A%20%D8%AF%D9%88%D9%86%20%D8%A5%D8%B1%D8%B3%D8%A7%D9%84%0A%0A%D8%A3%D8%B1%D9%8A%D8%AF%20%D9%85%D8%B9%D8%B1%D9%81%D8%A9%20%D8%A7%D9%84%D8%AE%D9%8A%D8%A7%D8%B1%D8%A7%D8%AA%20%D8%A7%D9%84%D9%85%D8%AA%D8%A7%D8%AD%D8%A9."
+      },
+      {
+        "name": "نعيم\n                  +972 58-400-3302",
+        "url": "https://wa.me/972584003302?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%20THARA%D8%8C%0A%0A%D8%A7%D9%84%D8%A7%D8%B3%D9%85%3A%20%D9%81%D8%AD%D8%B5%20%D8%A7%D9%84%D9%85%D8%B9%D8%A7%D9%8A%D9%86%D8%A9%0A%D8%A7%D9%84%D8%AA%D8%A7%D8%B1%D9%8A%D8%AE%3A%202026-10-20%0A%D8%B9%D8%AF%D8%AF%20%D8%A7%D9%84%D8%A3%D8%B4%D8%AE%D8%A7%D8%B5%3A%208%0A%D8%B9%D8%AF%D8%AF%20%D8%A7%D9%84%D8%BA%D8%B1%D9%81%3A%204%20%D8%BA%D8%B1%D9%81%0A%0A%D9%85%D9%84%D8%A7%D8%AD%D8%B8%D8%A7%D8%AA%3A%0A%D9%81%D8%AD%D8%B5%20%D9%85%D8%AD%D9%84%D9%8A%20%D8%AF%D9%88%D9%86%20%D8%A5%D8%B1%D8%B3%D8%A7%D9%84%0A%0A%D8%A3%D8%B1%D9%8A%D8%AF%20%D9%85%D8%B9%D8%B1%D9%81%D8%A9%20%D8%A7%D9%84%D8%AE%D9%8A%D8%A7%D8%B1%D8%A7%D8%AA%20%D8%A7%D9%84%D9%85%D8%AA%D8%A7%D8%AD%D8%A9."
+      },
+      {
+        "name": "مجد\n                  +972 58-442-9998",
+        "url": "https://wa.me/972584429998?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%20THARA%D8%8C%0A%0A%D8%A7%D9%84%D8%A7%D8%B3%D9%85%3A%20%D9%81%D8%AD%D8%B5%20%D8%A7%D9%84%D9%85%D8%B9%D8%A7%D9%8A%D9%86%D8%A9%0A%D8%A7%D9%84%D8%AA%D8%A7%D8%B1%D9%8A%D8%AE%3A%202026-10-20%0A%D8%B9%D8%AF%D8%AF%20%D8%A7%D9%84%D8%A3%D8%B4%D8%AE%D8%A7%D8%B5%3A%208%0A%D8%B9%D8%AF%D8%AF%20%D8%A7%D9%84%D8%BA%D8%B1%D9%81%3A%204%20%D8%BA%D8%B1%D9%81%0A%0A%D9%85%D9%84%D8%A7%D8%AD%D8%B8%D8%A7%D8%AA%3A%0A%D9%81%D8%AD%D8%B5%20%D9%85%D8%AD%D9%84%D9%8A%20%D8%AF%D9%88%D9%86%20%D8%A5%D8%B1%D8%B3%D8%A7%D9%84%0A%0A%D8%A3%D8%B1%D9%8A%D8%AF%20%D9%85%D8%B9%D8%B1%D9%81%D8%A9%20%D8%A7%D9%84%D8%AE%D9%8A%D8%A7%D8%B1%D8%A7%D8%AA%20%D8%A7%D9%84%D9%85%D8%AA%D8%A7%D8%AD%D8%A9."
+      }
+    ]
+  },
+  "fallbacks": [
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "scrollWidth": 375,
+      "clientWidth": 375,
+      "horizontalOverflow": false,
+      "overflow": [],
+      "contentBounds": [
+        15,
+        390
+      ],
+      "hidden": false,
+      "motion": "full",
+      "scene": "fallback",
+      "reason": "webgl-unavailable",
+      "progress": null,
+      "imageErrors": [],
+      "scripts": 3,
+      "render": null,
+      "case": "off",
+      "navVisible": false,
+      "formVisible": true,
+      "noScriptContact": false
+    },
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "scrollWidth": 375,
+      "clientWidth": 375,
+      "horizontalOverflow": false,
+      "overflow": [],
+      "contentBounds": [
+        15,
+        390
+      ],
+      "hidden": false,
+      "motion": "reduced",
+      "scene": "static",
+      "reason": "",
+      "progress": null,
+      "imageErrors": [],
+      "scripts": 3,
+      "render": null,
+      "case": "reduced",
+      "navVisible": false,
+      "formVisible": true,
+      "noScriptContact": false
+    },
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "scrollWidth": 375,
+      "clientWidth": 375,
+      "horizontalOverflow": false,
+      "overflow": [],
+      "contentBounds": [
+        15,
+        390
+      ],
+      "hidden": false,
+      "motion": "full",
+      "scene": "fallback",
+      "reason": "webgl-unavailable",
+      "progress": null,
+      "imageErrors": [],
+      "scripts": 3,
+      "render": null,
+      "case": "fail",
+      "navVisible": false,
+      "formVisible": true,
+      "noScriptContact": false
+    },
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "scrollWidth": 375,
+      "clientWidth": 375,
+      "horizontalOverflow": false,
+      "overflow": [],
+      "contentBounds": [
+        15,
+        390
+      ],
+      "hidden": false,
+      "motion": "full",
+      "scene": "static",
+      "reason": "",
+      "progress": null,
+      "imageErrors": [],
+      "scripts": 3,
+      "render": null,
+      "case": "nojs",
+      "navVisible": true,
+      "formVisible": false,
+      "noScriptContact": true
+    }
+  ],
+  "console": {
+    "observedSiteErrors": [],
+    "excludedExtensionEntries": 37
+  },
+  "limits": [
+    "WebGL2 unavailable; model-failure branch blocked before loading",
+    "CSS viewports, not real mobile hardware",
+    "No real GPU frame-rate or memory measurements"
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "source": "c5a2c7fa9ef6e7304e98cb01cb5dfd45eb97ee22",
+  "transferLimit": "gzip estimates are local, not measured HTTP transfer",
+  "assets": {
+    "assets/cinematic/thara-courtyard.glb": {
+      "bytes": 1978788,
+      "gzipEstimateBytes": 384853
+    },
+    "assets/cinematic/thara-letters.glb": {
+      "bytes": 143872,
+      "gzipEstimateBytes": 25189
+    },
+    "assets/cinematic-home.js": {
+      "bytes": 613915,
+      "gzipEstimateBytes": 159212
+    },
+    "home-bootstrap.js": {
+      "bytes": 3154,
+      "gzipEstimateBytes": 1335
+    },
+    "assets/cinematic/poster-desktop.webp": {
+      "bytes": 54936,
+      "gzipEstimateBytes": 54690
+    },
+    "assets/cinematic/poster-mobile.webp": {
+      "bytes": 22470,
+      "gzipEstimateBytes": 22395
+    }
+  }
+}

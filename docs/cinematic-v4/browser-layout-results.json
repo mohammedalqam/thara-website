@@ -1,0 +1,290 @@
+[
+  {
+    "selectedWidth": 320,
+    "orientation": "portrait",
+    "viewport": [
+      320,
+      640
+    ],
+    "scrollWidth": 305,
+    "clientWidth": 305,
+    "horizontalOverflow": false,
+    "overflow": [],
+    "contentBounds": [
+      15,
+      320
+    ],
+    "hidden": false,
+    "motion": "full",
+    "scene": "fallback",
+    "reason": "webgl-unavailable",
+    "progress": null,
+    "imageErrors": [],
+    "scripts": 3,
+    "render": null
+  },
+  {
+    "selectedWidth": 390,
+    "orientation": "portrait",
+    "viewport": [
+      390,
+      844
+    ],
+    "scrollWidth": 375,
+    "clientWidth": 375,
+    "horizontalOverflow": false,
+    "overflow": [],
+    "contentBounds": [
+      15,
+      390
+    ],
+    "hidden": false,
+    "motion": "full",
+    "scene": "fallback",
+    "reason": "webgl-unavailable",
+    "progress": null,
+    "imageErrors": [],
+    "scripts": 3,
+    "render": null
+  },
+  {
+    "selectedWidth": 768,
+    "orientation": "portrait",
+    "viewport": [
+      768,
+      1024
+    ],
+    "scrollWidth": 753,
+    "clientWidth": 753,
+    "horizontalOverflow": false,
+    "overflow": [],
+    "contentBounds": [
+      15,
+      768
+    ],
+    "hidden": false,
+    "motion": "full",
+    "scene": "fallback",
+    "reason": "webgl-unavailable",
+    "progress": null,
+    "imageErrors": [],
+    "scripts": 3,
+    "render": null
+  },
+  {
+    "selectedWidth": 1024,
+    "orientation": "portrait",
+    "viewport": [
+      1024,
+      768
+    ],
+    "scrollWidth": 1009,
+    "clientWidth": 1009,
+    "horizontalOverflow": false,
+    "overflow": [],
+    "contentBounds": [
+      15,
+      1024
+    ],
+    "hidden": false,
+    "motion": "full",
+    "scene": "fallback",
+    "reason": "webgl-unavailable",
+    "progress": null,
+    "imageErrors": [],
+    "scripts": 3,
+    "render": null
+  },
+  {
+    "selectedWidth": 1440,
+    "orientation": "portrait",
+    "viewport": [
+      1440,
+      900
+    ],
+    "scrollWidth": 1425,
+    "clientWidth": 1425,
+    "horizontalOverflow": false,
+    "overflow": [],
+    "contentBounds": [
+      15,
+      1440
+    ],
+    "hidden": false,
+    "motion": "full",
+    "scene": "fallback",
+    "reason": "webgl-unavailable",
+    "progress": null,
+    "imageErrors": [],
+    "scripts": 3,
+    "render": null
+  },
+  {
+    "selectedWidth": 1920,
+    "orientation": "portrait",
+    "viewport": [
+      1920,
+      1080
+    ],
+    "scrollWidth": 1905,
+    "clientWidth": 1905,
+    "horizontalOverflow": false,
+    "overflow": [],
+    "contentBounds": [
+      15,
+      1920
+    ],
+    "hidden": false,
+    "motion": "full",
+    "scene": "fallback",
+    "reason": "webgl-unavailable",
+    "progress": null,
+    "imageErrors": [],
+    "scripts": 3,
+    "render": null
+  },
+  {
+    "selectedWidth": 320,
+    "orientation": "landscape",
+    "viewport": [
+      640,
+      320
+    ],
+    "scrollWidth": 625,
+    "clientWidth": 625,
+    "horizontalOverflow": false,
+    "overflow": [],
+    "contentBounds": [
+      15,
+      640
+    ],
+    "hidden": false,
+    "motion": "full",
+    "scene": "fallback",
+    "reason": "webgl-unavailable",
+    "progress": null,
+    "imageErrors": [],
+    "scripts": 3,
+    "render": null
+  },
+  {
+    "selectedWidth": 390,
+    "orientation": "landscape",
+    "viewport": [
+      844,
+      390
+    ],
+    "scrollWidth": 829,
+    "clientWidth": 829,
+    "horizontalOverflow": false,
+    "overflow": [],
+    "contentBounds": [
+      15,
+      844
+    ],
+    "hidden": false,
+    "motion": "full",
+    "scene": "fallback",
+    "reason": "webgl-unavailable",
+    "progress": null,
+    "imageErrors": [],
+    "scripts": 3,
+    "render": null
+  },
+  {
+    "selectedWidth": 768,
+    "orientation": "landscape",
+    "viewport": [
+      1024,
+      768
+    ],
+    "scrollWidth": 1009,
+    "clientWidth": 1009,
+    "horizontalOverflow": false,
+    "overflow": [],
+    "contentBounds": [
+      15,
+      1024
+    ],
+    "hidden": false,
+    "motion": "full",
+    "scene": "fallback",
+    "reason": "webgl-unavailable",
+    "progress": null,
+    "imageErrors": [],
+    "scripts": 3,
+    "render": null
+  },
+  {
+    "selectedWidth": 1024,
+    "orientation": "landscape",
+    "viewport": [
+      1024,
+      768
+    ],
+    "scrollWidth": 1009,
+    "clientWidth": 1009,
+    "horizontalOverflow": false,
+    "overflow": [],
+    "contentBounds": [
+      15,
+      1024
+    ],
+    "hidden": false,
+    "motion": "full",
+    "scene": "fallback",
+    "reason": "webgl-unavailable",
+    "progress": null,
+    "imageErrors": [],
+    "scripts": 3,
+    "render": null
+  },
+  {
+    "selectedWidth": 1440,
+    "orientation": "landscape",
+    "viewport": [
+      1440,
+      900
+    ],
+    "scrollWidth": 1425,
+    "clientWidth": 1425,
+    "horizontalOverflow": false,
+    "overflow": [],
+    "contentBounds": [
+      15,
+      1440
+    ],
+    "hidden": false,
+    "motion": "full",
+    "scene": "fallback",
+    "reason": "webgl-unavailable",
+    "progress": null,
+    "imageErrors": [],
+    "scripts": 3,
+    "render": null
+  },
+  {
+    "selectedWidth": 1920,
+    "orientation": "landscape",
+    "viewport": [
+      1920,
+      1080
+    ],
+    "scrollWidth": 1905,
+    "clientWidth": 1905,
+    "horizontalOverflow": false,
+    "overflow": [],
+    "contentBounds": [
+      15,
+      1920
+    ],
+    "hidden": false,
+    "motion": "full",
+    "scene": "fallback",
+    "reason": "webgl-unavailable",
+    "progress": null,
+    "imageErrors": [],
+    "scripts": 3,
+    "render": null
+  }
+]
