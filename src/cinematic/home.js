@@ -31,7 +31,7 @@ export async function mountHome(root) {
   function documentY(element){const r=element.getBoundingClientRect();return scrollY+r.top+r.height/2;}
   function measure(){
     if(!renderer)return;
-    const nextWidth=Math.round(layer.getBoundingClientRect().width),nextHeight=innerHeight;
+    const nextWidth=Math.round(layer.getBoundingClientRect().width)||document.documentElement.clientWidth,nextHeight=innerHeight;
     const dpr=Math.min(devicePixelRatio||1,innerWidth<760?1.25:1.5);viewWidth=innerWidth;
     if(nextWidth===width&&nextHeight===height&&renderer.getPixelRatio()===dpr)return;
     width=nextWidth;height=nextHeight;
