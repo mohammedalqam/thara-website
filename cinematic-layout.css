@@ -197,12 +197,14 @@
   .thara-home-v4 .experience-step { grid-template-columns:30px 1fr; gap:12px; }
   .thara-home-v4 .team-card { grid-template-columns:90px minmax(0,1fr); gap:14px; }
   .thara-home-v4 .team-image { width:90px; height:128px; }
-  .thara-home-v4 .team-info>span { font-size:.65rem; }
-  .thara-home-v4 .team-info .team-phone { font-size:.69rem; letter-spacing:-.2px; white-space:nowrap; }
+  .thara-home-v4 .team-info>span { font-size:.8rem; }
+  .thara-home-v4 .team-info .team-phone { font-size:.8rem; letter-spacing:-.2px; white-space:nowrap; }
   .thara-home-v4 .home-inquiry-panel { padding:26px 18px; gap:30px; }
   .thara-home-v4 .home-inquiry-heading h2 { font-size:1.65rem; }
   .thara-home-v4 .home-inquiry-row { grid-template-columns:1fr; }
-  .thara-home-v4 .home-inquiry-submit { padding:14px 10px; font-size:.75rem; }
+  .thara-home-v4 .home-inquiry-panel input,.thara-home-v4 .home-inquiry-panel select,.thara-home-v4 .home-inquiry-panel textarea { font-size:16px; }
+  .thara-home-v4 .home-inquiry-form label>span { font-size:.85rem; }
+  .thara-home-v4 .home-inquiry-submit { padding:14px 10px; font-size:.84rem; }
   .thara-home-v4 .home-inquiry-contact-grid { grid-template-columns:1fr; }
   .thara-home-v4 .letter-band-end { height:185px; }
   .thara-home-v4 .floating-whatsapp-picker { right:auto; left:8px; bottom:16px; }
@@ -217,7 +219,7 @@
   .thara-home-v4 .letter-band-start { margin-left:-58px; margin-right:-16px; }
   .thara-home-v4 .team-card { grid-template-columns:80px minmax(0,1fr); gap:10px; }
   .thara-home-v4 .team-image { width:80px; height:122px; }
-  .thara-home-v4 .team-info .team-phone { font-size:.62rem; }
+  .thara-home-v4 .team-info .team-phone { font-size:.76rem; }
   .thara-home-v4 .home-inquiry-panel { padding:24px 14px; }
 }
 @media(max-height:550px) and (min-width:600px) {

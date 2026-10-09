@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
-import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
+import { mergeGeometries, mergeVertices } from 'three/addons/utils/BufferGeometryUtils.js';
 import { createBrandWordmark } from '../brand-geometry.js';
 
 // Original THARA courtyard villa study. Metres, Y-up. Front +Z, garden -Z.
@@ -219,6 +219,6 @@ export function buildVilla() {
     const g=transformed.index?transformed.toNonIndexed():transformed;
     const list=buckets.get(o.material)||[];list.push(g);buckets.set(o.material,list);o.removeFromParent();o.geometry.dispose();
   }
-  for(const [material,geometries] of buckets){const merged=mergeGeometries(geometries,false);if(!merged)throw Error('Cannot merge '+material.name);mesh(merged,material,'Static_'+material.name);geometries.forEach(g=>g.dispose());}
+  for(const [material,geometries] of buckets){const merged=mergeGeometries(geometries,false);if(!merged)throw Error('Cannot merge '+material.name);const indexed=mergeVertices(merged,1e-6);mesh(indexed,material,'Static_'+material.name);merged.dispose();geometries.forEach(g=>g.dispose());}
   return {root,materials};
 }

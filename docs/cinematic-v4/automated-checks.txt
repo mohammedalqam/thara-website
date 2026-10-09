@@ -1,0 +1,37 @@
+
+> thara-website@2.0.0 test
+> node --test tests/*.test.js
+
+✔ V4 retains protected pages, every original photograph and original contact messages (86.274196ms)
+✔ the camera path clears architectural collision volumes and the hinged door in both directions (446.848113ms)
+✔ five independent letters fit every reserved lane and assemble as readable LTR THARA (111.328282ms)
+✔ home inquiry validates, builds three encoded contact choices, focuses them and invalidates edited requests (222.745079ms)
+✔ missing intersection/resize APIs do not disable the home form or hide content (62.518867ms)
+✔ home inquiry respects system reduced motion and leaves property counts stable (66.090993ms)
+✔ home inquiry respects saved reduced motion and leaves property counts stable (69.56609ms)
+✔ home inquiry respects toggle reduced motion and leaves property counts stable (63.596207ms)
+✔ a system preference change stops an already running property counter (37.809114ms)
+✔ mobile navigation closes with Escape, outside clicks and desktop resize (56.170566ms)
+✔ WhatsApp pickers are exclusive, dismissable and preserve the correct person/message (41.462126ms)
+✔ real gallery opens, advances, wraps backwards and returns focus after Escape (53.549506ms)
+✔ gallery swipes advance and reverse while short touches leave the image unchanged (46.592177ms)
+✔ owner inquiry preserves required validation and selected services (full motion) (71.560954ms)
+✔ owner inquiry preserves required validation and selected services (reduced motion) (45.420961ms)
+✔ archived V3 portal controls remain covered independently of V4 (53.257506ms)
+✔ archived V3 layers mount once and respect motion preferences (105.673106ms)
+✔ architectural planes fit small phones and wide screens; manual angles stay bounded (2.126617ms)
+✔ brand movement has bounded entry/exit poses and a stable reduced-motion composition (0.321323ms)
+✔ CSS motion stops offscreen/hidden, resumes after BFCache, and releases observers on navigation (1.308517ms)
+✔ elapsed-time transitions match across 12, 30 and 60 fps (1.301557ms)
+✔ scroll progress remains bounded at anchors and on short stages (0.444869ms)
+✔ camera contains villa bounds at every supported angle and aspect ratio (5.178915ms)
+✔ THARA geometry has five letters, shared A outlines and bounded finite geometry (21.008399ms)
+✔ rendering sleeps when idle, hidden and off screen; navigation releases resources (2.037077ms)
+ℹ tests 25
+ℹ suites 0
+ℹ pass 25
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1506.250551

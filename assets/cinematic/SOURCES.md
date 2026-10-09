@@ -1,6 +1,6 @@
 # THARA cinematic homepage sources
 
-- `thara-courtyard.glb`: original conceptual architectural model authored for this THARA redesign. Editable source: `src/cinematic/villa-model.js`; rebuild with `npm run build:cinematic`. This is an architectural study and must not be advertised as an available rental property.
+- `thara-courtyard.glb`: original conceptual architectural model authored for this THARA redesign. Its static meshes use indexed vertices without a runtime decoder; triangle/normal/UV equivalence is recorded in `docs/cinematic-v4/geometry-equivalence.json`. Editable source: `src/cinematic/villa-model.js`; rebuild with `npm run build:cinematic`. This is an architectural study and must not be advertised as an available rental property.
 - Geometry, furniture, door hinge, glazing, foliage and architectural fixtures are generated from the original source code. No downloaded third-party model is included.
 - Entrance plaque uses the unmodified existing `assets/logo.jpeg` at runtime. The original photograph/logo bytes are unchanged. Its ownership/usage follows the existing THARA repository; this work grants no new third-party rights.
 - Extruded lettering reuses the repository's existing `src/brand-geometry.js` Roman-serif paths. This is not a newly substituted company emblem or an exact vector reconstruction of the JPEG wordmark. The lack of the original vector logo remains documented.

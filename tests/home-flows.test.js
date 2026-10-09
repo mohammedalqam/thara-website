@@ -174,6 +174,19 @@ test('real gallery opens, advances, wraps backwards and returns focus after Esca
   assert.equal(p.d.activeElement, triggers[0]);
 });
 
+test('gallery swipes advance and reverse while short touches leave the image unchanged', t => {
+  const p=page(t),triggers=[...p.d.querySelectorAll('.gallery-viewer')];
+  const image=p.d.getElementById('homeLightboxImage');triggers[0].click();
+  const touch=(type,x)=>{const event=new p.w.Event(type,{bubbles:true});Object.defineProperty(event,'changedTouches',{value:[{screenX:x}]});image.dispatchEvent(event);};
+  touch('touchstart',220);touch('touchend',195);p.flushTimers();
+  assert.equal(image.getAttribute('src'),triggers[0].dataset.full);
+  touch('touchstart',220);touch('touchend',80);p.flushTimers();
+  assert.equal(image.getAttribute('src'),triggers[1].dataset.full);
+  touch('touchstart',80);touch('touchend',220);p.flushTimers();
+  assert.equal(image.getAttribute('src'),triggers[0].dataset.full);
+  assert.equal(p.opened.length,0);
+});
+
 for (const reduced of [false, true]) {
   test(`owner inquiry preserves required validation and selected services (${reduced ? 'reduced' : 'full'} motion)`, t => {
     const p = page(t, { file: 'contact.html', savedReduced: reduced }), contacts = p.d.getElementById('ownersContactPicker');
