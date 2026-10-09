@@ -2,37 +2,38 @@
 > thara-website@2.0.0 test
 > node --test tests/*.test.js
 
-✔ V4 retains protected pages, every original photograph and original contact messages (77.797071ms)
-✔ the camera path clears architectural collision volumes and the hinged door in both directions (543.159975ms)
-✔ five independent letters fit every reserved lane and assemble as readable LTR THARA (169.28251ms)
-✔ home inquiry validates, builds three encoded contact choices, focuses them and invalidates edited requests (220.853208ms)
-✔ missing intersection/resize APIs do not disable the home form or hide content (83.444438ms)
-✔ home inquiry respects system reduced motion and leaves property counts stable (65.151624ms)
-✔ home inquiry respects saved reduced motion and leaves property counts stable (63.954109ms)
-✔ home inquiry respects toggle reduced motion and leaves property counts stable (66.095102ms)
-✔ a system preference change stops an already running property counter (47.023752ms)
-✔ mobile navigation closes with Escape, outside clicks and desktop resize (66.295643ms)
-✔ WhatsApp pickers are exclusive, dismissable and preserve the correct person/message (49.430125ms)
-✔ real gallery opens, advances, wraps backwards and returns focus after Escape (53.33246ms)
-✔ gallery swipes advance and reverse while short touches leave the image unchanged (55.640429ms)
-✔ V4 fragments align after load and BFCache return, coalesce events and release navigation work (63.838881ms)
-✔ owner inquiry preserves required validation and selected services (full motion) (77.882098ms)
-✔ owner inquiry preserves required validation and selected services (reduced motion) (50.700584ms)
-✔ archived V3 portal controls remain covered independently of V4 (73.470808ms)
-✔ archived V3 layers mount once and respect motion preferences (67.106066ms)
-✔ architectural planes fit small phones and wide screens; manual angles stay bounded (2.442831ms)
-✔ brand movement has bounded entry/exit poses and a stable reduced-motion composition (0.413221ms)
-✔ CSS motion stops offscreen/hidden, resumes after BFCache, and releases observers on navigation (1.240945ms)
-✔ elapsed-time transitions match across 12, 30 and 60 fps (1.178831ms)
-✔ scroll progress remains bounded at anchors and on short stages (0.231798ms)
-✔ camera contains villa bounds at every supported angle and aspect ratio (5.977504ms)
-✔ THARA geometry has five letters, shared A outlines and bounded finite geometry (28.098057ms)
-✔ rendering sleeps when idle, hidden and off screen; navigation releases resources (1.734377ms)
-ℹ tests 26
+✔ V4 retains protected pages, every original photograph and original contact messages (60.925321ms)
+✔ the camera path clears architectural collision volumes and the hinged door in both directions (427.183681ms)
+✔ five independent letters fit every reserved lane and assemble as readable LTR THARA (132.588866ms)
+✔ home inquiry validates, builds three encoded contact choices, focuses them and invalidates edited requests (163.070495ms)
+✔ missing intersection/resize APIs do not disable the home form or hide content (54.346875ms)
+✔ home inquiry respects system reduced motion and leaves property counts stable (53.817609ms)
+✔ home inquiry respects saved reduced motion and leaves property counts stable (48.156547ms)
+✔ home inquiry respects toggle reduced motion and leaves property counts stable (61.743681ms)
+✔ a system preference change stops an already running property counter (31.296734ms)
+✔ mobile navigation closes with Escape, outside clicks and desktop resize (53.432846ms)
+✔ WhatsApp pickers are exclusive, dismissable and preserve the correct person/message (37.343953ms)
+✔ real gallery opens, advances, wraps backwards and returns focus after Escape (42.993877ms)
+✔ gallery swipes advance and reverse while short touches leave the image unchanged (47.842651ms)
+✔ V4 explicit fragments align once, preserve BFCache positions and release navigation work (53.067457ms)
+✔ V4 reload preserves a manual scroll position after following a fragment (48.885397ms)
+✔ owner inquiry preserves required validation and selected services (full motion) (52.857076ms)
+✔ owner inquiry preserves required validation and selected services (reduced motion) (54.238092ms)
+✔ archived V3 portal controls remain covered independently of V4 (43.741726ms)
+✔ archived V3 layers mount once and respect motion preferences (66.64656ms)
+✔ architectural planes fit small phones and wide screens; manual angles stay bounded (1.700325ms)
+✔ brand movement has bounded entry/exit poses and a stable reduced-motion composition (0.294302ms)
+✔ CSS motion stops offscreen/hidden, resumes after BFCache, and releases observers on navigation (0.97778ms)
+✔ elapsed-time transitions match across 12, 30 and 60 fps (1.280064ms)
+✔ scroll progress remains bounded at anchors and on short stages (0.205739ms)
+✔ camera contains villa bounds at every supported angle and aspect ratio (5.506105ms)
+✔ THARA geometry has five letters, shared A outlines and bounded finite geometry (16.040546ms)
+✔ rendering sleeps when idle, hidden and off screen; navigation releases resources (1.742148ms)
+ℹ tests 27
 ℹ suites 0
-ℹ pass 26
+ℹ pass 27
 ℹ fail 0
 ℹ cancelled 0
 ℹ skipped 0
 ℹ todo 0
-ℹ duration_ms 1606.758261
+ℹ duration_ms 1321.778659

@@ -16,6 +16,20 @@
       root.dataset.anchorTarget=id;root.dataset.anchorTop=String(Math.round(target.getBoundingClientRect().top));
     });
   }
+  function restorePage(){
+    if(closed)return;
+    if(performance.getEntriesByType?.('navigation')[0]?.type==='reload'){
+      try{
+        const saved=JSON.parse(sessionStorage.getItem('thara-page-resume'));
+        if(saved?.path===location.pathname&&saved.hash===location.hash&&saved.width===innerWidth&&Number.isFinite(saved.y)){
+          cancelAnimationFrame(anchorFrame);
+          anchorFrame=requestAnimationFrame(()=>{anchorFrame=0;if(!closed){scrollTo({top:Math.max(0,saved.y),behavior:'instant'});root.dataset.scrollRestored='true';}});
+          return;
+        }
+      }catch{}
+    }
+    alignFragment();
+  }
   function start(){
     const reduced=media.matches||document.documentElement.dataset.motion==='reduced';
     root.classList.toggle('cinematic-reduced',reduced);
@@ -28,9 +42,16 @@
   }
   document.addEventListener('thara:motionchange',start,{signal:events.signal});
   media.addEventListener('change',start,{signal:events.signal});
-  addEventListener('load',alignFragment,{once:true,signal:events.signal});
-  addEventListener('hashchange',alignFragment,{signal:events.signal});
-  addEventListener('pageshow',alignFragment,{signal:events.signal});
-  addEventListener('pagehide',e=>{cancelAnimationFrame(anchorFrame);anchorFrame=0;if(!e.persisted){closed=true;events.abort();heroObserver?.disconnect();}},{signal:events.signal});
+  root.addEventListener('click',event=>{
+    if(event.defaultPrevented||event.button>0||event.ctrlKey||event.metaKey||event.shiftKey||event.altKey)return;
+    if(event.target.closest('a[href^="#"]'))alignFragment();
+  },{signal:events.signal});
+  addEventListener('load',restorePage,{once:true,signal:events.signal});
+  addEventListener('pageshow',e=>{if(!e.persisted)restorePage();},{signal:events.signal});
+  addEventListener('pagehide',e=>{
+    try{sessionStorage.setItem('thara-page-resume',JSON.stringify({path:location.pathname,hash:location.hash,y:scrollY,width:innerWidth}));}catch{}
+    cancelAnimationFrame(anchorFrame);anchorFrame=0;
+    if(!e.persisted){closed=true;events.abort();heroObserver?.disconnect();}
+  },{signal:events.signal});
   requestAnimationFrame(start);
 })();

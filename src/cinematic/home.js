@@ -40,7 +40,8 @@ export async function mountHome(root) {
   }
   function applyMotion() {
     const rect=film.getBoundingClientRect();
-    const anchored=rect.bottom<0;const before=rect.height;
+    const contentEdge=(parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop)||0)+16;
+    const anchored=rect.top<0&&rect.bottom<=contentEdge;const before=rect.height;
     root.classList.toggle('cinematic-ready',ready&&!reduced());
     root.classList.toggle('cinematic-reduced',reduced());
     if(anchored){const after=film.getBoundingClientRect().height;scrollBy({top:after-before,behavior:'instant'});}
@@ -114,7 +115,7 @@ export async function mountHome(root) {
   media.addEventListener('change',applyMotion,{signal:events.signal});
   document.addEventListener('visibilitychange',()=>{if(document.hidden){cancelAnimationFrame(frame);frame=0;}else request();},{signal:events.signal});
   addEventListener('pagehide',event=>{
-    try{sessionStorage.setItem('thara-camera-resume',JSON.stringify({path:location.pathname,chapter:mode,p}));}catch{}
+    try{sessionStorage.setItem('thara-camera-resume',JSON.stringify({path:location.pathname,hash:location.hash,chapter:mode,p}));}catch{}
     pageSuspended=true;cancelAnimationFrame(frame);frame=0;if(!event.persisted)dispose();
   },{signal:events.signal});
   addEventListener('pageshow',()=>{pageSuspended=false;request();},{signal:events.signal});
@@ -151,8 +152,8 @@ export async function mountHome(root) {
     logo.flipY=false;logo.colorSpace=THREE.SRGBColorSpace;logo.anisotropy=4;textures.add(logo);
     const plaque=model.getObjectByName('OriginalLogo');plaque.material.map=logo;plaque.material.needsUpdate=true;
     ready=true;setState('ready');measure();applyMotion();
-    if(performance.getEntriesByType('navigation')[0]?.type==='reload'&&!location.hash){
-      try{const saved=JSON.parse(sessionStorage.getItem('thara-camera-resume'));if(saved?.path===location.pathname&&saved.chapter==='villa'&&!reduced()){const r=film.getBoundingClientRect();scrollTo({top:scrollY+r.top+clamp(saved.p)*(r.height-innerHeight),behavior:'instant'});}}catch{}
+    if(performance.getEntriesByType('navigation')[0]?.type==='reload'){
+      try{const saved=JSON.parse(sessionStorage.getItem('thara-camera-resume'));if(saved?.path===location.pathname&&(!('hash' in saved)||saved.hash===location.hash)&&saved.chapter==='villa'&&!reduced()){const r=film.getBoundingClientRect();scrollTo({top:scrollY+r.top+clamp(saved.p)*(r.height-innerHeight),behavior:'instant'});}}catch{}
     }
     request();
   }catch(error){ready=false;setState('fallback',error.message);root.classList.remove('cinematic-ready');dispose();}

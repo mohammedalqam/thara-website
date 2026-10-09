@@ -187,7 +187,7 @@ test('gallery swipes advance and reverse while short touches leave the image unc
   assert.equal(p.opened.length,0);
 });
 
-test('V4 fragments align after load and BFCache return, coalesce events and release navigation work', t => {
+test('V4 explicit fragments align once, preserve BFCache positions and release navigation work', t => {
   const p=page(t,{savedReduced:true});
   p.w.eval(readFileSync(new URL('home-bootstrap.js',root),'utf8'));
   p.w.history.replaceState(null,'','#featured');
@@ -195,15 +195,27 @@ test('V4 fragments align after load and BFCache return, coalesce events and rele
   assert.equal(p.scrolls.at(-1).element.id,'featured');
   assert.equal(p.scrolls.at(-1).options.behavior,'instant');
   const before=p.scrolls.length;
-  p.w.dispatchEvent(new p.w.Event('hashchange'));p.w.dispatchEvent(new p.w.Event('hashchange'));p.flushFrames();
+  const link=p.d.querySelector('a[href="#featured"]');link.click();link.click();p.flushFrames();
   assert.equal(p.scrolls.length,before+1,'one alignment per animation frame');
   p.w.dispatchEvent(new p.w.PageTransitionEvent('pagehide',{persisted:true}));
   p.w.dispatchEvent(new p.w.PageTransitionEvent('pageshow',{persisted:true}));p.flushFrames();
-  assert.equal(p.scrolls.at(-1).element.id,'featured');
+  assert.equal(p.scrolls.length,before+1,'BFCache retains the native position');
   const restored=p.scrolls.length;
   p.w.dispatchEvent(new p.w.Event('pagehide'));
-  p.w.dispatchEvent(new p.w.Event('hashchange'));p.flushFrames();
+  link.click();p.flushFrames();
   assert.equal(p.scrolls.length,restored,'disposed page cannot scroll later');
+});
+
+test('V4 reload preserves a manual scroll position after following a fragment', t => {
+  const p=page(t,{savedReduced:true}),restored=[];
+  p.w.history.replaceState(null,'','#featured');
+  p.w.performance.getEntriesByType=()=>[{type:'reload'}];
+  p.w.scrollTo=options=>restored.push(options);
+  p.w.sessionStorage.setItem('thara-page-resume',JSON.stringify({path:'/index.html',hash:'#featured',y:2400,width:p.w.innerWidth}));
+  p.w.eval(readFileSync(new URL('home-bootstrap.js',root),'utf8'));
+  p.w.dispatchEvent(new p.w.Event('load'));p.flushFrames();
+  assert.equal(restored.at(-1).top,2400);
+  assert.equal(p.scrolls.length,0,'the old fragment must not override the visitor');
 });
 
 for (const reduced of [false, true]) {

@@ -1,4 +1,5 @@
 /* Architecture and content share one quiet grid. Every selector is homepage-scoped. */
+html:has(.thara-home-v4) { scroll-behavior:auto; }
 .thara-home-v4 { --page-gutter:clamp(82px,7.4vw,150px); isolation:isolate; }
 .thara-home-v4 .page-glow { display:none; }
 .thara-home-v4 main { position:relative; z-index:auto; }
