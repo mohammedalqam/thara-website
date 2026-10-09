@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+import { villaPose,smooth } from './timeline.js';
 
 const stage=document.querySelector('[data-cinematic-study]');
 const status=document.querySelector('[data-status]');
@@ -10,25 +11,6 @@ const shotButtons=[...document.querySelectorAll('[data-shot]')];
 let renderer,scene,camera,model,door,environment,frame=0,progress=0,disposed=false;
 const events=new AbortController(),textures=new Set();
 const clamp=THREE.MathUtils.clamp;
-const smooth=(a,b,t)=>{const x=clamp((t-a)/(b-a),0,1);return x*x*(3-2*x);};
-// Progress intervals independently control path velocity and gaze. No time-based drift.
-const points=[
-  {p:0,pos:[11,5.3,19],look:[0,1.65,3]},
-  {p:.12,pos:[9,3.9,16],look:[0,1.9,4.4]},
-  {p:.28,pos:[1.3,1.85,9.1],look:[-1.4,2.05,5.12]},
-  {p:.36,pos:[.15,1.72,7.1],look:[-1.25,1.92,5.1]},
-  {p:.42,pos:[.10,1.72,6.55],look:[0,1.65,1.7]},
-  {p:.56,pos:[.12,1.72,3.6],look:[-.15,1.60,-3.5]},
-  {p:.68,pos:[-.25,1.72,.65],look:[-3.45,1.16,-3.4]},
-  {p:.80,pos:[-2.1,1.72,.10],look:[-3,1.30,-8]},
-  {p:.88,pos:[-3.35,1.72,-.15],look:[.3,1.20,-10]},
-  {p:1,pos:[-3.0,1.72,-.2],look:[4,1.6,-5.8]}
-];
-function pose(p){
-  let i=points.findIndex((q,j)=>j<points.length-1&&p<=points[j+1].p);if(i<0)i=points.length-2;
-  const a=points[i],b=points[i+1];const t=smooth(a.p,b.p,p);
-  return {position:new THREE.Vector3(...a.pos).lerp(new THREE.Vector3(...b.pos),t),look:new THREE.Vector3(...a.look).lerp(new THREE.Vector3(...b.look),t)};
-}
 function texture(kind){
   const c=document.createElement('canvas');c.width=c.height=512;const ctx=c.getContext('2d');
   const data=ctx.createImageData(512,512);let seed=1735;
@@ -48,11 +30,10 @@ function request(){if(!frame&&!disposed&&!document.hidden)frame=requestAnimation
 function draw(){
   frame=0;if(!model)return;
   const rect=stage.getBoundingClientRect(),aspect=rect.width/rect.height;
-  const a=pose(progress);camera.position.copy(a.position);camera.lookAt(a.look);
-  camera.fov=aspect<.8?68:aspect<1.2?58:48;
-  if(aspect<.8&&progress<.28){camera.position.lerp(new THREE.Vector3(4,3.8,20),1-smooth(.12,.28,progress));camera.lookAt(0,1.6,3.3);}
+  const a=villaPose(progress,aspect);camera.position.copy(a.position);camera.lookAt(a.look);
+  camera.fov=a.fov;
   camera.aspect=aspect;camera.updateProjectionMatrix();
-  door.rotation.y=smooth(.29,.425,progress)*Math.PI*.54;
+  door.rotation.y=a.door;
   const w=Math.round(rect.width),h=Math.round(rect.height);
   if(renderer.domElement.clientWidth!==w||renderer.domElement.clientHeight!==h)renderer.setSize(w,h);
   renderer.render(scene,camera);
@@ -63,7 +44,9 @@ function draw(){
 }
 async function start(){
   try{
-    renderer=new THREE.WebGLRenderer({antialias:true,alpha:false});renderer.setPixelRatio(Math.min(devicePixelRatio,innerWidth<600?1.25:1.5));
+    const canvas=document.createElement('canvas'),context=canvas.getContext('webgl2');
+    if(!context){stage.dataset.state='fallback';status.textContent='WebGL غير متاح في بيئة الفحص؛ هذه الصورة الثابتة لا تثبت جودة الحركة.';return;}
+    renderer=new THREE.WebGLRenderer({canvas,context,antialias:true,alpha:false});renderer.setPixelRatio(Math.min(devicePixelRatio,innerWidth<600?1.25:1.5));
     renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;
     renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1;
     stage.append(renderer.domElement);scene=new THREE.Scene();scene.background=new THREE.Color(0xe9e4d6);scene.fog=new THREE.Fog(0xe9e4d6,35,85);
@@ -83,7 +66,7 @@ async function start(){
       if(m.name==='Water'){m.bumpMap=water;m.bumpScale=.10;o.castShadow=false;}
       if(m.name==='Glazing'){o.castShadow=false;m.depthWrite=false;}
     });
-    const logo=await new THREE.TextureLoader().loadAsync('./assets/logo.jpeg');logo.colorSpace=THREE.SRGBColorSpace;logo.anisotropy=8;textures.add(logo);
+    const logo=await new THREE.TextureLoader().loadAsync('./assets/logo.jpeg');logo.flipY=false;logo.colorSpace=THREE.SRGBColorSpace;logo.anisotropy=8;textures.add(logo);
     const plaque=model.getObjectByName('OriginalLogo');plaque.material.map=logo;plaque.material.needsUpdate=true;
     stage.dataset.state='ready';status.textContent='دراسة معمارية أولية — قيد ضبط الخامات والإخراج';
     document.querySelectorAll('button,input').forEach(n=>n.disabled=false);

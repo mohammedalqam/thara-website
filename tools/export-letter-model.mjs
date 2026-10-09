@@ -1,0 +1,12 @@
+import fs from 'node:fs';
+import { MeshStandardMaterial } from 'three';
+import { GLTFExporter } from 'three/addons/exporters/GLTFExporter.js';
+import { createBrandWordmark } from '../src/brand-geometry.js';
+import { letterPose } from '../src/cinematic/timeline.js';
+globalThis.FileReader=class {readAsArrayBuffer(blob){blob.arrayBuffer().then(data=>{this.result=data;this.onloadend?.();});}};
+const {world,letters}=createBrandWordmark(new MeshStandardMaterial({color:0xb89a63,roughness:.24,metalness:.86}),new Set());
+letters.forEach((mesh,i)=>mesh.name=`THARA_${i}_${'THARA'[i]}`);
+fs.writeFileSync('assets/cinematic/thara-letters.glb',Buffer.from(await new GLTFExporter().parseAsync(world,{binary:true})));
+const shots=[];
+for(const [label,w,h] of [['desktop',1440,900],['mobile',390,844]])for(const p of [0,.12,.5,1])shots.push({name:`letters-${label}-${Math.round(p*100)}`,w,h,p,poses:letters.map((mesh,i)=>letterPose(i,mesh.userData.homeX,w,h,p))});
+fs.writeFileSync('docs/cinematic-v4/letter-poses.json',JSON.stringify(shots,null,2)+'\n');

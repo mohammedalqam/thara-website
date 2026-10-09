@@ -211,8 +211,8 @@ function withSceneGlobals(p, work) {
   }
 }
 
-test('actual portal controls keep a paused viewpoint, change manual angles and honor reduced motion', t => {
-  const p = page(t);
+test('archived V3 portal controls remain covered independently of V4', t => {
+  const p = page(t, {file:'tests/fixtures/home-v3.html'});
   withSceneGlobals(p, () => {
     const host = p.d.querySelector('[data-portal-scene]'), camera = host.querySelector('[data-portal-camera]');
     const orbit = host.querySelector('[data-portal-orbit]'), pause = host.querySelector('[data-scene-pause]');
@@ -243,8 +243,8 @@ test('actual portal controls keep a paused viewpoint, change manual angles and h
   });
 });
 
-test('THARA layers mount once, follow scroll and settle when motion is reduced', t => {
-  const p = page(t);
+test('archived V3 layers mount once and respect motion preferences', t => {
+  const p = page(t, {file:'tests/fixtures/home-v3.html'});
   withSceneGlobals(p, () => {
     const host = p.d.querySelector('[data-scroll-sculpture]'), story = host.closest('[data-brand-story]');
     const stage = story.querySelector('.brand-story-stage'), orbit = host.querySelector('[data-brand-orbit]');

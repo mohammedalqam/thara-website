@@ -23,6 +23,7 @@ export function buildVilla() {
   const glass=mat('Glazing',0xb7c5bf,.08,.15,{transparent:true,opacity:.16,depthWrite:false,side:THREE.DoubleSide});
   const water=mat('Water',0x357c7d,.13,.45);
   const soil=mat('Earth',0x71644c,1);
+  const gravel=mat('Garden_gravel',0xbab4a3,1);
   const leaf=mat('Palm_leaf',0x526844,.94,0,{side:THREE.DoubleSide});
   const leafLight=mat('Palm_leaf_light',0x75805a,.96,0,{side:THREE.DoubleSide});
   const warm=mat('Warm_LED',0xffe5b9,.4,0,{emissive:0xffd095,emissiveIntensity:1.5});
@@ -38,15 +39,25 @@ export function buildVilla() {
   function cyl(name,r1,r2,h,pos,m,parent=root){const o=mesh(new THREE.CylinderGeometry(r1,r2,h,24),m,name,parent);o.position.set(...pos);return o;}
   function lathe(name,pts,pos,m,scale=1){const o=mesh(new THREE.LatheGeometry(pts.map(p=>new THREE.Vector2(...p)),32),m,name);o.position.set(...pos);o.scale.setScalar(scale);return o;}
   // Continuous floor levels and distinct exterior/foyer/living spaces.
-  box('Site',[40,.4,48],[0,-.32,0],soil);
-  box('Entry_terrace',[19,.22,8],[0,-.03,8],travertine);
+  box('Site',[40,.4,48],[0,-.32,0],gravel);
+  box('Entry_terrace',[19,.22,10],[0,-.03,9],travertine);
+  box('Arrival_step',[19,.13,1.3],[0,-.07,14.55],travertine);
+  box('Arrival_lower_step',[19,.08,1.3],[0,-.135,15.85],travertine);
   box('Interior_floor',[16,.22,11],[0,-.03,-.3],travertine);
-  box('Pool_terrace',[21,.22,12],[0,-.03,-11.2],travertine);
+  box('Pool_front_terrace',[21,.22,2.65],[0,-.03,-6.85],travertine);
+  box('Pool_rear_terrace',[21,.22,3.1],[0,-.03,-15.65],travertine);
+  for(const x of [-8.3,8.3])box('Pool_side_terrace',[4.4,.22,6.5],[x,-.03,-11.1],travertine);
   // Small grout joints turn the slab into correctly scaled floor stone.
   for(let x=-7;x<=7;x+=1.2) box('Floor_grout',[.007,.004,10.8],[x,.084,-.3],limestone,root,0);
   for(let z=-5;z<=5;z+=1.2) box('Floor_grout',[15.8,.004,.007],[0,.084,z],limestone,root,0);
   // Front elevation: asymmetric stone wings, a recessed 2.4m clear doorway.
-  box('Facade_left',[6.6,3.8,.5],[-4.65,1.98,5],limestone);
+  box('Facade_left_sill',[6.6,1.04,.5],[-4.65,.61,5],limestone);
+  box('Facade_left_lintel',[6.6,.66,.5],[-4.65,3.55,5],limestone);
+  box('Facade_sign_pier',[1.72,2.14,.5],[-2.23,2.18,5],limestone);
+  box('Facade_window_pier',[.25,2.14,.5],[-7.83,2.18,5],limestone);
+  box('Front_glazing',[4.39,2.05,.018],[-5.46,2.18,5.02],glass,root,0);
+  for(const x of [-7.69,-5.47,-3.25])box('Front_window_mullion',[.044,2.11,.075],[x,2.18,5.08],frame);
+  for(const y of [1.14,3.22])box('Front_window_rail',[4.49,.044,.075],[-5.46,y,5.08],frame);
   box('Facade_right',[6.6,3.8,.5],[4.65,1.98,5],limestone);
   box('Door_header',[2.7,.62,.65],[0,3.57,5],limestone);
   box('Left_return',[.45,3.8,10.7],[-7.8,1.98,-.35],limestone);
@@ -55,7 +66,11 @@ export function buildVilla() {
   box('Roof_shadow_reveal',[17,.06,12],[0,3.86,-.25],frame);
   box('Roof_upper_band',[17.25,.08,12.25],[0,4.24,-.25],limestone);
   // Stone cladding joints, low entry wing and a shaded wooden screen.
-  for(let y=.65;y<3.7;y+=.55){box('Facade_joint_L',[6.6,.013,.012],[-4.65,y,5.255],travertine,root,0);box('Facade_joint_R',[6.6,.013,.012],[4.65,y,5.255],travertine,root,0);}
+  for(let y=.65;y<3.7;y+=.55){
+    box('Facade_joint_L',[y<1.1||y>3.23?6.6:1.72,.013,.012],[y<1.1||y>3.23?-4.65:-2.23,y,5.255],travertine,root,0);
+    box('Facade_joint_R',[6.6,.013,.012],[4.65,y,5.255],travertine,root,0);
+  }
+  for(let row=0;row<6;row++)for(let col=0;col<4;col++)box('Stone_vertical_joint',[.007,.53,.008],[1.75+col*1.62+(row%2)*.75,.65+row*.55,5.255],travertine,root,0);
   for(let i=0;i<21;i++) box('Entry_walnut_batten',[.075,3.28,.095],[2.85+i*.13,1.81,5.32],walnut);
   box('Entry_canopy',[5.7,.16,3.3],[.65,3.38,6.35],walnut);
   box('Canopy_light',[4.7,.022,.035],[.65,3.287,7.78],warm,root,0);
@@ -71,6 +86,8 @@ export function buildVilla() {
   // Original logo is applied verbatim to this fixed architectural plaque at runtime.
   box('Logo_plaque_back',[1.36,1.36,.07],[-2.29,2.20,5.30],bronze);
   const plaque=mesh(new THREE.PlaneGeometry(1.27,1.27),mat('Original_logo',0xffffff,.55),'OriginalLogo');
+  // glTF uses top-left texture coordinates. Both runtime and Blender import agree.
+  const logoUV=plaque.geometry.attributes.uv;for(let i=0;i<logoUV.count;i++)logoUV.setY(i,1-logoUV.getY(i));
   plaque.position.set(-2.29,2.20,5.344);
   box('Sign_light',[1.28,.022,.075],[-2.29,2.93,5.37],warm);
   const signage=createBrandWordmark(bronze,resources);signage.world.name='EntryTHARA';signage.world.scale.setScalar(.16);signage.world.position.set(-2.29,1.24,5.29);root.add(signage.world);
@@ -133,7 +150,13 @@ export function buildVilla() {
   cyl('Pendant_stem',.008,.008,1.10,[4.5,3.20,-2.2],bronze);
   const pendant=mesh(new THREE.SphereGeometry(.52,32,16,0,Math.PI*2,0,Math.PI/2),bronze,'Pendant_shade');pendant.position.set(4.5,2.66,-2.2);
   // Pool, recessed water, limestone coping, quiet in-water steps.
-  box('Pool_basin',[11.9,.46,6.5],[0,-.02,-11.1],dark);
+  box('Arrival_reflecting_pool',[5.1,.22,2.85],[-5.75,.015,11.8],dark);
+  box('Arrival_pool_water',[4.74,.02,2.48],[-5.75,.14,11.8],water,root,0);
+  for(const z of [10.45,13.15])box('Arrival_pool_edge',[5.15,.12,.20],[-5.75,.19,z],travertine);
+  for(const x of [-8.23,-3.27])box('Arrival_pool_edge',[.20,.12,2.85],[x,.19,11.8],travertine);
+  box('Pool_basin_floor',[11.9,.12,6.5],[0,-.50,-11.1],dark);
+  for(const z of [-7.94,-14.26])box('Pool_basin_wall',[11.9,.61,.12],[0,-.18,z],dark);
+  for(const x of [-5.89,5.89])box('Pool_basin_wall',[.12,.61,6.5],[x,-.18,-11.1],dark);
   box('Pool_water',[11.4,.02,6.05],[0,.10,-11.1],water,root,0);
   for(const z of [-7.96,-14.23])box('Pool_coping',[12.3,.14,.26],[0,.15,z],travertine);
   for(const x of [-6.02,6.02])box('Pool_coping',[.26,.14,6.5],[x,.15,-11.1],travertine);
@@ -182,14 +205,19 @@ export function buildVilla() {
     const g=new THREE.ConeGeometry(.06,.45+(i%4)*.09,4);const m=mesh(g,i%3?leaf:leafLight,'Grass');m.position.set(x,.84,z);m.rotation.z=Math.sin(i)*.3;
   }
   // Interior sign is a real, separate mesh composition for the match transition.
-  const inside=createBrandWordmark(bronze,resources);inside.world.name='InteriorTHARA';inside.world.position.set(7.52,2.15,-1.1);inside.world.rotation.y=-Math.PI/2;inside.world.scale.setScalar(.22);root.add(inside.world);
+  const inside=createBrandWordmark(bronze,resources);inside.world.name='InteriorTHARA';inside.world.position.set(3.55,2.35,-5.36);inside.world.scale.setScalar(.22);root.add(inside.world);
+  box('Interior_sign_rail',[2.35,.025,.032],[3.55,2.19,-5.43],bronze);
+  for(const x of [2.56,4.54])box('Interior_sign_mount',[.04,.10,.10],[x,2.19,-5.45],bronze);
   // Consolidate static objects by material. Door, signs and original logo stay named.
   const buckets=new Map();root.updateMatrixWorld(true);
-  for(const o of [...root.children]){
-    if(!o.isMesh||o.name==='OriginalLogo'||o.material.transparent)continue;
+  const allMeshes=[];root.traverse(o=>{if(o.isMesh)allMeshes.push(o);});
+  root.userData.collisionVolumes=allMeshes.filter(o=>/Facade_(left|right|sign|window)|Door_header|Left_return|Right_return|Roof$|Ceiling$|Foyer_partition/.test(o.name)).map(o=>{const b=new THREE.Box3().setFromObject(o);return {name:o.name,min:b.min.toArray(),max:b.max.toArray()};});
+  for(const o of allMeshes){
+    let moving=false;for(let parent=o.parent;parent&&parent!==root;parent=parent.parent){if(['DoorPivot','EntryTHARA','InteriorTHARA'].includes(parent.name)){moving=true;break;}}
+    if(moving||o.name==='OriginalLogo'||o.material.transparent)continue;
     const transformed=o.geometry.clone().applyMatrix4(o.matrixWorld);
     const g=transformed.index?transformed.toNonIndexed():transformed;
-    const list=buckets.get(o.material)||[];list.push(g);buckets.set(o.material,list);root.remove(o);o.geometry.dispose();
+    const list=buckets.get(o.material)||[];list.push(g);buckets.set(o.material,list);o.removeFromParent();o.geometry.dispose();
   }
   for(const [material,geometries] of buckets){const merged=mergeGeometries(geometries,false);if(!merged)throw Error('Cannot merge '+material.name);mesh(merged,material,'Static_'+material.name);geometries.forEach(g=>g.dispose());}
   return {root,materials};
