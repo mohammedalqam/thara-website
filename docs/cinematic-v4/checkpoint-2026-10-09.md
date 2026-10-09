@@ -6,7 +6,7 @@ Implemented: connected custom villa GLB; a real door pivot; original logo plaque
 
 The letter X transition occurs entirely in assembly bands. Only after every letter enters its safe lateral lane does vertical spreading start. Reassembly reverses that sequence. Resizing recalculates the measured assembly anchors and preserves villa progress.
 
-Verification so far: 25 Node tests pass. The new contract verifies all original protected files and images by hash, every ID/heading/link/message/form option and gallery count. Camera/door collision tests sample 1,001 points × 5 aspect ratios. Letter geometry bounds are tested over seven viewport/orientation pairs. These tests do not replace visual GPU testing.
+Verification so far: 26 Node tests pass. The new contract verifies all original protected files and images by hash, every ID/heading/link/message/form option and gallery count. Camera/door collision tests sample 1,001 points × 5 aspect ratios. Letter geometry bounds are tested over seven viewport/orientation pairs. These tests do not replace visual GPU testing.
 
 Model statistics: GLB 1,978,788 bytes, 46,206 triangles, 58 meshes. One renderer is reused for both scenes. Pixel ratio caps: 1.5 desktop / 1.25 small screens. There is no free-running animation. Shader draw calls, actual GPU memory and 60/30 fps targets are not yet measured.
 

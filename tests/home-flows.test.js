@@ -187,6 +187,25 @@ test('gallery swipes advance and reverse while short touches leave the image unc
   assert.equal(p.opened.length,0);
 });
 
+test('V4 fragments align after load and BFCache return, coalesce events and release navigation work', t => {
+  const p=page(t,{savedReduced:true});
+  p.w.eval(readFileSync(new URL('home-bootstrap.js',root),'utf8'));
+  p.w.history.replaceState(null,'','#featured');
+  p.w.dispatchEvent(new p.w.Event('load'));p.flushFrames();
+  assert.equal(p.scrolls.at(-1).element.id,'featured');
+  assert.equal(p.scrolls.at(-1).options.behavior,'instant');
+  const before=p.scrolls.length;
+  p.w.dispatchEvent(new p.w.Event('hashchange'));p.w.dispatchEvent(new p.w.Event('hashchange'));p.flushFrames();
+  assert.equal(p.scrolls.length,before+1,'one alignment per animation frame');
+  p.w.dispatchEvent(new p.w.PageTransitionEvent('pagehide',{persisted:true}));
+  p.w.dispatchEvent(new p.w.PageTransitionEvent('pageshow',{persisted:true}));p.flushFrames();
+  assert.equal(p.scrolls.at(-1).element.id,'featured');
+  const restored=p.scrolls.length;
+  p.w.dispatchEvent(new p.w.Event('pagehide'));
+  p.w.dispatchEvent(new p.w.Event('hashchange'));p.flushFrames();
+  assert.equal(p.scrolls.length,restored,'disposed page cannot scroll later');
+});
+
 for (const reduced of [false, true]) {
   test(`owner inquiry preserves required validation and selected services (${reduced ? 'reduced' : 'full'} motion)`, t => {
     const p = page(t, { file: 'contact.html', savedReduced: reduced }), contacts = p.d.getElementById('ownersContactPicker');

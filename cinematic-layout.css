@@ -2,7 +2,7 @@
 .thara-home-v4 { --page-gutter:clamp(82px,7.4vw,150px); isolation:isolate; }
 .thara-home-v4 .page-glow { display:none; }
 .thara-home-v4 main { position:relative; z-index:auto; }
-.thara-home-v4 main>section { position:relative; scroll-margin-top:114px; }
+.thara-home-v4 main>section { position:relative; scroll-margin-top:16px; }
 .thara-home-v4 main>section:not(.cinematic-hero)>* { position:relative; z-index:6; }
 .thara-home-v4 main>section:not(.cinematic-hero) { padding-inline:var(--page-gutter); }
 .thara-home-v4 .site-header { z-index:100; border-radius:3px; box-shadow:none; }
