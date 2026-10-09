@@ -18,7 +18,7 @@ export async function mountHome(root) {
   const copy=film.querySelector('[data-hero-copy]');
   const media=matchMedia('(prefers-reduced-motion: reduce)');
   let renderer,model,door,environment,maps,frame=0,disposed=false,ready=false;
-  let width=0,height=0,frames=0,lastRender=0,totalRenderMs=0,p=0,mode='none',lastHeight=innerHeight;
+  let width=0,height=0,viewWidth=0,frames=0,lastRender=0,totalRenderMs=0,p=0,mode='none',lastHeight=innerHeight;
   let villaScene,letterScene,camera,letterCamera,wordmark,sun;
   let pageSuspended=false,visible=true;
   const reduced=()=>media.matches||document.documentElement.dataset.motion==='reduced';
@@ -31,9 +31,11 @@ export async function mountHome(root) {
   function documentY(element){const r=element.getBoundingClientRect();return scrollY+r.top+r.height/2;}
   function measure(){
     if(!renderer)return;
-    width=innerWidth;height=innerHeight;
-    renderer.setPixelRatio(Math.min(devicePixelRatio||1,width<760?1.25:1.5));
-    renderer.setSize(width,height);
+    const nextWidth=Math.round(layer.getBoundingClientRect().width),nextHeight=innerHeight;
+    const dpr=Math.min(devicePixelRatio||1,innerWidth<760?1.25:1.5);viewWidth=innerWidth;
+    if(nextWidth===width&&nextHeight===height&&renderer.getPixelRatio()===dpr)return;
+    width=nextWidth;height=nextHeight;
+    renderer.setPixelRatio(dpr);renderer.setSize(width,height,false);
     letterCamera.left=-width/2;letterCamera.right=width/2;letterCamera.top=height/2;letterCamera.bottom=-height/2;letterCamera.updateProjectionMatrix();
   }
   function applyMotion() {
@@ -46,7 +48,7 @@ export async function mountHome(root) {
   }
   function draw(){
     frame=0;if(!ready||disposed)return;
-    if(width!==innerWidth||height!==innerHeight)measure();
+    if(viewWidth!==innerWidth||height!==innerHeight)measure();
     const rect=film.getBoundingClientRect();
     const startY=documentY(beginning),endY=documentY(ending);
     p=chapterProgress(scrollY,scrollY+rect.top,rect.height,height);
@@ -144,7 +146,9 @@ export async function mountHome(root) {
     if(disposed){gltf.scene.traverse(o=>{o.geometry?.dispose();o.material?.dispose();});return controller;}
     model=gltf.scene;door=model.getObjectByName('DoorPivot');if(!door)throw new Error('missing-door-pivot');villaScene.add(model);
     maps=createMaps(renderer);maps.apply(model);
-    const logo=await new THREE.TextureLoader().loadAsync('./assets/logo.jpeg');logo.flipY=false;logo.colorSpace=THREE.SRGBColorSpace;logo.anisotropy=4;textures.add(logo);
+    const logo=await new THREE.TextureLoader().loadAsync('./assets/logo.jpeg');
+    if(disposed){logo.dispose();return controller;}
+    logo.flipY=false;logo.colorSpace=THREE.SRGBColorSpace;logo.anisotropy=4;textures.add(logo);
     const plaque=model.getObjectByName('OriginalLogo');plaque.material.map=logo;plaque.material.needsUpdate=true;
     ready=true;setState('ready');measure();applyMotion();
     if(performance.getEntriesByType('navigation')[0]?.type==='reload'&&!location.hash){

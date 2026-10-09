@@ -13,7 +13,7 @@
 .thara-home-v4 :focus-visible { outline:3px solid #a47936; outline-offset:5px; }
 .thara-home-v4 .button,.thara-home-v4 .home-inquiry-submit { border-radius:2px; box-shadow:none; }
 .thara-home-v4 .button:hover { transform:translateY(-2px); }
-.thara-home-v4 .cinematic-layer { position:fixed; inset:0; width:100%; height:100dvh; z-index:5; pointer-events:none; }
+.thara-home-v4 .cinematic-layer { position:fixed; inset:0; width:auto; height:100dvh; z-index:5; pointer-events:none; }
 .thara-home-v4 .cinematic-layer[hidden] { display:none; }
 .thara-home-v4 .cinematic-layer canvas { display:block; width:100%; height:100%; }
 .thara-home-v4 .cinematic-hero { height:auto; min-height:100svh; background:#e9e4d6; }
@@ -38,8 +38,9 @@
 .thara-home-v4 .scene-skip,.thara-home-v4 .motion-toggle { display:inline-flex; align-items:center; justify-content:center; gap:14px; min-height:44px; padding:10px 15px; border:1px solid #c7bca8; background:#f3efe6f2; color:#173b35; border-radius:2px; font:600 .7rem 'Cairo',sans-serif; cursor:pointer; }
 .thara-home-v4 .cinematic-caption { position:absolute; bottom:95px; left:5vw; z-index:7; display:flex; flex-direction:column; gap:5px; padding:10px 16px; background:#f3efe6e8; border-inline-start:2px solid #b89a63; max-width:calc(100% - 80px); font-size:.72rem; color:#173b35; }
 .thara-home-v4 [data-scene-status] { font-size:.62rem; color:#667466; }
-.thara-home-v4 .concept-note { position:absolute; bottom:42px; left:5vw; z-index:7; color:#415148; background:#f3efe6d9; padding:4px 9px; font-size:.61rem; margin:0; max-width:70%; }
-.thara-home-v4 .hero-footnote { position:absolute; bottom:18px; right:6.4vw; left:5vw; z-index:7; margin:0; padding:0; display:flex; justify-content:space-between; align-items:center; font-size:.57rem; color:#485b51; border:0; }
+.thara-home-v4 .concept-note { position:absolute; bottom:55px; left:5vw; z-index:7; color:#415148; background:#f3efe6d9; padding:4px 9px; font-size:.61rem; margin:0; max-width:70%; }
+.thara-home-v4 .hero-footnote { position:absolute; width:auto; max-width:none; bottom:18px; right:6.4vw; left:5vw; z-index:7; margin:0; padding:0; display:flex; justify-content:space-between; align-items:center; font-size:.57rem; color:#485b51; border:0; }
+.thara-home-v4.hero-in-view .floating-whatsapp-picker { visibility:hidden; pointer-events:none; }
 .thara-home-v4 .hero-footnote a { color:#173b35; display:inline-flex; align-items:center; gap:20px; }
 .thara-home-v4 .cinematic-story { background:#f3efe6; padding-block:110px 55px; text-align:center; }
 .thara-home-v4 .cinematic-story-heading h2 { font-size:clamp(2.4rem,4vw,4rem); line-height:1.6; font-weight:500; color:#173b35; margin:0; }
